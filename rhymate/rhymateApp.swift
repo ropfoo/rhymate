@@ -11,7 +11,16 @@ import SwiftUI
 struct rhymateApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView{
+                SearchView().tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+                HistoryView().tabItem {
+                    Label("History", systemImage: "clock")
+                }
+            }
         }
     }
 }
+
+
