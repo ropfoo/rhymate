@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var rhymes: [String] = []
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(alignment: .leading){
+            SearchFormView(rhymes: $rhymes)
+            ScrollView{
+                VStack(alignment: .leading){
+                    ForEach($rhymes,id: \.self) { rhyme in
+                        Text("\(rhyme.wrappedValue)")
+                    }
+                    Spacer()
+                }
+                .padding()
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .topLeading)
+            }
         }
-        .padding()
+        
     }
 }
 
