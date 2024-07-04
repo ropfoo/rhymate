@@ -18,6 +18,9 @@
 		EC238A892C33132600829799 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A882C33132600829799 /* HistoryView.swift */; };
 		EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8B2C33509100829799 /* RhymeItemView.swift */; };
 		EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8D2C3363A000829799 /* RhymesGrid.swift */; };
+		EC238A912C34003600829799 /* RhymesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A902C34003600829799 /* RhymesFetcher.swift */; };
+		EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A922C3471D800829799 /* RhymesStorage.swift */; };
+		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		EC238A882C33132600829799 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		EC238A8B2C33509100829799 /* RhymeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeItemView.swift; sourceTree = "<group>"; };
 		EC238A8D2C3363A000829799 /* RhymesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesGrid.swift; sourceTree = "<group>"; };
+		EC238A902C34003600829799 /* RhymesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesFetcher.swift; sourceTree = "<group>"; };
+		EC238A922C3471D800829799 /* RhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorage.swift; sourceTree = "<group>"; };
+		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,7 @@
 				EC238A602C321F6900829799 /* Assets.xcassets */,
 				EC238A622C321F6900829799 /* Preview Content */,
 				EC238A882C33132600829799 /* HistoryView.swift */,
+				EC238A942C35ACD900829799 /* StorageHandler.swift */,
 			);
 			path = rhymate;
 			sourceTree = "<group>";
@@ -139,10 +146,12 @@
 		EC238A8A2C33506D00829799 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				EC238A902C34003600829799 /* RhymesFetcher.swift */,
 				EC238A5E2C321F6800829799 /* SearchView.swift */,
 				EC238A862C329CEB00829799 /* SearchFormView.swift */,
 				EC238A8B2C33509100829799 /* RhymeItemView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
+				EC238A922C3471D800829799 /* RhymesStorage.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -277,10 +286,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC238A912C34003600829799 /* RhymesFetcher.swift in Sources */,
+				EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */,
 				EC238A5F2C321F6800829799 /* SearchView.swift in Sources */,
 				EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */,
 				EC238A892C33132600829799 /* HistoryView.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,
+				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
 			);
