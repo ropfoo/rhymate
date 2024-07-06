@@ -14,18 +14,17 @@ struct RhymesStorage {
     }
     
     private func getRhymesHistory() -> RhymesHistory  {
-        let rhymesHistory: RhymesHistory? = storageHandler.get(key: RHYMES_HISTORY_KEY)
+        let rhymesHistory: RhymesHistory? = storageHandler.getJSON(key: RHYMES_HISTORY_KEY)
         if let rhymesHistory {
             return  rhymesHistory
         }
-        store(rhymes: [], key: RHYMES_HISTORY_KEY)
         return ["":[]]
     }
     
-    func store(rhymes: [String], key: String) {
+    func store(rhymes: [String], key: String) throws  {
         var currentRhymes = getRhymesHistory()
         currentRhymes[key] = rhymes
-        storageHandler.set(value: currentRhymes, key: RHYMES_HISTORY_KEY)
+        try storageHandler.setJSON(value: currentRhymes, key: RHYMES_HISTORY_KEY)
     }
     
     func get(word: String) -> RhymesResponse? {

@@ -32,7 +32,11 @@ struct RhymesFetcher {
                     // parse the data
                     rhymeResponse  = try! JSONDecoder().decode(RhymesResponse.self, from: data)
                     rhymes = rhymeResponse?.rhymes ?? []
-                    rhymesStorage.store(rhymes: rhymes, key: word)
+                    do {
+                        try rhymesStorage.store(rhymes: rhymes, key: word)
+                    } catch {
+                        print("Error storing rhymes: \(error)")
+                    }
                 } else {
                     // handle the response code
                     print(response.statusCode)
