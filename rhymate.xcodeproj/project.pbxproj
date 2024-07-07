@@ -21,7 +21,8 @@
 		EC238A912C34003600829799 /* RhymesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A902C34003600829799 /* RhymesFetcher.swift */; };
 		EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A922C3471D800829799 /* RhymesStorage.swift */; };
 		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
-		EC7782DB2C39B2AB008E9884 /* StorageHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */; };
+		EC7782E02C39CAE7008E9884 /* StorageHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */; };
+		EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		EC238A922C3471D800829799 /* RhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorage.swift; sourceTree = "<group>"; };
 		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
 		EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageHandlerTests.swift; sourceTree = "<group>"; };
+		EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorageTests.swift; sourceTree = "<group>"; wrapsLines = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,12 +112,12 @@
 		EC238A5B2C321F6800829799 /* rhymate */ = {
 			isa = PBXGroup;
 			children = (
+				EC7782DE2C39CA87008E9884 /* Services */,
+				EC7782DD2C39CA19008E9884 /* Storage */,
+				EC7782DC2C39C904008E9884 /* View */,
 				EC238A5C2C321F6800829799 /* rhymateApp.swift */,
-				EC238A8A2C33506D00829799 /* Search */,
 				EC238A602C321F6900829799 /* Assets.xcassets */,
 				EC238A622C321F6900829799 /* Preview Content */,
-				EC238A882C33132600829799 /* HistoryView.swift */,
-				EC238A942C35ACD900829799 /* StorageHandler.swift */,
 			);
 			path = rhymate;
 			sourceTree = "<group>";
@@ -131,7 +133,7 @@
 		EC238A6C2C321F6900829799 /* rhymateTests */ = {
 			isa = PBXGroup;
 			children = (
-				EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */,
+				EC7782E12C39CAFA008E9884 /* Storage */,
 				EC238A6D2C321F6900829799 /* rhymateTests.swift */,
 			);
 			path = rhymateTests;
@@ -149,14 +151,47 @@
 		EC238A8A2C33506D00829799 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				EC238A902C34003600829799 /* RhymesFetcher.swift */,
 				EC238A5E2C321F6800829799 /* SearchView.swift */,
 				EC238A862C329CEB00829799 /* SearchFormView.swift */,
 				EC238A8B2C33509100829799 /* RhymeItemView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
-				EC238A922C3471D800829799 /* RhymesStorage.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		EC7782DC2C39C904008E9884 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC238A882C33132600829799 /* HistoryView.swift */,
+				EC238A8A2C33506D00829799 /* Search */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EC7782DD2C39CA19008E9884 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EC238A922C3471D800829799 /* RhymesStorage.swift */,
+				EC238A942C35ACD900829799 /* StorageHandler.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EC7782DE2C39CA87008E9884 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC238A902C34003600829799 /* RhymesFetcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EC7782E12C39CAFA008E9884 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */,
+				EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,7 +340,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7782DB2C39B2AB008E9884 /* StorageHandlerTests.swift in Sources */,
+				EC7782E02C39CAE7008E9884 /* StorageHandlerTests.swift in Sources */,
+				EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */,
 				EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

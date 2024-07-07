@@ -12,14 +12,18 @@ struct StorageHandler {
      Returns a decodable value from UserDefaults based on the given key if it exists
      */
     func getJSON<T:Decodable>(key: String) -> T?  {
-        let storageString = String(describing: UserDefaults.standard.object(forKey: key))
-        let storageJSON = Data(storageString.utf8)
-        do {
-            let storageData  = try JSONDecoder().decode(T.self, from: storageJSON)
-            return storageData
-        } catch {
-           return nil
+        let storageString =  UserDefaults.standard.object(forKey: key)
+        if let storageString = storageString as? String {
+            let storageJSON = Data(storageString.utf8)
+            do {
+                let storageData  = try JSONDecoder().decode(T.self, from: storageJSON)
+                return storageData
+            } catch {
+                print(error)
+               return nil
+            }
         }
+        return nil
     }
     
     /**
