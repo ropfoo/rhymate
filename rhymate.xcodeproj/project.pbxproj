@@ -25,6 +25,7 @@
 		EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */; };
 		EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E52C3B1BE8008E9884 /* Datamuse.swift */; };
 		EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E72C3C5B4B008E9884 /* Rhyme.swift */; };
+		EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorageTests.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		EC7782E52C3B1BE8008E9884 /* Datamuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datamuse.swift; sourceTree = "<group>"; };
 		EC7782E72C3C5B4B008E9884 /* Rhyme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhyme.swift; sourceTree = "<group>"; };
+		EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC7782E92C3C5F56008E9884 /* Buttons */,
 				EC238A882C33132600829799 /* HistoryView.swift */,
 				EC238A8A2C33506D00829799 /* Search */,
 			);
@@ -206,6 +209,14 @@
 				EC7782E72C3C5B4B008E9884 /* Rhyme.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EC7782E92C3C5F56008E9884 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +352,7 @@
 				EC238A912C34003600829799 /* RhymesFetcher.swift in Sources */,
 				EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */,
 				EC238A5F2C321F6800829799 /* SearchView.swift in Sources */,
+				EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */,
 				EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */,
 				EC238A892C33132600829799 /* HistoryView.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,

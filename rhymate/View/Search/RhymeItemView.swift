@@ -30,6 +30,7 @@ struct RhymeItemView: View {
                    onDismiss: {}) { detail in
                 VStack(alignment: .leading, spacing: 20) {
                     Text("\(detail.name)")
+                    FavoritesToggle(action: {}, isActivated: false)
                 }
                 .presentationDetents([.height(200)])
                 .onTapGesture {
