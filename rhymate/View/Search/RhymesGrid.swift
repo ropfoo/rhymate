@@ -2,15 +2,15 @@ import Foundation
 import SwiftUI
 
 struct RhymesGrid: View {
-    @Binding var rhymes: [String]
-    
+    @Binding var rhymes: DatamuseRhymeResponse
     var body: some View {
-        LazyVGrid(columns:  [GridItem(.flexible()), GridItem(.flexible())]){
-            ForEach($rhymes,id: \.self) { rhyme in
-                RhymeItemView(rhyme:rhyme)
+        LazyVGrid(columns:  [GridItem(.flexible()), GridItem(.flexible())], spacing: 0){
+            ForEach($rhymes) { rhyme in
+                RhymeItemView(rhyme:rhyme.word)
             }
+            
         }
-        .padding(.horizontal,25)
+        .padding(.horizontal, 20)
         .frame(
             minWidth: 0,
             maxWidth: .infinity,
@@ -18,4 +18,8 @@ struct RhymesGrid: View {
             maxHeight: .infinity,
             alignment: .topLeading
         )}
+}
+
+#Preview {
+    SearchView()
 }

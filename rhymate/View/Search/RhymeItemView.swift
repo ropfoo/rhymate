@@ -1,26 +1,26 @@
 import Foundation
 import SwiftUI
 
-struct InventoryItem: Identifiable {
+struct RhymeItem: Identifiable {
     let id: String
     let name: String
 }
 
 struct RhymeItemView: View {
     @Binding var rhyme: String
-    @State private var sheetDetail: InventoryItem?
+    @State private var sheetDetail: RhymeItem?
     
     var body:some View {
         HStack{
             Button(action: {
-                sheetDetail = InventoryItem(
+                sheetDetail = RhymeItem(
                     id: rhyme,
                     name: rhyme)
             }, label: {
                 Text("\($rhyme.wrappedValue)")
                     .font(.system(size: 16))
                     .fontWeight(.semibold)
-                    .padding(10)
+                    .padding(.vertical, 18)
                     .opacity(1)
                     .frame(
                         maxWidth: .infinity
@@ -31,7 +31,7 @@ struct RhymeItemView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("\(detail.name)")
                 }
-                .presentationDetents([.height(300)])
+                .presentationDetents([.height(200)])
                 .onTapGesture {
                     sheetDetail = nil
                 }
@@ -39,7 +39,7 @@ struct RhymeItemView: View {
             
         }
         .background(.gray.opacity(0.15))
-        .cornerRadius(10)
+        .cornerRadius(25)
     }
 }
 

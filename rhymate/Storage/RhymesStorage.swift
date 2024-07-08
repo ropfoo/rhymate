@@ -1,6 +1,6 @@
 import Foundation
 
-typealias RhymesHistory = [String: [String]]
+typealias RhymesHistory = [String: DatamuseRhymeResponse]
 
 struct RhymesStorage {
     let RHYMES_HISTORY_KEY = "rhymesHistory"
@@ -27,7 +27,7 @@ struct RhymesStorage {
     /**
      Add rhymes to the UserDefaults store
      */
-    func store(rhymes: [String], key: String) throws  {
+    func store(rhymes: DatamuseRhymeResponse, key: String) throws  {
         var currentRhymes = getRhymesHistory()
         currentRhymes[key] = rhymes
         try storageHandler.setJSON(value: currentRhymes, key: RHYMES_HISTORY_KEY)
@@ -36,10 +36,10 @@ struct RhymesStorage {
     /**
      Get rhymes for given word from UserDefaults store
      */
-    func get(word: String) -> RhymesResponse? {
+    func get(word: String) -> DatamuseRhymeResponse? {
         let currentRhymes = getRhymesHistory()
         if let rhymes = currentRhymes[word]  {
-            return RhymesResponse(rhymes: rhymes, word: word)
+            return rhymes
         }
         return nil
     }

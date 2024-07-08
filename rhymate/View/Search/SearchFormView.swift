@@ -2,7 +2,7 @@ import SwiftUI
 import Foundation
 
 struct SearchFormView: View {
-    @Binding var rhymes: [String]
+    @Binding var rhymes: DatamuseRhymeResponse
     @State private var word: String = ""
     
     func submit() {
@@ -21,7 +21,13 @@ struct SearchFormView: View {
         }
         .onSubmit{
             submit()
-        }.frame(maxHeight:100, alignment: .top)
+        }
+        .frame(
+            maxHeight: 100
+        )
     }
 }
 
+#Preview {
+    SearchView()
+}

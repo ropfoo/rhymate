@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct SearchView: View {
-    @State var rhymes: [String] = ["sdsdaSAs","ddadadasdasdasd","asdsasd", "dadasdasdad"]
+    @State var rhymes: DatamuseRhymeResponse = []
     
     var body: some View {
         NavigationStack{
