@@ -26,6 +26,10 @@
 		EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E52C3B1BE8008E9884 /* Datamuse.swift */; };
 		EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E72C3C5B4B008E9884 /* Rhyme.swift */; };
 		EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */; };
+		ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */; };
+		ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* Util.swift */; };
+		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
+		ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,10 @@
 		EC7782E52C3B1BE8008E9884 /* Datamuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datamuse.swift; sourceTree = "<group>"; };
 		EC7782E72C3C5B4B008E9884 /* Rhyme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhyme.swift; sourceTree = "<group>"; };
 		EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesToggle.swift; sourceTree = "<group>"; };
+		ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorage.swift; sourceTree = "<group>"; };
+		ECB1A5DC2C3C744A0087EDF9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +189,7 @@
 			children = (
 				EC238A922C3471D800829799 /* RhymesStorage.swift */,
 				EC238A942C35ACD900829799 /* StorageHandler.swift */,
+				ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -198,6 +207,7 @@
 			children = (
 				EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */,
 				EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */,
+				ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -207,6 +217,8 @@
 			children = (
 				EC7782E52C3B1BE8008E9884 /* Datamuse.swift */,
 				EC7782E72C3C5B4B008E9884 /* Rhyme.swift */,
+				ECB1A5DC2C3C744A0087EDF9 /* Util.swift */,
+				ECB1A5DE2C3C84730087EDF9 /* Storage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -357,10 +369,13 @@
 				EC238A892C33132600829799 /* HistoryView.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,
 				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
+				ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */,
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
+				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
+				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +385,7 @@
 			files = (
 				EC7782E02C39CAE7008E9884 /* StorageHandlerTests.swift in Sources */,
 				EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */,
+				ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */,
 				EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

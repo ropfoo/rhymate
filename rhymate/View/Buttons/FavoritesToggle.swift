@@ -27,7 +27,7 @@ struct FavoritesToggle: View {
             action: {print("activate")},
             isActivated: false
         )
-       Spacer(minLength: 1)
+       Spacer()
         FavoritesToggle(
             action: {print("deactivate")},
             isActivated: true

@@ -1,8 +1,9 @@
 import Foundation
 
-struct RhymeFavorite {
+struct RhymeWithFavorites: JSONable {
     let word: String
-    let rhymes: [String]
+    var rhymes: [String]
 }
 
-typealias RhymeFavorites = [String: RhymeFavorite]
+typealias FavoriteRhymes = [String: RhymeWithFavorites]
+

@@ -20,8 +20,8 @@ final class RhymesStorageTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: rhymesStorage.RHYMES_HISTORY_KEY)
     }
     
-    func testStore() throws {
-        try rhymesStorage.store(rhymes: testRhymes, key: testWord)
+    func testAdd() throws {
+        try rhymesStorage.mutate(type: .add, data: testRhymes, key: testWord)
         
         if let result: RhymesHistory = StorageHandler().getJSON(key: rhymesStorage.RHYMES_HISTORY_KEY) {
             for (index, rhyme) in testRhymes.enumerated() {
@@ -29,6 +29,15 @@ final class RhymesStorageTests: XCTestCase {
                 XCTAssertEqual(rhyme.score, result[testWord]![index].score)
                 XCTAssertEqual(rhyme.numSyllables, result[testWord]![index].numSyllables)
             }
+        }
+    }
+    
+    func testRemove() throws {
+        try rhymesStorage.mutate(type: .add, data: testRhymes, key: testWord)
+        
+        try rhymesStorage.mutate(type: .remove, data: testRhymes, key: testWord)
+        if let result: RhymesHistory = StorageHandler().getJSON(key: rhymesStorage.RHYMES_HISTORY_KEY) {
+            XCTAssertNil(result[testWord])
         }
     }
     

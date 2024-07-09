@@ -1,6 +1,6 @@
 import Foundation
 
-struct DatamuseRhyme: Decodable & Encodable & Identifiable {
+struct DatamuseRhyme: JSONable & Identifiable {
     var word: String
     let score: Int
     let numSyllables: Int
