@@ -3,7 +3,7 @@ import Foundation
 
 struct SearchFormView: View {
     @Binding var rhymes: DatamuseRhymeResponse
-    @State private var word: String = ""
+    @Binding var word: String
     
     func submit() {
         print("submitting: \(word)")

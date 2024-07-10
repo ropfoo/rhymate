@@ -30,6 +30,7 @@
 		ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* Util.swift */; };
 		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
 		ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */; };
+		ECB1A5E42C3E6FB10087EDF9 /* RhymeItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5E32C3E6FB10087EDF9 /* RhymeItemDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		ECB1A5DC2C3C744A0087EDF9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorageTests.swift; sourceTree = "<group>"; };
+		ECB1A5E32C3E6FB10087EDF9 /* RhymeItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeItemDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +170,6 @@
 			children = (
 				EC238A5E2C321F6800829799 /* SearchView.swift */,
 				EC238A862C329CEB00829799 /* SearchFormView.swift */,
-				EC238A8B2C33509100829799 /* RhymeItemView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
 			);
 			path = Search;
@@ -177,6 +178,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
 				EC7782E92C3C5F56008E9884 /* Buttons */,
 				EC238A882C33132600829799 /* HistoryView.swift */,
 				EC238A8A2C33506D00829799 /* Search */,
@@ -229,6 +231,15 @@
 				EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		ECB1A5E22C3E6F700087EDF9 /* RhymeItem */ = {
+			isa = PBXGroup;
+			children = (
+				EC238A8B2C33509100829799 /* RhymeItemView.swift */,
+				ECB1A5E32C3E6FB10087EDF9 /* RhymeItemDetail.swift */,
+			);
+			path = RhymeItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +379,7 @@
 				EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */,
 				EC238A892C33132600829799 /* HistoryView.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,
+				ECB1A5E42C3E6FB10087EDF9 /* RhymeItemDetail.swift in Sources */,
 				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
 				ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */,
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,

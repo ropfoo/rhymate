@@ -7,16 +7,14 @@ struct FavoritesToggle: View {
     
     var body: some View {
         Button(
-            "",
-            systemImage: isActivated ? "heart.fill" : "heart",
             action: action
-        )
-        .font(.system(size: 20))
+        ){
+            Image(systemName: isActivated ? "heart.fill" : "heart")
+        }
+        .font(.system(size: 24))
         .foregroundColor(
             isActivated ? .red: .blue
         )
-        .cornerRadius(20)
-        
     }
 }
 
@@ -27,7 +25,7 @@ struct FavoritesToggle: View {
             action: {print("activate")},
             isActivated: false
         )
-       Spacer()
+        Spacer()
         FavoritesToggle(
             action: {print("deactivate")},
             isActivated: true
