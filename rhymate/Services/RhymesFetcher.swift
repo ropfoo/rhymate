@@ -28,7 +28,7 @@ struct RhymesFetcher {
                     rhymeResponse  = try! JSONDecoder().decode(DatamuseRhymeResponse.self, from: data)
                     rhymes = rhymeResponse ?? []
                     do {
-                        try rhymesStorage.mutate(type: .add, data: rhymes, key: word)
+                        try rhymesStorage.mutate(.add, data: rhymes, key: word)
                     } catch {
                         print("Error storing rhymes: \(error)")
                     }

@@ -2,14 +2,16 @@ import SwiftUI
 
 @main
 struct rhymateApp: App {
+    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+    
     var body: some Scene {
         WindowGroup {
             TabView{
-                SearchView().tabItem {
+                SearchView(favorites: $favorites).tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-                HistoryView().tabItem {
-                    Label("History", systemImage: "clock")
+                FavoritesView(favorites: $favorites).tabItem {
+                    Label("Favorites", systemImage: "heart")
                 }
             }
         }

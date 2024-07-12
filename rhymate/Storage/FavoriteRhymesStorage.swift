@@ -1,8 +1,12 @@
 import Foundation
+import SwiftUI
 
 struct FavoriteRhymesStorage: RhymeStorage {
     let FAVORITE_RHYMES_STORAGE_KEY = "favoriteRhymes"
     private let storageHandler = StorageHandler()
+    private let helper = DictionaryHelper()
+    
+    let emptyDefault: FavoriteRhymes = ["": RhymeWithFavorites(word: "", rhymes: [])]
     
     init() {
         storageHandler.createKeyIfNoneExists(key: FAVORITE_RHYMES_STORAGE_KEY)
@@ -14,7 +18,7 @@ struct FavoriteRhymesStorage: RhymeStorage {
             return favoriteRhymes
         }
         storageHandler.createKeyIfNoneExists(key: FAVORITE_RHYMES_STORAGE_KEY)
-        return ["": RhymeWithFavorites(word: "", rhymes: [])]
+        return emptyDefault
     }
     
     /// Check if value is in favorites
@@ -27,24 +31,10 @@ struct FavoriteRhymesStorage: RhymeStorage {
     }
     
     /// Mutates rhyme favorites in UserDefaults storage at given key with provided data
-    func mutate(type: RhymeStorageMutation, data: String, key: String) throws  {
-        var currentFavoriteRhymes = getFavoriteRhymes()
-        switch type {
-        case .add:
-            if var newRhymeWithFavorites = currentFavoriteRhymes[key] {
-                newRhymeWithFavorites.rhymes.append(data)
-                currentFavoriteRhymes[key] = newRhymeWithFavorites
-            } else {
-                currentFavoriteRhymes[key] = RhymeWithFavorites(word: key, rhymes: [data])
-            }
-        case .remove:
-            if var newRhymeWithFavorites = currentFavoriteRhymes[key] {
-                newRhymeWithFavorites.rhymes = newRhymeWithFavorites.rhymes.filter{!$0.contains(data)}
-                currentFavoriteRhymes[key] = newRhymeWithFavorites
-            }
-        }
-        
-        try storageHandler.setJSON(value: currentFavoriteRhymes, key: FAVORITE_RHYMES_STORAGE_KEY)
+    func mutate(_ type: Mutation, data: String, key: String) throws  {
+        var currentFavorites = getFavoriteRhymes()
+        currentFavorites = helper.mutateFavorite(currentFavorites, type, data: data, key: key)
+        try storageHandler.setJSON(value: currentFavorites, key: FAVORITE_RHYMES_STORAGE_KEY)
     }
     
     

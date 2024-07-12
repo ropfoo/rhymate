@@ -12,30 +12,38 @@ struct RhymeItemView: View {
     @State private var sheetDetail: RhymeItem?
     @State private var isFavorite: Bool
     
-    private let favoriteStorage = FavoriteRhymesStorage()
+    @Binding var favorites: FavoriteRhymes
     
+    let favoriteStorage = FavoriteRhymesStorage()
     
-    init(rhyme: Binding<String>, word: Binding<String>) {
+    init(rhyme: Binding<String>, word: Binding<String>, favorites: Binding<FavoriteRhymes>) {
         self._rhyme = rhyme
         self._word = word
+        self._favorites = favorites
         self.sheetDetail = nil
         self.isFavorite = favoriteStorage.isFavorite(rhyme: rhyme.wrappedValue, forWord: word.wrappedValue)
         
     }
     
     var body:some View {
-        HStack{
+        ZStack(alignment: .topLeading){
+            if isFavorite {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.red)
+                    .font(.system(size: 10))
+                    .offset(x: 12, y: 14)
+            }
+            
             Button(action: {
                 sheetDetail = RhymeItem(
                     id: rhyme,
                     name: rhyme)
             }, label: {
                 Text("\($rhyme.wrappedValue)")
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-                    .padding(.vertical, 18)
-                    .opacity(1)
-                    .foregroundColor(isFavorite ? .red : .primary)
+                    .font(.system(.subheadline))
+                    .fontWeight(.bold)
+                    .padding(.vertical, 10)
+                    .foregroundColor(.primary)
                     .frame(
                         maxWidth: .infinity
                     )
@@ -45,13 +53,16 @@ struct RhymeItemView: View {
                 onDismiss: {}
             )
             { detail in
-                RhymeItemDetail(rhyme: detail.name, word: word, isFavorite: $isFavorite)
-                    .presentationDetents([.height(180)])
-                    .onTapGesture {
-                        sheetDetail = nil
-                    }
+                FavoritesItemView(
+                    .detail,
+                    word: word,
+                    rhyme: detail.name,
+                    onToggle: { sheetDetail = nil },
+                    favorites: $favorites,
+                    isFavorite: $isFavorite
+                ).presentationDetents([.height(180)])
             }
-            .background(.gray.opacity(0.15))
+            .background(.quinary)
             .cornerRadius(25)
         }
         
@@ -61,8 +72,15 @@ struct RhymeItemView: View {
 struct PreviewRhymeItemView: View {
     @State var word = "test"
     @State var rhyme = "best"
+    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+    
+    init(word: String = "test", rhyme: String = "best") {
+        self.word = word
+        self.rhyme = rhyme
+    }
+    
     var body: some View {
-        RhymeItemView(rhyme: $rhyme, word: $word)
+        RhymeItemView(rhyme: $rhyme, word: $word, favorites: $favorites)
     }
 }
 

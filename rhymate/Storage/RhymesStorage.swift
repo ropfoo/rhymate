@@ -20,7 +20,7 @@ struct RhymesStorage: RhymeStorage{
     
     /// Add rhymes to the UserDefaults
     func mutate(
-        type: RhymeStorageMutation,
+        _ type: Mutation,
         data: DatamuseRhymeResponse,
         key: String
     ) throws  {

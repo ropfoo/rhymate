@@ -29,5 +29,5 @@ struct SearchFormView: View {
 }
 
 #Preview {
-    SearchView()
+    PreviewSearchView()
 }
