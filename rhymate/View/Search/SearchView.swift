@@ -22,7 +22,6 @@ struct SearchView: View {
 
 struct PreviewSearchView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-
     var body: some View {
         SearchView(favorites: $favorites)
     }

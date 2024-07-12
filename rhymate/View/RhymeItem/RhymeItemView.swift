@@ -16,6 +16,8 @@ struct RhymeItemView: View {
     
     let favoriteStorage = FavoriteRhymesStorage()
     
+
+    
     init(rhyme: Binding<String>, word: Binding<String>, favorites: Binding<FavoriteRhymes>) {
         self._rhyme = rhyme
         self._word = word
@@ -27,7 +29,7 @@ struct RhymeItemView: View {
     
     var body:some View {
         ZStack(alignment: .topLeading){
-            if isFavorite {
+            if favorites[word]?.rhymes.contains(rhyme) ?? false {
                 Image(systemName: "heart.fill")
                     .foregroundColor(.red)
                     .font(.system(size: 10))
@@ -59,7 +61,7 @@ struct RhymeItemView: View {
                     rhyme: detail.name,
                     onToggle: { sheetDetail = nil },
                     favorites: $favorites,
-                    isFavorite: $isFavorite
+                    isFavorite: favorites[word]?.rhymes.contains(rhyme) ?? false
                 ).presentationDetents([.height(180)])
             }
             .background(.quinary)

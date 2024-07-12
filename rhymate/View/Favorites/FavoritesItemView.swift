@@ -11,7 +11,7 @@ struct FavoritesItemView: View {
     let rhyme: String
     let onToggle: () -> Void
     @Binding var favorites: FavoriteRhymes
-    @Binding var isFavorite: Bool
+    var isFavorite: Bool
     
     init(
         _ layout: FavoritesItemLayout,
@@ -19,14 +19,14 @@ struct FavoritesItemView: View {
         rhyme: String,
         onToggle: @escaping () -> Void,
         favorites: Binding<FavoriteRhymes>,
-        isFavorite: Binding<Bool>
+        isFavorite: Bool
     ) {
         self.layout = layout
         self.word = word
         self.rhyme = rhyme
         self.onToggle = onToggle
         self._favorites = favorites
-        self._isFavorite = isFavorite
+        self.isFavorite = isFavorite
     }
     
     func toggleState() {
@@ -47,9 +47,7 @@ struct FavoritesItemView: View {
                 data: rhyme,
                 key: word
             )
-            isFavorite = !isFavorite
         }
-        
     }
     
     var body: some View {
@@ -94,9 +92,8 @@ struct FavoritesItemView: View {
 struct PreviewFavoritesItemView: View {
     let layout: FavoritesItemLayout
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-    @State var isFavorite = FavoriteRhymesStorage().isFavorite(rhyme: "best", forWord: "test")
     var body: some View{
-        FavoritesItemView(layout, word: "test", rhyme: "best",onToggle: {print("toggle")}, favorites: $favorites, isFavorite: $isFavorite )
+        FavoritesItemView(layout, word: "test", rhyme: "best",onToggle: {print("toggle")}, favorites: $favorites, isFavorite: favorites["test"]?.rhymes.contains("best") ?? false )
     }
 }
 

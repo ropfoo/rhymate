@@ -17,7 +17,9 @@ struct RhymesFetcher {
         
         print("fetching data")
         // let url = URL(string: "http://localhost:8000/rhyme-word?word=\(word)")!
-        let url = URL(string: "http://localhost:8000/rhymes")!
+//        let url = URL(string: "http://localhost:8000/rhymes")!
+        let url = URL(string: "https://api.datamuse.com/words?rel_rhy=\(word)")!
+
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 // handle the error
