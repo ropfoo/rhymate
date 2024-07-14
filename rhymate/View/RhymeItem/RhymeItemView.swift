@@ -30,10 +30,16 @@ struct RhymeItemView: View {
     var body:some View {
         ZStack(alignment: .topLeading){
             if favorites[word]?.rhymes.contains(rhyme) ?? false {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.red)
-                    .font(.system(size: 10))
-                    .offset(x: 12, y: 14)
+                VStack{
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                        .font(.system(size: 10))
+                }
+                .padding(5)
+                .background(.quaternary)
+                .cornerRadius(100)
+                .offset(x: 0, y: -10)
+
             }
             
             Button(action: {

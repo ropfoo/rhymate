@@ -53,10 +53,15 @@ struct FavoritesItemView: View {
     var body: some View {
         switch layout {
         case .detail:
-            VStack(alignment: .center, spacing: 22) {
+            VStack(alignment: .center, spacing: 18) {
+                Text(word)
+                    .font(.subheadline)
+                    .fontWeight(.black)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom)
                 Text(rhyme)
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
+                    .font(.title3)
+                    .fontWeight(.bold)
                 FavoritesToggle(
                     action: toggleState,
                     isActivated: isFavorite,

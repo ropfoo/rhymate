@@ -39,6 +39,8 @@
 		ECBD84492C42F90E00193BA2 /* FetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84482C42F90E00193BA2 /* FetcherTests.swift */; };
 		ECBD844D2C42FBF100193BA2 /* TestProtocolHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD844C2C42FBF100193BA2 /* TestProtocolHandler.swift */; };
 		ECBD84522C43385D00193BA2 /* DatamuseFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */; };
+		ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84532C43BC9400193BA2 /* FallbackView.swift */; };
+		ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84562C43DADB00193BA2 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		ECBD84482C42F90E00193BA2 /* FetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherTests.swift; sourceTree = "<group>"; };
 		ECBD844C2C42FBF100193BA2 /* TestProtocolHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProtocolHandler.swift; sourceTree = "<group>"; };
 		ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatamuseFetcherTests.swift; sourceTree = "<group>"; };
+		ECBD84532C43BC9400193BA2 /* FallbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackView.swift; sourceTree = "<group>"; };
+		ECBD84562C43DADB00193BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 		EC238A5B2C321F6800829799 /* rhymate */ = {
 			isa = PBXGroup;
 			children = (
+				ECBD84562C43DADB00193BA2 /* Constants.swift */,
 				ECBD84402C41013F00193BA2 /* Utils */,
 				EC7782E42C3B1BB2008E9884 /* Model */,
 				EC7782DE2C39CA87008E9884 /* Services */,
@@ -212,6 +217,7 @@
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
 				EC7782E92C3C5F56008E9884 /* Buttons */,
 				EC238A8A2C33506D00829799 /* Search */,
+				ECBD84532C43BC9400193BA2 /* FallbackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -447,6 +453,8 @@
 				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
 				ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */,
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,
+				ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */,
+				ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
 				ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */,

@@ -14,10 +14,10 @@ final class DatamuseFetcherTests: XCTestCase {
 
     func testGetRhymesFetchSuccess() async throws {
         let fetcher = createMockDatamuseFetcher()
-        let targetURL = fetcher.baseUrl.appendingPathComponent("/words?rel_rhy=test")
+        let url = URL(string: DATAMUSE_API_URL.absoluteString + "/words?rel_rhy=test")!
         let json =  #"[{"word": "best", "score": 123, "numSyllables": 1 }]"#
         
-        BlockTestProtocolHandler.register(url: targetURL) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
+        BlockTestProtocolHandler.register(url: url) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: BlockTestProtocolHandler.httpVersion, headerFields: nil)!
             return (response, Data(json.utf8))
         }
@@ -34,10 +34,10 @@ final class DatamuseFetcherTests: XCTestCase {
         try rhymesStorage.mutate(.add, data: localData, key: "test")
         
         let fetcher = createMockDatamuseFetcher()
-        let targetURL = fetcher.baseUrl.appendingPathComponent("/words?rel_rhy=test")
+        let url = URL(string: DATAMUSE_API_URL.absoluteString + "/words?rel_rhy=test")!
         let json =  #"[{"word": "best", "score": 123, "numSyllables": 1 }]"#
         
-        BlockTestProtocolHandler.register(url: targetURL) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
+        BlockTestProtocolHandler.register(url: url) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: BlockTestProtocolHandler.httpVersion, headerFields: nil)!
             return (response, Data(json.utf8))
         }
@@ -51,10 +51,10 @@ final class DatamuseFetcherTests: XCTestCase {
     
     func testGetRhymesError() async throws {
         let fetcher = createMockDatamuseFetcher()
-        let targetURL = fetcher.baseUrl.appendingPathComponent("/words?rel_rhy=test")
+        let url = URL(string: DATAMUSE_API_URL.absoluteString + "/words?rel_rhy=test")!
         let json =  #"[{"word": "best", "score": 123, "numSyllables": 1 }]"#
         
-        BlockTestProtocolHandler.register(url: targetURL) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
+        BlockTestProtocolHandler.register(url: url) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
             let response = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: BlockTestProtocolHandler.httpVersion, headerFields: nil)!
             return (response, Data(json.utf8))
         }

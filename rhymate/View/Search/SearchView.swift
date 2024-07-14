@@ -5,6 +5,7 @@ struct SearchView: View {
     @State var rhymes: DatamuseRhymeResponse = []
     @State var isLoading: Bool = false
     @State var word: String = ""
+    @State var searchError: SearchError? = nil
     @Binding var favorites: FavoriteRhymes
     
     var body: some View {
@@ -17,16 +18,39 @@ struct SearchView: View {
                             .scaleEffect(1.5, anchor: .center)
                     }
                     Spacer()
-                }else if rhymes.isEmpty {
+                } else if let searchError {
                     Spacer()
-                    VStack{
-                        Text("no rhymes")
+                    VStack(alignment: .center){
+                        switch searchError {
+                        case .noResults:
+                            FallbackView(
+                                "No rhymes found for \"\(word)\"",
+                                "exclamationmark.magnifyingglass"
+                            )
+                        case .network:
+                            FallbackView(
+                                "Check your internet connection",
+                                "network.slash"
+                            )
+                        case .generic:
+                            FallbackView(
+                                "An unexpected error occured",
+                                "exclamationmark.triangle"
+                            )
+                        }
                     }
                     Spacer()
-
+                } else if rhymes.isEmpty{
+                    Spacer()
+                    FallbackView("Search for rhymes", "magnifyingglass")
+                    Spacer()
                 } else {
                     ScrollView{
-                        RhymesGrid(rhymes:$rhymes, word: $word, favorites: $favorites)
+                        RhymesGrid(
+                            rhymes:$rhymes,
+                            word: $word,
+                            favorites: $favorites
+                        )
                     }
                 }
             }
@@ -36,7 +60,12 @@ struct SearchView: View {
                 }
             }
             Spacer()
-            SearchFormView(rhymes: $rhymes, word: $word, isLoading: $isLoading)
+            SearchFormView(
+                rhymes: $rhymes,
+                word: $word,
+                isLoading: $isLoading,
+                searchError: $searchError
+            )
         }
         
     }

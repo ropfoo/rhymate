@@ -3,7 +3,7 @@ import Foundation
 struct DatamuseFetcher {
     private let rhymesStorage = RhymesStorage()
     private let fetcher: Fetcher
-    let baseUrl = URL(string: "https://api.datamuse.com")!
+    let baseUrlWords = DATAMUSE_API_URL.appendingPathComponent("/words")
     
     init(
         configuration: URLSessionConfiguration = URLSessionConfiguration.default
@@ -21,11 +21,18 @@ struct DatamuseFetcher {
         }
         
         // fetch data from datamuse
-        let url = baseUrl.appendingPathComponent("/words?rel_rhy=\(word)")
+        var urlComponents = URLComponents(string: baseUrlWords.absoluteString)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "rel_rhy", value: word),
+        ]
+        let url = urlComponents.url!
         if let rhymesResponse: DatamuseRhymeResponse = try await fetcher.get(url) {
+            let sortedRhymeResponse = rhymesResponse.sorted{
+                $0.score ?? 0 > $1.score ?? 0
+            }
             // store response in UserDefaults
-            try rhymesStorage.mutate(.add, data: rhymesResponse, key: word)
-            return rhymesResponse
+            try rhymesStorage.mutate(.add, data: sortedRhymeResponse, key: word)
+            return sortedRhymeResponse
         }
         return []
     }
