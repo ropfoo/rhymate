@@ -1,5 +1,3 @@
-import Foundation
-
 struct RhymeWithFavorites: JSONable & Identifiable {
     var id: String {word}
     let word: String

@@ -23,6 +23,20 @@ struct RhymesGrid: View {
         )}
 }
 
-//#Preview {
-//    SearchView()
-//}
+struct PreviewRhymesGrid: View {
+    @State var rhymes: DatamuseRhymeResponse = [
+        DatamuseRhyme(word: "west", score: 10, numSyllables: 2),
+        DatamuseRhyme(word: "best", score: 10, numSyllables: 2),
+        DatamuseRhyme(word: "chest", score: 10, numSyllables: 2),
+    ]
+    @State var word: String = "test"
+    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+    var body: some View {
+        RhymesGrid(rhymes: $rhymes, word: $word, favorites:$favorites)
+
+    }
+}
+
+#Preview {
+    PreviewRhymesGrid()
+}

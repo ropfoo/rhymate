@@ -1,26 +1,32 @@
 import SwiftUI
-import Foundation
 
 struct SearchFormView: View {
     @Binding var rhymes: DatamuseRhymeResponse
     @Binding var word: String
+    @Binding var isLoading: Bool
     
-    func submit() {
-        print("submitting: \(word)")
-        RhymesFetcher(rhymes:$rhymes).getRhyme(word:word)
+    private let fetcher = DatamuseFetcher()
+    
+    func submit() async {
+        withAnimation{ isLoading = true }
+        do {
+            let rhymesResponse = try await fetcher.getRhymes(forWord: word)
+            rhymes = rhymesResponse
+        } catch {
+            print(error)
+        }
+        withAnimation{ isLoading = false }
     }
     
     var body: some View {
         Form{
             HStack{
                 TextField("Search rhyme...", text:$word)
-                Button(action:submit){
-                    Text("Go")
-                }
             }
-        }
-        .onSubmit{
-            submit()
+        }.onSubmit {
+            Task{
+                await submit()
+            }
         }
         .frame(
             maxHeight: 100
