@@ -47,10 +47,14 @@ struct FavoritesView: View {
                                 }
                             ){
                                 VStack{
-                                    Subheadline(key)
+                                    Text(key)
+                                        .fontWeight(.black)
+                                        .font(.system(.caption))
+                                        .foregroundColor(.primary)
                                     HStack{
                                         ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
                                             Text(rhyme)
+                                                .font(.footnote)
                                                 .lineLimit(1)
                                                 .fixedSize()
                                                 .padding(.horizontal, 5)

@@ -53,14 +53,13 @@ struct FavoritesItemView: View {
     var body: some View {
         switch layout {
         case .detail:
-            VStack(alignment: .center, spacing: 18) {
+            VStack(alignment: .center, spacing: 16) {
                 Text(word)
-                    .font(.subheadline)
+                    .font(.footnote)
                     .fontWeight(.black)
                     .foregroundColor(.secondary)
                     .padding(.bottom)
                 Text(rhyme)
-                    .font(.title3)
                     .fontWeight(.bold)
                 FavoritesToggle(
                     action: toggleState,
@@ -71,24 +70,23 @@ struct FavoritesItemView: View {
         case .list:
             HStack {
                 Text(rhyme)
-                    .font(.system(.callout))
+                    .font(.system(.caption))
                     .fontWeight(.bold)
                     .padding(.horizontal)
                 Spacer()
                 FavoritesToggle(
                     action: toggleState,
                     isActivated: isFavorite)
-                .padding(.horizontal,3)
+                .padding(.horizontal, 12)
                 
             }
-            .padding()
+            .padding(.vertical, 12)
             .background(.quinary.opacity(0.8))
             .frame(
                 minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
                 maxWidth: .infinity
             )
             .cornerRadius(.infinity)
-            .padding(3)
         }
         
     }

@@ -23,7 +23,6 @@
 		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
 		EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */; };
 		EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5A28C62C404C9C00DEDFFF /* FavoritesItemView.swift */; };
-		EC5A28CA2C404EE200DEDFFF /* Subheadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5A28C92C404EE200DEDFFF /* Subheadline.swift */; };
 		EC5A28CC2C40555100DEDFFF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EC5A28CB2C40555100DEDFFF /* README.md */; };
 		EC7782E02C39CAE7008E9884 /* StorageHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */; };
 		EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */; };
@@ -80,7 +79,6 @@
 		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
 		EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetail.swift; sourceTree = "<group>"; };
 		EC5A28C62C404C9C00DEDFFF /* FavoritesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesItemView.swift; sourceTree = "<group>"; };
-		EC5A28C92C404EE200DEDFFF /* Subheadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subheadline.swift; sourceTree = "<group>"; };
 		EC5A28CB2C40555100DEDFFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageHandlerTests.swift; sourceTree = "<group>"; };
 		EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorageTests.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -201,18 +199,9 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		EC5A28C82C404EB700DEDFFF /* Text */ = {
-			isa = PBXGroup;
-			children = (
-				EC5A28C92C404EE200DEDFFF /* Subheadline.swift */,
-			);
-			path = Text;
-			sourceTree = "<group>";
-		};
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EC5A28C82C404EB700DEDFFF /* Text */,
 				ECD4E5712C3FBFC4004D02CF /* Favorites */,
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
 				EC7782E92C3C5F56008E9884 /* Buttons */,
@@ -462,7 +451,6 @@
 				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
-				EC5A28CA2C404EE200DEDFFF /* Subheadline.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
 				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,
 			);

@@ -48,7 +48,7 @@ struct RhymeItemView: View {
                     name: rhyme)
             }, label: {
                 Text("\($rhyme.wrappedValue)")
-                    .font(.system(.subheadline))
+                    .font(.system(.caption))
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
                     .foregroundColor(.primary)
