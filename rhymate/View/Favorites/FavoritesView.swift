@@ -4,6 +4,7 @@ import SwiftUI
 
 
 struct FavoritesView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Binding var favorites: FavoriteRhymes
     @State private var sheet: RhymeWithFavorites?
     
@@ -46,27 +47,34 @@ struct FavoritesView: View {
                                     sheet = RhymeWithFavorites(word: key, rhymes: $favorites.wrappedValue[key]?.rhymes ?? [])
                                 }
                             ){
-                                VStack{
-                                    Text(key)
-                                        .fontWeight(.black)
-                                        .font(.system(.caption))
-                                        .foregroundColor(.primary)
-                                    HStack{
-                                        ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
-                                            Text(rhyme)
-                                                .font(.footnote)
-                                                .lineLimit(1)
-                                                .fixedSize()
-                                                .padding(.horizontal, 5)
-                                                .foregroundColor(.primary)
-                                                .opacity(0.6)
-                                        }
-                                    }
-                                    .frame(
-                                        maxWidth: 300,
-                                        alignment: .center
+                                let fadeColor =
+                                colorScheme == .dark ? 0.06 : 0.925
+                                ZStack{
+                                    FadeInOutRow(
+                                        rgbColorIn: fadeColor,
+                                        rgbColorOut: fadeColor
                                     )
-                                    .clipped()
+                                    VStack{
+                                        Text(key)
+                                            .fontWeight(.black)
+                                            .font(.system(.caption))
+                                            .foregroundColor(.primary)
+                                        HStack{
+                                            ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
+                                                Text(rhyme)
+                                                    .font(.footnote)
+                                                    .lineLimit(1)
+                                                    .fixedSize()
+                                                    .padding(.horizontal, 5)
+                                                    .foregroundColor(.primary)
+                                                    .opacity(0.6)
+                                            }
+                                        }
+                                        .frame(
+                                            maxWidth: 300,
+                                            alignment: .center
+                                        )
+                                    }
                                 }.padding(10)
                             }
                             .sheet(

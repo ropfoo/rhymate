@@ -40,6 +40,7 @@
 		ECBD84522C43385D00193BA2 /* DatamuseFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */; };
 		ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84532C43BC9400193BA2 /* FallbackView.swift */; };
 		ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84562C43DADB00193BA2 /* Constants.swift */; };
+		ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatamuseFetcherTests.swift; sourceTree = "<group>"; };
 		ECBD84532C43BC9400193BA2 /* FallbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackView.swift; sourceTree = "<group>"; };
 		ECBD84562C43DADB00193BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInOutRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECBD84582C45138C00193BA2 /* UIUtils */,
 				ECD4E5712C3FBFC4004D02CF /* Favorites */,
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
 				EC7782E92C3C5F56008E9884 /* Buttons */,
@@ -289,6 +292,14 @@
 				ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		ECBD84582C45138C00193BA2 /* UIUtils */ = {
+			isa = PBXGroup;
+			children = (
+				ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */,
+			);
+			path = UIUtils;
 			sourceTree = "<group>";
 		};
 		ECD4E5712C3FBFC4004D02CF /* Favorites */ = {
@@ -450,6 +461,7 @@
 				ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */,
 				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
+				ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
 				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,
@@ -622,6 +634,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rhymate/Preview Content\"";
+				DEVELOPMENT_TEAM = WH56D7VT5D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -629,6 +642,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -650,6 +664,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rhymate/Preview Content\"";
+				DEVELOPMENT_TEAM = WH56D7VT5D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -657,6 +672,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

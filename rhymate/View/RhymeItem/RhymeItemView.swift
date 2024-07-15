@@ -27,6 +27,27 @@ struct RhymeItemView: View {
         
     }
     
+    func toggleState() {
+        let isFav = favorites[word]?.rhymes.contains(rhyme) ?? false
+        do {
+            try favoriteStorage.mutate(
+                isFav ? .remove : .add,
+                data: rhyme,
+                key: word
+            )
+        } catch {
+            print(error)
+        }
+        withAnimation {
+            favorites = DictionaryHelper().mutateFavorite(
+                favorites,
+                isFav ? .remove : .add,
+                data: rhyme,
+                key: word
+            )
+        }
+    }
+    
     var body:some View {
         ZStack(alignment: .topLeading){
             if favorites[word]?.rhymes.contains(rhyme) ?? false {
@@ -35,18 +56,15 @@ struct RhymeItemView: View {
                         .foregroundColor(.red)
                         .font(.system(size: 10))
                 }
+                .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                 .padding(5)
-                .background(.quaternary)
+                .background(Color(UIColor.systemBackground))
                 .cornerRadius(100)
                 .offset(x: 0, y: -10)
-
+                .shadow(radius: 1)
             }
             
-            Button(action: {
-                sheetDetail = RhymeItem(
-                    id: rhyme,
-                    name: rhyme)
-            }, label: {
+            Button(action: toggleState , label: {
                 Text("\($rhyme.wrappedValue)")
                     .font(.system(.caption))
                     .fontWeight(.bold)
@@ -56,20 +74,6 @@ struct RhymeItemView: View {
                         maxWidth: .infinity
                     )
             })
-            .sheet(
-                item: $sheetDetail,
-                onDismiss: {}
-            )
-            { detail in
-                FavoritesItemView(
-                    .detail,
-                    word: word,
-                    rhyme: detail.name,
-                    onToggle: { sheetDetail = nil },
-                    favorites: $favorites,
-                    isFavorite: favorites[word]?.rhymes.contains(rhyme) ?? false
-                ).presentationDetents([.height(180)])
-            }
             .background(.quinary)
             .cornerRadius(25)
         }

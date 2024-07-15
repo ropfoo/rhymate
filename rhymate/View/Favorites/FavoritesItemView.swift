@@ -81,7 +81,7 @@ struct FavoritesItemView: View {
                 
             }
             .padding(.vertical, 12)
-            .background(.quinary.opacity(0.8))
+            .background(.quinary)
             .frame(
                 minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
                 maxWidth: .infinity
