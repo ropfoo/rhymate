@@ -4,13 +4,13 @@ Rhymate is a swift based client for the [Datamuse API](https://www.datamuse.com/
 
 Besides making rhyme requests, it also allows marking favorite results and storing them locally.
 
-Supported Platforms:
+### Supported Platforms
 - [x] iOS
 - [ ] iPadOS (coming soon)
 - [ ] macOS (planned)
 - [ ] watchOS (planned)
 
-Features
+### Features
 - [x] save rhymes as favorites
 - [ ] wiktionary support
 
