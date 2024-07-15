@@ -15,13 +15,11 @@ struct FavoritesDetail: View {
                 Spacer(minLength: 30)
                 VStack(alignment: .trailing){
                     ForEach($favorites.wrappedValue[word]?.rhymes ?? [],id: \.self){ rhyme in
-                        FavoritesItemView(
-                            .list,
-                            word: word,
+                        RhymeItemView(
+                            .favorite,
                             rhyme: rhyme,
-                            onToggle: {},
-                            favorites: $favorites,
-                            isFavorite: favorites[word]?.rhymes.contains(rhyme) ?? false
+                            word: word,
+                            favorites: $favorites
                         )
                     }
                     .frame(

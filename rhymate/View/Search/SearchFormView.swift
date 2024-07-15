@@ -36,7 +36,7 @@ struct SearchFormView: View {
     var body: some View {
         Form{
             HStack{
-                TextField("Search rhyme...", text:$word)
+                TextField(LocalizedStringKey("searchInput"), text:$word)
             }
         }.onSubmit {
             Task{

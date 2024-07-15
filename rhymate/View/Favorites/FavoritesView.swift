@@ -85,7 +85,7 @@ struct FavoritesView: View {
                                     word: detail.word,
                                     favorites: $favorites
                                 )
-                                .presentationDetents([.height(500)])
+                                .presentationDetents([.medium, .large])
                             }
                         }
                         .background(.quinary)
@@ -101,7 +101,7 @@ struct FavoritesView: View {
                 maxHeight: .infinity
             )
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem {
                     Spacer()
                 }
             }

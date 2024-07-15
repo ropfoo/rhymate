@@ -24,17 +24,17 @@ struct SearchView: View {
                         switch searchError {
                         case .noResults:
                             FallbackView(
-                                "No rhymes found for \"\(word)\"",
+                                "fallbackNoRhymesFound \(word)",
                                 "exclamationmark.magnifyingglass"
                             )
                         case .network:
                             FallbackView(
-                                "Check your internet connection",
+                                "fallbackNoInternetConnection",
                                 "network.slash"
                             )
                         case .generic:
                             FallbackView(
-                                "An unexpected error occured",
+                                "fallbackUnexpectedError",
                                 "exclamationmark.triangle"
                             )
                         }
@@ -42,7 +42,7 @@ struct SearchView: View {
                     Spacer()
                 } else if rhymes.isEmpty{
                     Spacer()
-                    FallbackView("Search for rhymes", "magnifyingglass")
+                    FallbackView("fallbackNoInput", "magnifyingglass")
                     Spacer()
                 } else {
                     ScrollView{
@@ -55,7 +55,7 @@ struct SearchView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem {
                     Spacer()
                 }
             }

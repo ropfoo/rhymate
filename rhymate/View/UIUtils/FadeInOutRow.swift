@@ -11,9 +11,9 @@ struct FadeInOutRow: View {
         self.rgbColorIn = rgbColorIn
         self.rgbColorOut = rgbColorOut
         
-        colorIn = Color(UIColor(red: rgbColorIn, green: rgbColorIn, blue: rgbColorIn, alpha: 1.0))
+        colorIn = Color(red: rgbColorIn, green: rgbColorIn, blue: rgbColorIn)
         
-        colorOut = Color(UIColor(red: rgbColorOut, green: rgbColorOut, blue: rgbColorOut, alpha: 1.0))
+        colorOut = Color(red: rgbColorOut, green: rgbColorOut, blue: rgbColorOut)
     }
     
     

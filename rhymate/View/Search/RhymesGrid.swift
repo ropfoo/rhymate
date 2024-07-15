@@ -9,7 +9,7 @@ struct RhymesGrid: View {
     var body: some View {
         LazyVGrid(columns:  [GridItem(.flexible()), GridItem(.flexible())], spacing: 10){
             ForEach($rhymes) { rhyme in
-                RhymeItemView(rhyme:rhyme.word, word: $word, favorites: $favorites)
+                RhymeItemView(rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
             }
             
         }

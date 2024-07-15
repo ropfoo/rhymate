@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct FallbackView: View {
-    let text: String
+    let localizedKey: LocalizedStringKey
     let systemName: String
     
-    init(_ text: String, _ systemName: String = "info.circle") {
-        self.text = text
+    init(_ localizedKey: LocalizedStringKey, _ systemName: String = "info.circle") {
+        self.localizedKey = localizedKey
         self.systemName = systemName
     }
     
@@ -15,7 +15,7 @@ struct FallbackView: View {
                 .font(.title)
                 .foregroundColor(.secondary)
                 .padding(.bottom, 10)
-            Text(text)
+            Text(localizedKey)
                 .font(.footnote)
                 .foregroundColor(.secondary)
 

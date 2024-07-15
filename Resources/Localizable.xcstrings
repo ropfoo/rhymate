@@ -1,0 +1,76 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "fallbackNoInput" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for rhymes"
+          }
+        }
+      }
+    },
+    "fallbackNoInternetConnection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your internet connection"
+          }
+        }
+      }
+    },
+    "fallbackNoRhymesFound %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No rhymes found for \"%@\""
+          }
+        }
+      }
+    },
+    "fallbackUnexpectedError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unexpected error occured"
+          }
+        }
+      }
+    },
+    "Favorites" : {
+
+    },
+    "No favorites yet" : {
+
+    },
+    "Search" : {
+
+    },
+    "searchInput" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for rhymes..."
+          }
+        }
+      }
+    },
+    "Some text message" : {
+
+    },
+    "You can mark rhymes as favorites by tapping them and activating the heart icon" : {
+
+    }
+  },
+  "version" : "1.0"
+}
