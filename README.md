@@ -7,4 +7,10 @@ Besides making rhyme requests, it also allows marking favorite results and stori
 Supported Platforms:
 - [x] iOS
 - [ ] iPadOS (coming soon)
-- [ ] macOS (coming soon)
+- [ ] macOS (planned)
+- [ ] watchOS (planned)
+
+Features
+- [x] save rhymes as favorites
+- [ ] wiktionary support
+
