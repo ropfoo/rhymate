@@ -13,7 +13,9 @@ struct DatamuseFetcher {
     
     /// Fetch Ryhmes from Datamuse API (https://api.datamuse.com/words?rel_rhy=word))
     func getRhymes(forWord: String) async throws -> DatamuseRhymeResponse {
-        let word = forWord.lowercased()
+        let word = forWord
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
         
         // prefer local store if word already exists in UserDefaults
         if let localResult = rhymesStorage.get(word: word), !localResult.isEmpty {

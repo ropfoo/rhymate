@@ -26,12 +26,12 @@ struct FavoritesView: View {
             if !hasFavoritesWithRhymes() {
                 VStack(alignment: .center){
                     Spacer()
-                    Text("No favorites yet")
+                    Text("fallbackFavoritesTitle")
                         .font(.system(.headline))
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .padding(.bottom, 10)
-                    Text("You can mark rhymes as favorites by tapping them and activating the heart icon")
-                        .padding(.bottom, 20)
+                    Text("fallbackFavoritesText")
+                        .padding(.bottom, 10)
                     Image(systemName: "heart.fill").foregroundColor(.red)
                 }.padding(.horizontal, 50)
             }

@@ -5,9 +5,12 @@ struct RhymesGrid: View {
     @Binding var rhymes: DatamuseRhymeResponse
     @Binding var word: String
     @Binding var favorites: FavoriteRhymes
-
+    
     var body: some View {
-        LazyVGrid(columns:  [GridItem(.flexible()), GridItem(.flexible())], spacing: 10){
+        LazyVGrid(
+            columns:[GridItem(.adaptive(minimum: 163))],
+            spacing: 10
+        ){
             ForEach($rhymes) { rhyme in
                 RhymeItemView(rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
             }

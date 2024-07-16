@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "fallbackFavoritesText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark rhymes as favorites by toggling the heart icon."
+          }
+        }
+      }
+    },
+    "fallbackFavoritesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No favorites yet"
+          }
+        }
+      }
+    },
     "fallbackNoInput" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -48,9 +70,6 @@
     "Favorites" : {
 
     },
-    "No favorites yet" : {
-
-    },
     "Search" : {
 
     },
@@ -66,9 +85,6 @@
       }
     },
     "Some text message" : {
-
-    },
-    "You can mark rhymes as favorites by tapping them and activating the heart icon" : {
 
     }
   },
