@@ -11,8 +11,9 @@ struct WiktionaryFetcher {
         self.fetcher = Fetcher(configuration: configuration)
     }
     
-   private func flattenDefinitionsToHTMLStrings(
-        definitionResponse: WiktionaryDefinitionResponse,
+    /// Convert wiktionary response to string array where every string is a definition div with all of its examples as list items.
+    private func flattenDefinitionsToHTMLStrings(
+        _ definitionResponse: WiktionaryDefinitionResponse,
         language: String
     ) -> [String] {
         var definitions: [String] = []
@@ -23,27 +24,23 @@ struct WiktionaryFetcher {
                 for example in definition.examples ?? [] {
                     examplesHtml.append("<li>\(example)</li>")
                 }
-                var definitionHtml: String = """
-                    <div class=\"definition\">
-                        <p>\(definition.definition)</p>
-                        <ul>\(examplesHtml)</ul>
-                    </div>
-                """
+                let definitionHtml: String =
+                    "<div class=\"definition\"><p>\(definition.definition)</p><ul>\(examplesHtml)</ul></div>"
+                
                 definitions.append(definitionHtml)
             }
         }
         return definitions
     }
     
+    /// Fetch wiktionary word definitons as a parsed array of html strings.
     func getDefinitions(forWord: String) async throws -> [String] {
         // fetch data from wiktionary
         let url = baseUrlDefinition.appendingPathComponent("/\(forWord)")
         if let definitionResponse: WiktionaryDefinitionResponse = try await fetcher.get(url) {
-            let definitions = flattenDefinitionsToHTMLStrings(definitionResponse: definitionResponse, language: "en")
+            let definitions = flattenDefinitionsToHTMLStrings(definitionResponse, language: "en")
             return definitions
         }
         return []
     }
-    
-    
 }

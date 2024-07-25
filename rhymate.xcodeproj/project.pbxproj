@@ -45,7 +45,8 @@
 		ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */; };
 		ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */; };
 		ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */; };
-		ECBDC3DF2C46E93E00943D83 /* WiktionaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */; };
+		ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */; };
+		ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +108,8 @@
 		ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLContentView.swift; sourceTree = "<group>"; };
 		ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcher.swift; sourceTree = "<group>"; };
 		ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiktionary.swift; sourceTree = "<group>"; };
-		ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDetailView.swift; sourceTree = "<group>"; };
+		ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcherTests.swift; sourceTree = "<group>"; };
+		ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		EC238A6C2C321F6900829799 /* rhymateTests */ = {
 			isa = PBXGroup;
 			children = (
+				ECF4C9372C52F282001E6B55 /* MockData */,
 				ECBD844E2C4337F800193BA2 /* Service */,
 				ECBD84472C42F8CC00193BA2 /* Utils */,
 				EC7782E12C39CAFA008E9884 /* Storage */,
@@ -216,7 +219,6 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ECBDC3DD2C46E92200943D83 /* Wiktionary */,
 				ECBD84582C45138C00193BA2 /* UIUtils */,
 				ECD4E5712C3FBFC4004D02CF /* Favorites */,
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				ECBD84512C43385D00193BA2 /* DatamuseFetcherTests.swift */,
+				ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -333,14 +336,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ECBDC3DD2C46E92200943D83 /* Wiktionary */ = {
-			isa = PBXGroup;
-			children = (
-				ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */,
-			);
-			path = Wiktionary;
-			sourceTree = "<group>";
-		};
 		ECD4E5712C3FBFC4004D02CF /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +344,14 @@
 				EC5A28C62C404C9C00DEDFFF /* FavoritesItemView.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		ECF4C9372C52F282001E6B55 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */,
+			);
+			path = MockData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,7 +515,6 @@
 				ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
-				ECBDC3DF2C46E93E00943D83 /* WiktionaryDetailView.swift in Sources */,
 				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,7 +527,9 @@
 				EC7782E32C39CC28008E9884 /* RhymesStorageTests.swift in Sources */,
 				ECBD844D2C42FBF100193BA2 /* TestProtocolHandler.swift in Sources */,
 				ECBD84492C42F90E00193BA2 /* FetcherTests.swift in Sources */,
+				ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */,
 				ECBD84522C43385D00193BA2 /* DatamuseFetcherTests.swift in Sources */,
+				ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */,
 				ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */,
 				EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */,
 			);
