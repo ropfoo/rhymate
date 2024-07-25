@@ -12,5 +12,5 @@ Besides making rhyme requests, it also allows marking favorite results and stori
 
 ### Features
 - [x] save rhymes as favorites
-- [ ] wiktionary support
+- [x] wiktionary definitions
 
