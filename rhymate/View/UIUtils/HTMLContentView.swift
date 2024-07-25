@@ -3,15 +3,19 @@ import WebKit
 
 struct HTMLContentView: UIViewRepresentable  {
     private let html: String
-    
-    init(htmlElements: [String], scheme:ColorScheme) {
+
+    init(
+        htmlElements: [String],
+        scheme:ColorScheme,
+        classNames: String = ""
+    ) {
         let textColor = scheme == .dark ? "white" : "black"
         
         
-        var elemts: String = ""
+        var elements: String = ""
         for el in htmlElements {
             let elementWithWrapper = "<div class=\"element\">\(el)</div>"
-            elemts.append(elementWithWrapper)
+            elements.append(elementWithWrapper)
         }
         
         let wrapper = """
@@ -22,6 +26,7 @@ struct HTMLContentView: UIViewRepresentable  {
                 line-height: 2.25rem;
                 color:\(textColor);
                 animation: fadeInAnimation ease .5s;
+                margin: 0;
             }
         
             a {
@@ -31,6 +36,8 @@ struct HTMLContentView: UIViewRepresentable  {
             .element {
                 margin-bottom: 1.5rem;
             }
+        
+            \(classNames)
         
             @keyframes fadeInAnimation {
                 0% {
@@ -42,7 +49,7 @@ struct HTMLContentView: UIViewRepresentable  {
             }
         </style>
         <div>
-            \(elemts)
+            \(elements)
         <div>
         """
         self.html = wrapper

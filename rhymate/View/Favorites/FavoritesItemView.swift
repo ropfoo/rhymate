@@ -72,7 +72,15 @@ struct FavoritesItemView: View {
                 VStack{
                     HTMLContentView(
                         htmlElements: definitions,
-                        scheme: colorScheme
+                        scheme: colorScheme,
+                        classNames: """
+                        .definition p {
+                            padding-bottom: 0.5rem;
+                        }
+                        .definition li {
+                            opacity: 0.65;
+                        }
+                        """
                     )
                 }.onAppear(perform: {
                     Task {

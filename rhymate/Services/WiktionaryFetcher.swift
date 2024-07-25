@@ -19,7 +19,17 @@ struct WiktionaryFetcher {
         guard let usageDescriptions = definitionResponse[language] else { return [] }
         for description in usageDescriptions {
             for definition in description.definitions {
-                definitions.append(definition.definition)
+                var examplesHtml: String = ""
+                for example in definition.examples ?? [] {
+                    examplesHtml.append("<li>\(example)</li>")
+                }
+                var definitionHtml: String = """
+                    <div class=\"definition\">
+                        <p>\(definition.definition)</p>
+                        <ul>\(examplesHtml)</ul>
+                    </div>
+                """
+                definitions.append(definitionHtml)
             }
         }
         return definitions
