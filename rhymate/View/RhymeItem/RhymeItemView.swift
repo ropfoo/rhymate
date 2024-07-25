@@ -79,7 +79,7 @@ struct RhymeItemView: View {
                     onToggle: { sheetDetail = nil },
                     favorites: $favorites,
                     isFavorite: favorites[word]?.rhymes.contains(rhyme) ?? false
-                ).presentationDetents([.medium])
+                ).presentationDetents([.height(200), .large])
             }
             .background(.quinary)
             .cornerRadius(25)

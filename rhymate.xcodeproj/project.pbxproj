@@ -42,6 +42,10 @@
 		ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84562C43DADB00193BA2 /* Constants.swift */; };
 		ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */; };
 		ECBD845D2C451B9D00193BA2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ECBD845C2C451B9D00193BA2 /* Localizable.xcstrings */; };
+		ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */; };
+		ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */; };
+		ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */; };
+		ECBDC3DF2C46E93E00943D83 /* WiktionaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +104,10 @@
 		ECBD84562C43DADB00193BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInOutRow.swift; sourceTree = "<group>"; };
 		ECBD845C2C451B9D00193BA2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLContentView.swift; sourceTree = "<group>"; };
+		ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcher.swift; sourceTree = "<group>"; };
+		ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiktionary.swift; sourceTree = "<group>"; };
+		ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 				EC238A6C2C321F6900829799 /* rhymateTests */,
 				EC238A762C321F6900829799 /* rhymateUITests */,
 				EC238A5A2C321F6800829799 /* Products */,
+				ECBDC3D62C46B52B00943D83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +216,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECBDC3DD2C46E92200943D83 /* Wiktionary */,
 				ECBD84582C45138C00193BA2 /* UIUtils */,
 				ECD4E5712C3FBFC4004D02CF /* Favorites */,
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
@@ -231,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				EC238A902C34003600829799 /* DatamuseFetcher.swift */,
+				ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -252,6 +263,7 @@
 				EC7782E72C3C5B4B008E9884 /* Rhyme.swift */,
 				ECB1A5DC2C3C744A0087EDF9 /* Util.swift */,
 				ECB1A5DE2C3C84730087EDF9 /* Storage.swift */,
+				ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */,
+				ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */,
 			);
 			path = UIUtils;
 			sourceTree = "<group>";
@@ -311,6 +324,21 @@
 				ECBD845C2C451B9D00193BA2 /* Localizable.xcstrings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		ECBDC3D62C46B52B00943D83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECBDC3DD2C46E92200943D83 /* Wiktionary */ = {
+			isa = PBXGroup;
+			children = (
+				ECBDC3DE2C46E93E00943D83 /* WiktionaryDetailView.swift */,
+			);
+			path = Wiktionary;
 			sourceTree = "<group>";
 		};
 		ECD4E5712C3FBFC4004D02CF /* Favorites */ = {
@@ -339,6 +367,8 @@
 			dependencies = (
 			);
 			name = rhymate;
+			packageProductDependencies = (
+			);
 			productName = rhymate;
 			productReference = EC238A592C321F6800829799 /* rhymate.app */;
 			productType = "com.apple.product-type.application";
@@ -412,6 +442,8 @@
 				de,
 			);
 			mainGroup = EC238A502C321F6800829799;
+			packageReferences = (
+			);
 			productRefGroup = EC238A5A2C321F6800829799 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -458,6 +490,7 @@
 			files = (
 				EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */,
 				EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */,
+				ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */,
 				EC238A5F2C321F6800829799 /* SearchView.swift in Sources */,
 				EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */,
 				EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */,
@@ -472,11 +505,14 @@
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
 				ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */,
 				ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */,
+				ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */,
 				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
 				ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */,
+				ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
+				ECBDC3DF2C46E93E00943D83 /* WiktionaryDetailView.swift in Sources */,
 				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,7 +756,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WH56D7VT5D;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymateTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -740,7 +776,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WH56D7VT5D;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymateTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

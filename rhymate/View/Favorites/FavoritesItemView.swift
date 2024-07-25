@@ -6,6 +6,9 @@ enum FavoritesItemLayout {
 }
 
 struct FavoritesItemView: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    @State var definitions: [String] = []
     let layout: FavoritesItemLayout
     let word: String
     let rhyme: String
@@ -66,6 +69,16 @@ struct FavoritesItemView: View {
                     isActivated: isFavorite,
                     size: .large
                 )
+                VStack{
+                    HTMLContentView(
+                        htmlElements: definitions,
+                        scheme: colorScheme
+                    )
+                }.onAppear(perform: {
+                    Task {
+                        definitions = try await WiktionaryFetcher().getDefinitions(forWord: rhyme)
+                    }
+                })
             }
         case .list:
             HStack {
