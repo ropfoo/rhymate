@@ -2,6 +2,7 @@ import Foundation
 
 
 struct WiktionaryFetcher {
+    private let wiktionaryDefinitionsStorage = WiktionaryDefinitionsStorage()
     private let fetcher: Fetcher
     let baseUrlDefinition = WIKTIONARY_API_URL.appendingPathComponent("/definition")
     
@@ -35,10 +36,17 @@ struct WiktionaryFetcher {
     
     /// Fetch wiktionary word definitons as a parsed array of html strings.
     func getDefinitions(forWord: String) async throws -> [String] {
+        // prefer local store if word already exists in UserDefaults
+        if let localResult = wiktionaryDefinitionsStorage.get(word: forWord), !localResult.isEmpty {
+            return localResult
+        }
+        
         // fetch data from wiktionary
         let url = baseUrlDefinition.appendingPathComponent("/\(forWord)")
         if let definitionResponse: WiktionaryDefinitionResponse = try await fetcher.get(url) {
             let definitions = flattenDefinitionsToHTMLStrings(definitionResponse, language: "en")
+            // store flattened definitons in UserDefaults
+            try wiktionaryDefinitionsStorage.mutate(.add, data: definitions, key: forWord)
             return definitions
         }
         return []

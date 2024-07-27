@@ -17,3 +17,7 @@ struct WiktionaryUsageDescription: JSONable {
 }
     
 typealias WiktionaryDefinitionResponse = [String: [WiktionaryUsageDescription]]
+
+typealias WiktionaryWord = String
+typealias WiktionaryDefinitions = [String]
+typealias WiktionaryHistory = [WiktionaryWord: WiktionaryDefinitions]
