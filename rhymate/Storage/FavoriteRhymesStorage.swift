@@ -31,7 +31,8 @@ struct FavoriteRhymesStorage: RhymeStorage {
     }
     
     /// Mutates rhyme favorites in UserDefaults storage at given key with provided data
-    func mutate(_ type: Mutation, data: String, key: String) throws  {
+    func mutate(_ type: Mutation, key: String, _ data: String?) throws  {
+        let data = data ?? ""
         var currentFavorites = getFavoriteRhymes()
         currentFavorites = helper.mutateFavorite(currentFavorites, type, data: data, key: key)
         try storageHandler.setJSON(value: currentFavorites, key: FAVORITE_RHYMES_STORAGE_KEY)

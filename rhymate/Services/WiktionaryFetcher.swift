@@ -46,7 +46,7 @@ struct WiktionaryFetcher {
         if let definitionResponse: WiktionaryDefinitionResponse = try await fetcher.get(url) {
             let definitions = flattenDefinitionsToHTMLStrings(definitionResponse, language: "en")
             // store flattened definitons in UserDefaults
-            try wiktionaryDefinitionsStorage.mutate(.add, data: definitions, key: forWord)
+            try wiktionaryDefinitionsStorage.mutate(.add, key: forWord, definitions)
             return definitions
         }
         return []

@@ -9,6 +9,7 @@ struct FavoritesItemView: View {
     @Environment(\.colorScheme) var colorScheme
 
     @State var definitions: [String] = []
+    @State var isLoading: Bool = true
     let layout: FavoritesItemLayout
     let word: String
     let rhyme: String
@@ -37,8 +38,8 @@ struct FavoritesItemView: View {
         do {
             try FavoriteRhymesStorage().mutate(
                 isFavorite ? .remove : .add,
-                data: rhyme,
-                key: word
+                key: word,
+                rhyme
             )
         } catch {
             print(error)
@@ -57,34 +58,43 @@ struct FavoritesItemView: View {
         switch layout {
         case .detail:
             VStack(alignment: .center, spacing: 16) {
+                Spacer()
                 Text(word)
                     .font(.footnote)
                     .fontWeight(.black)
                     .foregroundColor(.secondary)
                     .padding(.bottom)
-                Text(rhyme)
-                    .fontWeight(.bold)
-                FavoritesToggle(
-                    action: toggleState,
-                    isActivated: isFavorite,
-                    size: .large
-                )
-                VStack{
-                    HTMLContentView(
-                        htmlElements: definitions,
-                        scheme: colorScheme,
-                        classNames: """
-                        .definition p {
-                            padding-bottom: 0.5rem;
-                        }
-                        .definition li {
-                            opacity: 0.65;
-                        }
-                        """
+                HStack{
+                    Text(rhyme)
+                        .fontWeight(.bold)
+                        .padding(.trailing, 20)
+                    FavoritesToggle(
+                        action: toggleState,
+                        isActivated: isFavorite,
+                        size: .large
                     )
+                }
+                VStack{
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        HTMLContentView(
+                            htmlElements: definitions,
+                            scheme: colorScheme,
+                            classNames: """
+                            .definition p {
+                                padding-bottom: 0.5rem;
+                            }
+                            .definition li {
+                                opacity: 0.65;
+                            }
+                            """
+                        )
+                    }
                 }.onAppear(perform: {
                     Task {
                         definitions = try await WiktionaryFetcher().getDefinitions(forWord: rhyme)
+                        withAnimation{ isLoading = false }
                     }
                 })
             }

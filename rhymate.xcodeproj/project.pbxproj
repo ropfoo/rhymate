@@ -46,6 +46,7 @@
 		ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */; };
 		ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */; };
 		ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */; };
+		ECD720EE2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */; };
 		ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */; };
 		ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLContentView.swift; sourceTree = "<group>"; };
 		ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcher.swift; sourceTree = "<group>"; };
 		ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiktionary.swift; sourceTree = "<group>"; };
+		ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitionsStorageTests.swift; sourceTree = "<group>"; };
 		ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcherTests.swift; sourceTree = "<group>"; };
 		ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,6 +259,7 @@
 				EC7782DA2C39B2AB008E9884 /* StorageHandlerTests.swift */,
 				EC7782E22C39CC28008E9884 /* RhymesStorageTests.swift */,
 				ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */,
+				ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */,
 				ECBD84522C43385D00193BA2 /* DatamuseFetcherTests.swift in Sources */,
 				ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */,
+				ECD720EE2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift in Sources */,
 				ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */,
 				EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */,
 			);

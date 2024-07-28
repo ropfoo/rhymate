@@ -18,7 +18,7 @@ struct FavoritesToggle: View {
         self.size = size
         
         switch self.size {
-        case .large: self.sizeValue = 24
+        case .large: self.sizeValue = 20
         case .small: self.sizeValue = 14
         }
     }

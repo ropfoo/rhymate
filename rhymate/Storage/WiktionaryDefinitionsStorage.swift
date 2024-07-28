@@ -19,8 +19,8 @@ struct WiktionaryDefinitionsStorage: RhymeStorage {
     /// Add wiktionary definition to the UserDefaults
     func mutate(
         _ type: Mutation,
-        data: WiktionaryDefinitions,
-        key: String
+        key: String,
+        _ data: WiktionaryDefinitions? = nil
     ) throws  {
         switch type {
         case .add:

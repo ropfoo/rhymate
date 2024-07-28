@@ -33,7 +33,7 @@ struct DatamuseFetcher {
                 $0.score ?? 0 > $1.score ?? 0
             }
             // store response in UserDefaults
-            try rhymesStorage.mutate(.add, data: sortedRhymeResponse, key: word)
+            try rhymesStorage.mutate(.add, key: word, sortedRhymeResponse)
             return sortedRhymeResponse
         }
         return []

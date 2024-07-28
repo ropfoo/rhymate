@@ -28,7 +28,7 @@ final class WiktionaryFetcherTests: XCTestCase {
     
     func testGetWiktionaryDefinitionsLocalResultSuccess() async throws {
         let localData = wiktionaryMockBestResult
-        try wiktionaryDefinitionsStorage.mutate(.add, data: localData, key: "best")
+        try wiktionaryDefinitionsStorage.mutate(.add, key: "best", localData)
         
         let fetcher = createMockWiktionaryFetcher()
         let url = URL(string: WIKTIONARY_API_URL.absoluteString + "/definition/best")!
