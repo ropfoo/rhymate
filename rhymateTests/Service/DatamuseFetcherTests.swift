@@ -6,6 +6,7 @@ final class DatamuseFetcherTests: XCTestCase {
 
     override func setUpWithError() throws {
         rhymesStorage = RhymesStorage()
+        UserDefaults.standard.removeObject(forKey: rhymesStorage.RHYMES_HISTORY_KEY)
     }
 
     override func tearDownWithError() throws {
@@ -15,7 +16,7 @@ final class DatamuseFetcherTests: XCTestCase {
     func testGetRhymesFetchSuccess() async throws {
         let fetcher = createMockDatamuseFetcher()
         let url = URL(string: DATAMUSE_API_URL.absoluteString + "/words?rel_rhy=test")!
-        let json =  #"[{"word": "best", "score": 123, "numSyllables": 1 }]"#
+        let json =  #"[{"word": "best", "score": 123, "numSyllables": 1 }, {"word": "chest", "score": 321, "numSyllables": 1 }]"#
         
         BlockTestProtocolHandler.register(url: url) { (request: URLRequest) -> (response: HTTPURLResponse, data:Data?) in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: BlockTestProtocolHandler.httpVersion, headerFields: nil)!
@@ -24,14 +25,17 @@ final class DatamuseFetcherTests: XCTestCase {
       
         let result = try await fetcher.getRhymes(forWord: "test")
         XCTAssertNotNil(result)
-        XCTAssertEqual(result[0].word, "best")
-        XCTAssertEqual(result[0].score, 123)
+        XCTAssertEqual(result[0].word, "chest")
+        XCTAssertEqual(result[0].score, 321)
         XCTAssertEqual(result[0].numSyllables, 1)
+        XCTAssertEqual(result[1].word, "best")
+        XCTAssertEqual(result[1].score, 123)
+        XCTAssertEqual(result[1].numSyllables, 1)
     }
     
     func testGetRhymesLocalResult() async throws {
         let localData = [DatamuseRhyme(word: "west", score: 321, numSyllables: 1)]
-        try rhymesStorage.mutate(.add, data: localData, key: "test")
+        try rhymesStorage.mutate(.add, key: "test", localData)
         
         let fetcher = createMockDatamuseFetcher()
         let url = URL(string: DATAMUSE_API_URL.absoluteString + "/words?rel_rhy=test")!

@@ -13,6 +13,7 @@ enum RhymeItemLayout {
 
 struct RhymeItemView: View {
     let layout: RhymeItemLayout
+    let onPress: () -> Void
     private var rhyme: String
     private var word: String
     @State private var sheetDetail: RhymeItem?
@@ -22,8 +23,15 @@ struct RhymeItemView: View {
     
     let favoriteStorage = FavoriteRhymesStorage()
     
-    init(_ layout: RhymeItemLayout = .grid,rhyme: String, word: String, favorites: Binding<FavoriteRhymes>) {
+    init(
+        _ layout: RhymeItemLayout = .grid,
+        onPress: @escaping () -> Void,
+        rhyme: String,
+        word: String,
+        favorites: Binding<FavoriteRhymes>
+    ) {
         self.layout = layout
+        self.onPress = onPress
         self.rhyme = rhyme
         self.word = word
         self._favorites = favorites
@@ -51,11 +59,7 @@ struct RhymeItemView: View {
 
             }
             
-            Button(action: {
-                sheetDetail = RhymeItem(
-                    id: rhyme,
-                    name: rhyme)
-            }, label: {
+            Button(action: onPress, label: {
                 Text(rhyme)
                     .font(.system(.caption))
                     .fontWeight(.bold)
@@ -67,20 +71,7 @@ struct RhymeItemView: View {
                         alignment: layout == .grid ? .center : .leading
                     )
             })
-            .sheet(
-                item: $sheetDetail,
-                onDismiss: {}
-            )
-            { detail in
-                FavoritesItemView(
-                    .detail,
-                    word: word,
-                    rhyme: detail.name,
-                    onToggle: { sheetDetail = nil },
-                    favorites: $favorites,
-                    isFavorite: favorites[word]?.rhymes.contains(rhyme) ?? false
-                ).presentationDetents([.medium])
-            }
+        
             .background(.quinary)
             .cornerRadius(25)
         }
@@ -92,8 +83,8 @@ struct PreviewRhymeItemView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     
     var body: some View {
-        RhymeItemView(rhyme: "best", word: "test", favorites: $favorites)
-        RhymeItemView(.favorite, rhyme: "best", word: "test", favorites: $favorites)
+        RhymeItemView(onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
+        RhymeItemView(.favorite,onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
 
     }
 }

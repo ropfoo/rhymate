@@ -15,8 +15,8 @@ final class FavoriteRhymesStorageTests: XCTestCase {
     
     private func setupDefaultData() throws {
         // add sample values to store
-        try favoriteRhymesStorage.mutate(.add, data: "chest", key: "test")
-        try favoriteRhymesStorage.mutate(.add, data: "best", key: "test")
+        try favoriteRhymesStorage.mutate(.add,  key: "test", "chest")
+        try favoriteRhymesStorage.mutate(.add, key: "test", "best")
     }
     
     func testIsFavorite() throws {
@@ -33,13 +33,13 @@ final class FavoriteRhymesStorageTests: XCTestCase {
 
     func testAdd() throws {
         // should create an entry if none exists
-        try favoriteRhymesStorage.mutate(.add, data: "chest", key: "test")
+        try favoriteRhymesStorage.mutate(.add,  key: "test", "chest")
         if let resulWithSingleEntry: FavoriteRhymes = StorageHandler().getJSON(key: favoriteRhymesStorage.FAVORITE_RHYMES_STORAGE_KEY) {
             XCTAssertEqual(resulWithSingleEntry["test"]?.rhymes, ["chest"])
         }
         
         // should add to entry if it exists
-        try favoriteRhymesStorage.mutate(.add, data: "best", key: "test")
+        try favoriteRhymesStorage.mutate(.add, key: "test", "best")
          if let result: FavoriteRhymes = StorageHandler().getJSON(key: favoriteRhymesStorage.FAVORITE_RHYMES_STORAGE_KEY) {
              XCTAssertEqual(result["test"]?.rhymes, ["chest", "best"])
          }
@@ -49,7 +49,7 @@ final class FavoriteRhymesStorageTests: XCTestCase {
         try setupDefaultData()
         
         // should remove string from rhymes array
-        try favoriteRhymesStorage.mutate(.remove, data: "chest", key: "test")
+        try favoriteRhymesStorage.mutate(.remove, key: "test", "chest")
         if let result: FavoriteRhymes = StorageHandler().getJSON(key: favoriteRhymesStorage.FAVORITE_RHYMES_STORAGE_KEY) {
             XCTAssertEqual(result["test"]?.rhymes, ["best"])
         }

@@ -21,8 +21,8 @@ struct RhymesStorage: RhymeStorage{
     /// Add rhymes to the UserDefaults
     func mutate(
         _ type: Mutation,
-        data: DatamuseRhymeResponse,
-        key: String
+        key: String,
+        _ data: DatamuseRhymeResponse? = nil
     ) throws  {
         switch type {
         case .add:

@@ -21,7 +21,7 @@ final class RhymesStorageTests: XCTestCase {
     }
     
     func testAdd() throws {
-        try rhymesStorage.mutate(.add, data: testRhymes, key: testWord)
+        try rhymesStorage.mutate(.add, key: testWord, testRhymes)
         
         if let result: RhymesHistory = StorageHandler().getJSON(key: rhymesStorage.RHYMES_HISTORY_KEY) {
             for (index, rhyme) in testRhymes.enumerated() {
@@ -33,9 +33,9 @@ final class RhymesStorageTests: XCTestCase {
     }
     
     func testRemove() throws {
-        try rhymesStorage.mutate(.add, data: testRhymes, key: testWord)
+        try rhymesStorage.mutate(.add,key: testWord, testRhymes )
         
-        try rhymesStorage.mutate(.remove, data: testRhymes, key: testWord)
+        try rhymesStorage.mutate(.remove, key: testWord)
         if let result: RhymesHistory = StorageHandler().getJSON(key: rhymesStorage.RHYMES_HISTORY_KEY) {
             XCTAssertNil(result[testWord])
         }
