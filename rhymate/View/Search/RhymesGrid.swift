@@ -5,16 +5,35 @@ struct RhymesGrid: View {
     @Binding var rhymes: DatamuseRhymeResponse
     @Binding var word: String
     @Binding var favorites: FavoriteRhymes
-    
+    @State private var sheetDetail: RhymeItem?
+
     var body: some View {
         LazyVGrid(
             columns:[GridItem(.adaptive(minimum: 163))],
             spacing: 10
         ){
             ForEach($rhymes) { rhyme in
-                RhymeItemView(rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
+                RhymeItemView(onPress: {
+                    sheetDetail=RhymeItem(
+                        id: rhyme.word.wrappedValue,
+                        name: rhyme.word.wrappedValue)
+                },rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
             }
             
+        }
+        .sheet(
+            item: $sheetDetail,
+            onDismiss: {}
+        )
+        { detail in
+            FavoritesItemView(
+                .detail,
+                word: word,
+                rhyme: detail.name,
+                onToggle: { },
+                favorites: $favorites,
+                isFavorite: favorites[word]?.rhymes.contains(detail.name) ?? false
+            ).presentationDetents([.medium, .large])
         }
         .padding(.horizontal, 20)
         .frame(

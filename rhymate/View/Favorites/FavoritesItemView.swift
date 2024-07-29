@@ -7,7 +7,7 @@ enum FavoritesItemLayout {
 
 struct FavoritesItemView: View {
     @Environment(\.colorScheme) var colorScheme
-
+    
     @State var definitions: [String] = []
     @State var isLoading: Bool = true
     let layout: FavoritesItemLayout
@@ -57,26 +57,34 @@ struct FavoritesItemView: View {
     var body: some View {
         switch layout {
         case .detail:
-            VStack(alignment: .center, spacing: 16) {
+            VStack(alignment: .center) {
                 Spacer()
-                Text(word)
-                    .font(.footnote)
-                    .fontWeight(.black)
-                    .foregroundColor(.secondary)
-                    .padding(.bottom)
-                HStack{
-                    Text(rhyme)
-                        .fontWeight(.bold)
-                        .padding(.trailing, 20)
+                HStack(alignment: .center, spacing: -20){
+                    Spacer()
+                    Text(word)
+                        .font(.footnote)
+                        .fontWeight(.black)
+                        .foregroundColor(.secondary)
+                    Spacer()
                     FavoritesToggle(
                         action: toggleState,
                         isActivated: isFavorite,
                         size: .large
                     )
                 }
+                .padding(.horizontal,20)
+                .padding(.top, 20)
+                .padding(.bottom, 5)
+                
+                Text(rhyme)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 10)
+
                 VStack{
                     if isLoading {
-                        ProgressView()
+                        VStack{
+                            ProgressView()
+                        }.frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
                     } else {
                         HTMLContentView(
                             htmlElements: definitions,
