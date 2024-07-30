@@ -30,7 +30,6 @@ struct RhymesGrid: View {
                 .detail,
                 word: word,
                 rhyme: detail.name,
-                onToggle: { },
                 favorites: $favorites,
                 isFavorite: favorites[word]?.rhymes.contains(detail.name) ?? false
             ).presentationDetents([.medium, .large])
