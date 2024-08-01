@@ -1,49 +1,46 @@
 import SwiftUI
 
 struct SearchFormView: View {
-    @Binding var rhymes: DatamuseRhymeResponse
+    @Binding var input: String
     @Binding var word: String
-    @Binding var isLoading: Bool
-    @Binding var searchError: SearchError?
+    @Binding var showOverlay: Bool
+    @FocusState.Binding var isSearchFocused: Bool
+    @Binding var searchHistory: [String]
+    let onSubmit: () async -> Void
     
     private let fetcher = DatamuseFetcher()
     
-    func submit() async {
-        withAnimation{
-            searchError = nil
-            isLoading = true
-        }
-        do {
-            let rhymesResponse = try await fetcher.getRhymes(forWord: word)
-            if rhymesResponse.isEmpty {
-                withAnimation{ searchError = .noResults }
-            }
-            rhymes = rhymesResponse
-        } catch {
-            withAnimation{
-                switch error._code {
-                case -1009:
-                    searchError = .network
-                default:
-                    searchError = .generic
-                }
-            }
-            print(error)
-        }
-        withAnimation{ isLoading = false }
-    }
-    
     var body: some View {
-        Form{
-            HStack{
-                TextField(LocalizedStringKey("searchInput"), text:$word)
+        VStack{
+            if showOverlay {
+                Button("done", action: {
+                    withAnimation{
+                        showOverlay = false
+                        isSearchFocused = false
+                    }
+                })
             }
-        }.onSubmit {
-            Task{
-                await submit()
+            HStack{
+                TextField(
+                    LocalizedStringKey("searchInput"),
+                    text:$input,
+                    onEditingChanged: {changed in
+                        if changed {
+                            withAnimation{ showOverlay = true}
+                        }
+                    },
+                    onCommit: {withAnimation{
+                        showOverlay = true
+                        word = input
+                        Task{ await onSubmit() }
+                    }}
+                )
+                .focused($isSearchFocused)
+                .padding()
+                .background(.quinary)
             }
         }
-        .frame(maxHeight: 100)
+        .padding()
     }
 }
 

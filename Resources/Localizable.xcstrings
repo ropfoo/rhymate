@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
+    "done" : {
+
+    },
     "fallbackFavoritesText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +91,9 @@
       }
     },
     "Some text message" : {
+
+    },
+    "test" : {
 
     }
   },

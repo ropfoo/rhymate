@@ -2,22 +2,95 @@ import Foundation
 import SwiftUI
 
 struct SearchView: View {
+    private let fetcher = DatamuseFetcher()
+    private var searchStorage: SearchHistoryStorage
+    
     @State var rhymes: DatamuseRhymeResponse = []
     @State var isLoading: Bool = false
     @State var word: String = ""
+    @State var input: String = ""
     @State var searchError: SearchError? = nil
     @Binding var favorites: FavoriteRhymes
+    @State private var showOverlay: Bool = false
+    @State var searchHistory: [String]
+    @FocusState private var isSearchFocused: Bool
+    
+    init(favorites: Binding<FavoriteRhymes>) {
+        self.searchStorage = SearchHistoryStorage()
+        self._favorites = favorites
+        self.searchHistory = self.searchStorage.get()
+    }
+    
+
+    
+    func submit() async {
+        withAnimation{
+            searchError = nil
+            isLoading = true
+        }
+        do {
+            let rhymesResponse = try await fetcher.getRhymes(forWord: word)
+            if rhymesResponse.isEmpty {
+                withAnimation{ searchError = .noResults }
+            }
+            rhymes = rhymesResponse
+            
+            // store word in search storage
+            try searchStorage.mutate(.add, word)
+            if !searchHistory.contains(word) {
+                withAnimation{
+                    searchHistory.append(word)
+                }
+            }
+        } catch {
+            withAnimation{
+                switch error._code {
+                case -1009:
+                    searchError = .network
+                default:
+                    searchError = .generic
+                }
+            }
+            print(error)
+        }
+        withAnimation{
+            isLoading = false
+            showOverlay = false
+        }
+    }
     
     var body: some View {
         NavigationStack{
             VStack {
-                if isLoading {
-                    Spacer()
-                    VStack(alignment: .center){
-                        ProgressView()
-                            .scaleEffect(1.5, anchor: .center)
+                if showOverlay {
+                    VStack{
+                        if isLoading {
+                            ProgressView()
+                                .scaleEffect(1.5, anchor: .center)
+                        } else {
+                            SearchOverlay(
+                                searchHistory: $searchHistory,
+                                onItemSelect: { selection in
+                                    word = selection
+                                    input = selection
+                                    Task{
+                                        await submit()
+                                        isSearchFocused = false
+                                    }
+                                }
+                            )
+                            Button("test",action: {
+                             
+                            })
+                        }
                     }
-                    Spacer()
+                    .frame(
+                        minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
+                        maxWidth: .infinity,
+                        minHeight: 0,
+                        maxHeight: .infinity
+                    )
+                    .background(.background)
                 } else if let searchError {
                     Spacer()
                     VStack(alignment: .center){
@@ -61,10 +134,12 @@ struct SearchView: View {
             }
             Spacer()
             SearchFormView(
-                rhymes: $rhymes,
+                input: $input,
                 word: $word,
-                isLoading: $isLoading,
-                searchError: $searchError
+                showOverlay: $showOverlay,
+                isSearchFocused: $isSearchFocused,
+                searchHistory: $searchHistory,
+                onSubmit: submit
             )
         }
         
