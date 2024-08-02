@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SearchFormView: View {
+struct SearchInputView: View {
     @Binding var input: String
     @Binding var word: String
     @Binding var showOverlay: Bool

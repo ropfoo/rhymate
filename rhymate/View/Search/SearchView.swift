@@ -139,7 +139,7 @@ struct SearchView: View {
                 }
             }
             Spacer()
-            SearchFormView(
+            SearchInputView(
                 input: $input,
                 word: $word,
                 showOverlay: $showOverlay,

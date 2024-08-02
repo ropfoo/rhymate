@@ -14,7 +14,7 @@
 		EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A6D2C321F6900829799 /* rhymateTests.swift */; };
 		EC238A782C321F6900829799 /* rhymateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A772C321F6900829799 /* rhymateUITests.swift */; };
 		EC238A7A2C321F6900829799 /* rhymateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A792C321F6900829799 /* rhymateUITestsLaunchTests.swift */; };
-		EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A862C329CEB00829799 /* SearchFormView.swift */; };
+		EC238A872C329CEB00829799 /* SearchInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A862C329CEB00829799 /* SearchInputView.swift */; };
 		EC238A892C33132600829799 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A882C33132600829799 /* FavoritesView.swift */; };
 		EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8B2C33509100829799 /* RhymeItemView.swift */; };
 		EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8D2C3363A000829799 /* RhymesGrid.swift */; };
@@ -82,7 +82,7 @@
 		EC238A732C321F6900829799 /* rhymateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rhymateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC238A772C321F6900829799 /* rhymateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateUITests.swift; sourceTree = "<group>"; };
 		EC238A792C321F6900829799 /* rhymateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EC238A862C329CEB00829799 /* SearchFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFormView.swift; sourceTree = "<group>"; };
+		EC238A862C329CEB00829799 /* SearchInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInputView.swift; sourceTree = "<group>"; };
 		EC238A882C33132600829799 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		EC238A8B2C33509100829799 /* RhymeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeItemView.swift; sourceTree = "<group>"; };
 		EC238A8D2C3363A000829799 /* RhymesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesGrid.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				EC238A5E2C321F6800829799 /* SearchView.swift */,
-				EC238A862C329CEB00829799 /* SearchFormView.swift */,
+				EC238A862C329CEB00829799 /* SearchInputView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
 				ECD720F32C5C0930007CE080 /* SearchOverlay.swift */,
 			);
@@ -530,7 +530,7 @@
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
 				ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */,
 				ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */,
-				EC238A872C329CEB00829799 /* SearchFormView.swift in Sources */,
+				EC238A872C329CEB00829799 /* SearchInputView.swift in Sources */,
 				ECD720F42C5C0930007CE080 /* SearchOverlay.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
 				ECD720F02C5C0366007CE080 /* SearchHistoryStorage.swift in Sources */,
