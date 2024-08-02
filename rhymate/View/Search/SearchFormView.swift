@@ -5,7 +5,6 @@ struct SearchFormView: View {
     @Binding var word: String
     @Binding var showOverlay: Bool
     @FocusState.Binding var isSearchFocused: Bool
-    @Binding var searchHistory: [String]
     let onSubmit: () async -> Void
     
     private func formatInput(_ value: String) -> String {

@@ -21,7 +21,7 @@ struct SearchView: View {
         self.searchHistory = self.searchStorage.get()
     }
     
-    func submit() async {
+    private func submit() async {
         // handle empty input
         if input == "" {
             rhymes = []
@@ -88,9 +88,6 @@ struct SearchView: View {
                                     }
                                 }
                             )
-                            Button("test",action: {
-                                
-                            })
                         }
                     }
                     .frame(
@@ -147,7 +144,6 @@ struct SearchView: View {
                 word: $word,
                 showOverlay: $showOverlay,
                 isSearchFocused: $isSearchFocused,
-                searchHistory: $searchHistory,
                 onSubmit: submit
             )
         }
