@@ -25,7 +25,9 @@ struct SearchHistoryStorage {
         case .add:
             var searchHistory = self.get()
             if !searchHistory.contains(word) {
-                searchHistory.append(word)
+                var newHistory = searchHistory.filter{!$0.contains(word)}
+                newHistory.insert(word, at: 0)
+                searchHistory = newHistory
             }
             try storageHandler.setJSON(value: searchHistory, key: SEARCH_HISTORY_KEY)
         case .remove:	

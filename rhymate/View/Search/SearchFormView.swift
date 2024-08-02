@@ -8,7 +8,24 @@ struct SearchFormView: View {
     @Binding var searchHistory: [String]
     let onSubmit: () async -> Void
     
-    private let fetcher = DatamuseFetcher()
+    private func formatInput(_ value: String) -> String {
+        return value
+            .trimmingCharacters(in: .punctuationCharacters)
+            .trimmingCharacters(in: .symbols)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    private func handleCommit() {
+        withAnimation{ showOverlay = true}
+        word = formatInput(input)
+        Task{ await onSubmit() }
+    }
+    
+    private func handleChange(hasChanged: Bool) {
+        if hasChanged {
+            withAnimation{ showOverlay = true}
+        }
+    }
     
     var body: some View {
         VStack{
@@ -24,16 +41,8 @@ struct SearchFormView: View {
                 TextField(
                     LocalizedStringKey("searchInput"),
                     text:$input,
-                    onEditingChanged: {changed in
-                        if changed {
-                            withAnimation{ showOverlay = true}
-                        }
-                    },
-                    onCommit: {withAnimation{
-                        showOverlay = true
-                        word = input
-                        Task{ await onSubmit() }
-                    }}
+                    onEditingChanged: handleChange,
+                    onCommit: handleCommit
                 )
                 .focused($isSearchFocused)
                 .padding()

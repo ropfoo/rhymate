@@ -21,13 +21,22 @@ struct SearchView: View {
         self.searchHistory = self.searchStorage.get()
     }
     
-
-    
     func submit() async {
+        // handle empty input
+        if input == "" {
+            rhymes = []
+            showOverlay = false
+            return
+        }
+        
+        // set input to formatted word
+        input = word
+        
         withAnimation{
             searchError = nil
             isLoading = true
         }
+        
         do {
             let rhymesResponse = try await fetcher.getRhymes(forWord: word)
             if rhymesResponse.isEmpty {
@@ -37,10 +46,10 @@ struct SearchView: View {
             
             // store word in search storage
             try searchStorage.mutate(.add, word)
-            if !searchHistory.contains(word) {
-                withAnimation{
-                    searchHistory.append(word)
-                }
+            withAnimation{
+                var newHistory = searchHistory.filter{!$0.contains(word)}
+                newHistory.insert(word, at: 0)
+                searchHistory = newHistory
             }
         } catch {
             withAnimation{
@@ -80,7 +89,7 @@ struct SearchView: View {
                                 }
                             )
                             Button("test",action: {
-                             
+                                
                             })
                         }
                     }
@@ -142,9 +151,7 @@ struct SearchView: View {
                 onSubmit: submit
             )
         }
-        
     }
-    
 }
 
 struct PreviewSearchView: View {
