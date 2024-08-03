@@ -6,7 +6,7 @@ struct RhymesGrid: View {
     @Binding var word: String
     @Binding var favorites: FavoriteRhymes
     @State private var sheetDetail: RhymeItem?
-
+    
     var body: some View {
         LazyVGrid(
             columns:[GridItem(.adaptive(minimum: 163))],
@@ -16,10 +16,10 @@ struct RhymesGrid: View {
                 RhymeItemView(onPress: {
                     sheetDetail=RhymeItem(
                         id: rhyme.word.wrappedValue,
-                        name: rhyme.word.wrappedValue)
+                        word: word,
+                        rhyme: rhyme.word.wrappedValue)
                 },rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
             }
-            
         }
         .sheet(
             item: $sheetDetail,
@@ -29,9 +29,9 @@ struct RhymesGrid: View {
             FavoritesItemView(
                 .detail,
                 word: word,
-                rhyme: detail.name,
+                rhyme: detail.word,
                 favorites: $favorites,
-                isFavorite: favorites[word]?.rhymes.contains(detail.name) ?? false
+                isFavorite: favorites[word]?.rhymes.contains(detail.word) ?? false
             ).presentationDetents([.medium, .large])
         }
         .padding(.horizontal, 20)
@@ -54,7 +54,7 @@ struct PreviewRhymesGrid: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View {
         RhymesGrid(rhymes: $rhymes, word: $word, favorites:$favorites)
-
+        
     }
 }
 

@@ -3,7 +3,8 @@ import SwiftUI
 
 struct RhymeItem: Identifiable {
     let id: String
-    let name: String
+    let word: String
+    let rhyme: String
 }
 
 enum RhymeItemLayout {

@@ -7,6 +7,7 @@ struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var favorites: FavoriteRhymes
     @State private var sheet: RhymeWithFavorites?
+    @State private var sheetDetail: RhymeItem?
     
     private func hasFavoritesWithRhymes() -> Bool {
         var hasFavorite: Bool = false
@@ -77,16 +78,6 @@ struct FavoritesView: View {
                                     }
                                 }.padding(10)
                             }
-                            .sheet(
-                                item: $sheet,
-                                onDismiss: {sheet = nil}
-                            ){ detail in
-                                FavoritesDetail(
-                                    word: detail.word,
-                                    favorites: $favorites
-                                )
-                                .presentationDetents([.medium, .large])
-                            }
                         }
                         .background(.quinary)
                         .cornerRadius(20)
@@ -94,7 +85,36 @@ struct FavoritesView: View {
                     }
                 }
                 .padding(30)
-                
+            }
+            .sheet(
+                item: $sheet,
+                onDismiss: {sheet = nil}
+            ){ detail in
+                FavoritesDetail(
+                    word: detail.word,
+                    favorites: $favorites,
+                    onItemPress: {
+                        rhyme in
+                        sheetDetail = RhymeItem(
+                            id: detail.word,
+                            word: detail.word,
+                            rhyme: rhyme
+                        )
+                    }
+                )
+                .sheet(
+                    item: $sheetDetail,
+                    onDismiss: {sheetDetail = nil}
+                ){ rhymeItem in
+                    FavoritesItemView(
+                        .detail,
+                        word: rhymeItem.word,
+                        rhyme: rhymeItem.rhyme,
+                        favorites: $favorites,
+                        isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false
+                    ).presentationDetents([.medium, .large])
+                }
+                .presentationDetents([.medium, .large])
             }
             .frame(
                 minHeight: 0,
@@ -119,3 +139,6 @@ struct PreviewFavoritesView: View {
 #Preview {
     PreviewFavoritesView()
 }
+
+
+

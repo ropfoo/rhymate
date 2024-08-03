@@ -4,7 +4,7 @@ import SwiftUI
 struct FavoritesDetail: View {
     let word: String
     @Binding var favorites: FavoriteRhymes
-    @State private var sheetDetail: RhymeItem?
+    let onItemPress: (_ rhyme: String) -> Void
 
     var body: some View {
         VStack(alignment: .leading){
@@ -18,10 +18,7 @@ struct FavoritesDetail: View {
                     ForEach($favorites.wrappedValue[word]?.rhymes ?? [],id: \.self){ rhyme in
                         RhymeItemView(
                             .favorite,
-                            onPress: {sheetDetail = RhymeItem(
-                                id: rhyme, 
-                                name: rhyme
-                            )},
+                            onPress: {onItemPress(rhyme)},
                             rhyme: rhyme,
                             word: word,
                             favorites: $favorites
@@ -34,28 +31,14 @@ struct FavoritesDetail: View {
                 }
             }
         }
-        .sheet(
-            item: $sheetDetail,
-            onDismiss: {}
-        )
-        { detail in
-            FavoritesItemView(
-                .detail,
-                word: word,
-                rhyme: detail.name,
-                favorites: $favorites,
-                isFavorite: favorites[word]?.rhymes.contains(detail.name) ?? false
-            ).presentationDetents([.medium, .large])
-        }
         .padding(30)
-        
     }
 }
 
 struct PreviewFavoritesDetail: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View{
-        FavoritesDetail(word: "Test", favorites: $favorites)
+        FavoritesDetail(word: "Test", favorites: $favorites, onItemPress: {rhyme in print("\(rhyme)")})
     }
 }
 
