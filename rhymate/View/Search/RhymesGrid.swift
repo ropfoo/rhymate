@@ -29,7 +29,7 @@ struct RhymesGrid: View {
             FavoritesItemView(
                 .detail,
                 word: word,
-                rhyme: detail.word,
+                rhyme: detail.rhyme,
                 favorites: $favorites,
                 isFavorite: favorites[word]?.rhymes.contains(detail.word) ?? false
             ).presentationDetents([.medium, .large])

@@ -37,6 +37,8 @@ struct SearchInputView: View {
                 })
             }
             HStack{
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
                 TextField(
                     LocalizedStringKey("searchInput"),
                     text:$input,
@@ -44,9 +46,14 @@ struct SearchInputView: View {
                     onCommit: handleCommit
                 )
                 .focused($isSearchFocused)
-                .padding()
-                .background(.quinary)
             }
+            .padding()
+            .background(.quaternary)
+            .cornerRadius(20)
+            .onTapGesture {
+                isSearchFocused = true
+            }
+            
         }
         .padding()
     }
