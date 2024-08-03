@@ -41,8 +41,8 @@ struct RhymeItemView: View {
     
     var body:some View {
         ZStack(alignment: .topLeading){
-            if layout == .grid && 
-                favorites[word]?.rhymes.contains(rhyme) ?? false 
+            if layout == .grid &&
+                favorites[word]?.rhymes.contains(rhyme) ?? false
             {
                 VStack{
                     Image(systemName: "heart.fill")
@@ -56,9 +56,7 @@ struct RhymeItemView: View {
                 .offset(x: 0, y: -10)
                 .zIndex(1)
                 .shadow(radius: 1)
-
             }
-            
             Button(action: onPress, label: {
                 Text(rhyme)
                     .font(.system(.caption))
@@ -71,11 +69,9 @@ struct RhymeItemView: View {
                         alignment: layout == .grid ? .center : .leading
                     )
             })
-        
             .background(.quinary)
             .cornerRadius(25)
         }
-        
     }
 }
 
@@ -85,7 +81,6 @@ struct PreviewRhymeItemView: View {
     var body: some View {
         RhymeItemView(onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
         RhymeItemView(.favorite,onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
-
     }
 }
 

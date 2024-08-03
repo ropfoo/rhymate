@@ -1,16 +1,21 @@
 import SwiftUI
 import WebKit
 
-struct HTMLContentView: UIViewRepresentable  {
+struct HTMLContentLinkOptions{
+    let baseUrl: String
+    let target: String
+}
+
+struct HTMLContentView: UIViewRepresentable {
     private let html: String
 
     init(
         htmlElements: [String],
-        scheme:ColorScheme,
-        classNames: String = ""
+        scheme: ColorScheme,
+        classNames: String = "",
+        linkOptions: HTMLContentLinkOptions
     ) {
         let textColor = scheme == .dark ? "white" : "black"
-        
         
         var elements: String = ""
         for el in htmlElements {
@@ -19,13 +24,15 @@ struct HTMLContentView: UIViewRepresentable  {
         }
         
         let wrapper = """
+        <base href="\(linkOptions.baseUrl)" />
+        <base target="\(linkOptions.target)" />
         <style>
             * {
                 font-family: Sans-Serif;
                 font-size: 1.5rem;
                 line-height: 2.25rem;
-                color:\(textColor);
-                animation: fadeInAnimation ease .5s;
+                color: \(textColor);
+                animation: fadeInAnimation ease .3s;
                 margin: 0;
             }
         
@@ -51,7 +58,7 @@ struct HTMLContentView: UIViewRepresentable  {
         </style>
         <div>
             \(elements)
-        <div>
+        </div>
         """
         self.html = wrapper
     }
@@ -59,6 +66,7 @@ struct HTMLContentView: UIViewRepresentable  {
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.isOpaque = false
+        webView.navigationDelegate = context.coordinator
         return webView
     }
     
@@ -66,20 +74,50 @@ struct HTMLContentView: UIViewRepresentable  {
         uiView.loadHTMLString(html, baseURL: nil)
     }
     
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+        var parent: HTMLContentView
+
+        init(_ parent: HTMLContentView) {
+            self.parent = parent
+        }
+
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let url = navigationAction.request.url, navigationAction.navigationType == .linkActivated {
+                if navigationAction.targetFrame == nil {
+                    UIApplication.shared.open(url)
+                    decisionHandler(.cancel)
+                } else {
+                    decisionHandler(.allow)
+                }
+            } else {
+                decisionHandler(.allow)
+            }
+        }
+        
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            if let url = navigationAction.request.url {
+                UIApplication.shared.open(url)
+            }
+            return nil
+        }
+    }
 }
 
 #Preview {
-    VStack{
+    VStack {
         HTMLContentView(
             htmlElements: [
-                #"A <a rel=\"mw:WikiLink\" href=\"/wiki/shrub\" title=\"shrub\">shrub</a> of the genus <i><a rel=\"mw:WikiLink\" href=\"/wiki/Rosa\" title=\"Rosa\">Rosa</a></i>, with red, pink, white or yellow <a rel=\"mw:WikiLink\" href=\"/wiki/flower\" title=\"flower\">flowers</a>."#,
-                #"A <a rel=\"mw:WikiLink\" href=\"/wiki/shrub\" title=\"shrub\">shrub</a> of the genus <i><a rel=\"mw:WikiLink\" href=\"/wiki/Rosa\" title=\"Rosa\">Rosa</a></i>, with red, pink, white or yellow <a rel=\"mw:WikiLink\" href=\"/wiki/flower\" title=\"flower\">flowers</a>."#,
-                
+                #"A <a target="_blank" rel="mw:WikiLink" href="https://en.wiktionary.org/wiki/shrub" title="shrub">shrub</a> of the genus <i><a target="_blank" rel="mw:WikiLink" href="https://en.wiktionary.org/wiki/Rosa" title="Rosa">Rosa</a></i>, with red, pink, white or yellow <a target="_blank" rel="mw:WikiLink" href="https://en.wiktionary.org/wiki/flower" title="flower">flowers</a>."#
             ],
-            scheme: .light
+            scheme: .light,
+            linkOptions: HTMLContentLinkOptions(
+                baseUrl: "https://en.wiktionary.org/",
+                target: "_target"
+            )
         )
-    }.frame(
-        width: .infinity,
-        height: .infinity
-    )
+    }.frame(maxWidth: .infinity, maxHeight: .infinity)
 }

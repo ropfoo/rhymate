@@ -75,7 +75,7 @@ struct FavoritesItemView: View {
                 Text(rhyme)
                     .fontWeight(.bold)
                     .padding(.bottom, 10)
-
+                
                 VStack{
                     if isLoading {
                         VStack{
@@ -92,7 +92,11 @@ struct FavoritesItemView: View {
                             .definition li {
                                 opacity: 0.65;
                             }
-                            """
+                            """,
+                            linkOptions: HTMLContentLinkOptions(
+                                baseUrl: "https://en.wiktionary.org/",
+                                target: "_target"
+                            )
                         )
                     }
                 }.onAppear(perform: {
@@ -132,9 +136,9 @@ struct PreviewFavoritesItemView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View{
         FavoritesItemView(
-            layout, 
+            layout,
             word: "test",
-            rhyme: "best", 
+            rhyme: "best",
             favorites: $favorites,
             isFavorite: favorites["test"]?.rhymes.contains("best") ?? false )
     }
