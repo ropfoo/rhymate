@@ -13,12 +13,16 @@ struct RhymesGrid: View {
             spacing: 10
         ){
             ForEach($rhymes) { rhyme in
-                RhymeItemView(onPress: {
-                    sheetDetail=RhymeItem(
-                        id: rhyme.word.wrappedValue,
-                        word: word,
-                        rhyme: rhyme.word.wrappedValue)
-                },rhyme:rhyme.word.wrappedValue, word: $word.wrappedValue, favorites: $favorites)
+                RhymeItemView(
+                    onPress: {
+                        sheetDetail=RhymeItem(
+                            id: rhyme.word.wrappedValue,
+                            word: word,
+                            rhyme: rhyme.word.wrappedValue)
+                    },
+                    rhyme:rhyme.word.wrappedValue,
+                    word: $word.wrappedValue,
+                    favorites: $favorites)
             }
         }
         .sheet(
@@ -31,7 +35,7 @@ struct RhymesGrid: View {
                 word: word,
                 rhyme: detail.rhyme,
                 favorites: $favorites,
-                isFavorite: favorites[word]?.rhymes.contains(detail.word) ?? false
+                isFavorite: favorites[word]?.rhymes.contains(detail.rhyme) ?? false
             ).presentationDetents([.medium, .large])
         }
         .padding(.horizontal, 20)

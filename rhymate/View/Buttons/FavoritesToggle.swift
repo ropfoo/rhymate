@@ -30,9 +30,7 @@ struct FavoritesToggle: View {
             Image(systemName: isActivated ? "heart.fill" : "heart")
         }
         .font(.system(size: sizeValue))
-        .foregroundColor(
-            isActivated ? .red: .blue
-        )
+        .foregroundColor(.accentColor)
     }
 }
 

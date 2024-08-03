@@ -28,8 +28,8 @@ struct HTMLContentView: UIViewRepresentable {
         <base target="\(linkOptions.target)" />
         <style>
             * {
-                font-family: Sans-Serif;
-                font-size: 1.5rem;
+                font-family: SF Pro, Sans-Serif;
+                font-size: 1.57rem;
                 line-height: 2.25rem;
                 color: \(textColor);
                 animation: fadeInAnimation ease .3s;
@@ -37,7 +37,7 @@ struct HTMLContentView: UIViewRepresentable {
             }
         
             a {
-                color: orange;
+                color: #A4C7AF;
             }
         
             .element {

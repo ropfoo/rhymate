@@ -89,13 +89,10 @@ struct FavoritesItemView: View {
                             .definition p {
                                 padding-bottom: 0.5rem;
                             }
-                            .definition li {
-                                opacity: 0.65;
-                            }
                             """,
                             linkOptions: HTMLContentLinkOptions(
                                 baseUrl: "https://en.wiktionary.org/",
-                                target: "_target"
+                                target: "_blank"
                             )
                         )
                     }

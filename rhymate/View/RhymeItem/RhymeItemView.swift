@@ -47,7 +47,7 @@ struct RhymeItemView: View {
             {
                 VStack{
                     Image(systemName: "heart.fill")
-                        .foregroundColor(.red)
+                        .foregroundColor(.accentColor)
                         .font(.system(size: 10))
                 }
                 .padding(5)

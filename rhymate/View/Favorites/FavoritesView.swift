@@ -33,7 +33,7 @@ struct FavoritesView: View {
                         .padding(.bottom, 10)
                     Text("fallbackFavoritesText")
                         .padding(.bottom, 10)
-                    Image(systemName: "heart.fill").foregroundColor(.red)
+                    Image(systemName: "heart.fill").foregroundColor(.accentColor)
                 }.padding(.horizontal, 50)
             }
             
