@@ -10,6 +10,6 @@ Rhymate is a swift based client for the [Datamuse API](https://www.datamuse.com/
 ### Supported Platforms
 
 - [x] iOS
-- [ ] iPadOS 🔜
-- [ ] macOS (planned)
+- [x] iPadOS
+- [x] macOS
 - [ ] watchOS (planned)
