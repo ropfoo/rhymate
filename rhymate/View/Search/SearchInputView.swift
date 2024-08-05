@@ -56,6 +56,7 @@ struct SearchInputView: View {
                     onCommit: handleCommit
                 )
                 .focused($isSearchFocused)
+                .frame(maxWidth: 900)
             }
             .padding()
             .background(.quaternary)

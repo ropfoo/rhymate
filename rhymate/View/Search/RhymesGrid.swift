@@ -9,7 +9,9 @@ struct RhymesGrid: View {
     
     var body: some View {
         LazyVGrid(
-            columns:[GridItem(.adaptive(minimum: 163))],
+            columns:[GridItem(
+                .adaptive(minimum: 300)
+            )],
             spacing: 10
         ){
             ForEach($rhymes) { rhyme in
@@ -37,7 +39,9 @@ struct RhymesGrid: View {
                 favorites: $favorites,
                 isFavorite: favorites[word]?.rhymes.contains(detail.rhyme) ?? false,
                 onDismiss: {sheetDetail = nil}
-            ).presentationDetents([.medium, .large])
+            )
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.hidden)
         }
         .padding(.horizontal, 20)
         .frame(

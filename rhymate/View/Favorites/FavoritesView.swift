@@ -114,9 +114,11 @@ struct FavoritesView: View {
                         favorites: $favorites,
                         isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false,
                         onDismiss: { sheetDetail = nil }
-                    ).presentationDetents([.medium, .large])
+                    )
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.hidden)
                 }
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
             }
             .frame(
                 minHeight: 0,

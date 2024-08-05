@@ -60,7 +60,7 @@ struct RhymeItemView: View {
             }
             Button(action: onPress, label: {
                 Text(rhyme)
-                    .font(.system(.caption))
+                    .font(.system(.subheadline))
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
                     .padding(.horizontal, 15)

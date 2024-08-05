@@ -45,7 +45,7 @@ struct HTMLContentView: UIViewRepresentable {
             }
         
             .element {
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
                 padding: 0 1.5rem;
             }
         

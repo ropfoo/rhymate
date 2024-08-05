@@ -56,12 +56,15 @@ struct FavoritesItemView: View {
         case .detail:
             VStack(alignment: .center) {
                 Spacer()
-                HStack(alignment: .center, spacing: -20){
-                    FavoritesToggle(
-                        action: toggleState,
-                        isActivated: isFavorite,
-                        size: .large
-                    )
+                HStack(alignment: .center){
+                    HStack{
+                        FavoritesToggle(
+                            action: toggleState,
+                            isActivated: isFavorite,
+                            size: .large
+                        )
+                    }
+                    .frame(width: 50,alignment: .leading)
                     Spacer()
                     Text(word)
                         .font(.footnote)
@@ -69,20 +72,22 @@ struct FavoritesItemView: View {
                         .foregroundColor(.secondary)
                     Spacer()
                     Button("close", action: onDismiss)
+                        .frame(width: 50)
+                    
                 }
                 .padding(.horizontal,20)
                 .padding(.top, 20)
-                .padding(.bottom, 5)
+                .padding(.bottom, 15)
+                
                 
                 Text(rhyme)
+                    .font(.title)
                     .fontWeight(.bold)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 15)
                 
                 VStack{
                     if isLoading {
-                        VStack{
-                            ProgressView()
-                        }.frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+                        ProgressView()
                     }
                     else if definitions.isEmpty {
                         Text("wiktionaryNoDefinitions").foregroundStyle(.secondary)
@@ -102,7 +107,12 @@ struct FavoritesItemView: View {
                             )
                         )
                     }
-                }.onAppear(perform: {
+                }
+                .frame(
+                    minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
+                    maxHeight: .infinity
+                )
+                .onAppear(perform: {
                     Task {
                         definitions = try await WiktionaryFetcher().getDefinitions(forWord: rhyme)
                         withAnimation{ isLoading = false }
