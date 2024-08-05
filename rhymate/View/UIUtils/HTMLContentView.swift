@@ -4,6 +4,7 @@ import WebKit
 struct HTMLContentLinkOptions{
     let baseUrl: String
     let target: String
+    let color: String
 }
 
 struct HTMLContentView: UIViewRepresentable {
@@ -24,20 +25,23 @@ struct HTMLContentView: UIViewRepresentable {
         }
         
         let wrapper = """
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
         <base href="\(linkOptions.baseUrl)" />
         <base target="\(linkOptions.target)" />
         <style>
             * {
                 font-family: SF Pro, Sans-Serif;
-                font-size: 1.57rem;
-                line-height: 2.25rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
                 color: \(textColor);
                 animation: fadeInAnimation ease .3s;
                 margin: 0;
             }
         
             a {
-                color: #A4C7AF;
+                color: \(linkOptions.color);
             }
         
             .element {
@@ -116,7 +120,8 @@ struct HTMLContentView: UIViewRepresentable {
             scheme: .light,
             linkOptions: HTMLContentLinkOptions(
                 baseUrl: "https://en.wiktionary.org/",
-                target: "_target"
+                target: "_target",
+                color: ACCENT_COLOR
             )
         )
     }.frame(maxWidth: .infinity, maxHeight: .infinity)
