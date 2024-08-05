@@ -29,12 +29,22 @@ struct SearchInputView: View {
     var body: some View {
         VStack{
             if showOverlay {
-                Button("done", action: {
-                    withAnimation{
-                        showOverlay = false
-                        isSearchFocused = false
-                    }
-                })
+                HStack(alignment: .lastTextBaseline){
+                    Button("done", action: {
+                        withAnimation{
+                            showOverlay = false
+                            isSearchFocused = false
+                        }
+                    })
+                }
+                .transition(.opacity)
+                .padding(.horizontal)
+                .padding(.vertical, 5)
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    alignment: .trailing
+                )
             }
             HStack{
                 Image(systemName: "magnifyingglass")
