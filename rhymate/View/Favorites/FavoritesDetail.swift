@@ -5,13 +5,18 @@ struct FavoritesDetail: View {
     let word: String
     @Binding var favorites: FavoriteRhymes
     let onItemPress: (_ rhyme: String) -> Void
+    let onDismiss: () -> Void
 
     var body: some View {
         VStack(alignment: .leading){
-            Text(word)
-                .fontWeight(.black)
-                .font(.system(.title))
-                .padding(3)
+            HStack{
+                Text(word)
+                    .fontWeight(.black)
+                    .font(.system(.title))
+                    .padding(3)
+                Spacer()
+                Button("close", action: onDismiss)
+            }
             ScrollView{
                 Spacer(minLength: 30)
                 VStack(alignment: .trailing){
@@ -38,7 +43,12 @@ struct FavoritesDetail: View {
 struct PreviewFavoritesDetail: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View{
-        FavoritesDetail(word: "Test", favorites: $favorites, onItemPress: {rhyme in print("\(rhyme)")})
+        FavoritesDetail(
+            word: "Test",
+            favorites: $favorites,
+            onItemPress: {rhyme in print("\(rhyme)")},
+            onDismiss: {print("dismiss")}
+        )
     }
 }
 

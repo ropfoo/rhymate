@@ -4,6 +4,9 @@
     "%@" : {
 
     },
+    "close" : {
+
+    },
     "done" : {
 
     },
@@ -92,6 +95,28 @@
     },
     "Some text message" : {
 
+    },
+    "wiktionaryDefinitonHeadline %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Definition for \"%@\""
+          }
+        }
+      }
+    },
+    "wiktionaryNoDefinitions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No wiktionary definitions found."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -88,7 +88,7 @@ struct FavoritesView: View {
             }
             .sheet(
                 item: $sheet,
-                onDismiss: {sheet = nil}
+                onDismiss: { sheet = nil }
             ){ detail in
                 FavoritesDetail(
                     word: detail.word,
@@ -100,18 +100,20 @@ struct FavoritesView: View {
                             word: detail.word,
                             rhyme: rhyme
                         )
-                    }
+                    },
+                    onDismiss: { sheet = nil }
                 )
                 .sheet(
                     item: $sheetDetail,
-                    onDismiss: {sheetDetail = nil}
+                    onDismiss: { sheetDetail = nil }
                 ){ rhymeItem in
                     FavoritesItemView(
                         .detail,
                         word: rhymeItem.word,
                         rhyme: rhymeItem.rhyme,
                         favorites: $favorites,
-                        isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false
+                        isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false,
+                        onDismiss: { sheetDetail = nil }
                     ).presentationDetents([.medium, .large])
                 }
                 .presentationDetents([.medium, .large])

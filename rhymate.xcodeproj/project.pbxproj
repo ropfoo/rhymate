@@ -114,6 +114,7 @@
 		ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLContentView.swift; sourceTree = "<group>"; };
 		ECBDC3D92C46D1D200943D83 /* WiktionaryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcher.swift; sourceTree = "<group>"; };
 		ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiktionary.swift; sourceTree = "<group>"; };
+		ECD1C82E2C5FAE3C009D16A9 /* rhymate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = rhymate.entitlements; sourceTree = "<group>"; };
 		ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitionsStorageTests.swift; sourceTree = "<group>"; };
 		ECD720EF2C5C0366007CE080 /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 		ECD720F12C5C0410007CE080 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		EC238A5B2C321F6800829799 /* rhymate */ = {
 			isa = PBXGroup;
 			children = (
+				ECD1C82E2C5FAE3C009D16A9 /* rhymate.entitlements */,
 				ECBD84562C43DADB00193BA2 /* Constants.swift */,
 				ECBD84402C41013F00193BA2 /* Utils */,
 				EC7782E42C3B1BB2008E9884 /* Model */,
@@ -704,6 +706,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rhymate/rhymate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rhymate/Preview Content\"";
@@ -726,12 +729,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -740,6 +743,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rhymate/rhymate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rhymate/Preview Content\"";
@@ -762,12 +766,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -817,6 +821,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WH56D7VT5D;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymateUITests;
@@ -834,6 +839,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WH56D7VT5D;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymateUITests;

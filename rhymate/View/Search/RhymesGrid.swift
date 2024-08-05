@@ -27,7 +27,7 @@ struct RhymesGrid: View {
         }
         .sheet(
             item: $sheetDetail,
-            onDismiss: {}
+            onDismiss: {sheetDetail = nil}
         )
         { detail in
             FavoritesItemView(
@@ -35,7 +35,8 @@ struct RhymesGrid: View {
                 word: word,
                 rhyme: detail.rhyme,
                 favorites: $favorites,
-                isFavorite: favorites[word]?.rhymes.contains(detail.rhyme) ?? false
+                isFavorite: favorites[word]?.rhymes.contains(detail.rhyme) ?? false,
+                onDismiss: {sheetDetail = nil}
             ).presentationDetents([.medium, .large])
         }
         .padding(.horizontal, 20)

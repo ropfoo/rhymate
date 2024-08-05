@@ -15,19 +15,22 @@ struct FavoritesItemView: View {
     let rhyme: String
     @Binding var favorites: FavoriteRhymes
     var isFavorite: Bool
+    var onDismiss: () -> Void
     
     init(
         _ layout: FavoritesItemLayout,
         word: String,
         rhyme: String,
         favorites: Binding<FavoriteRhymes>,
-        isFavorite: Bool
+        isFavorite: Bool,
+        onDismiss: @escaping () -> Void
     ) {
         self.layout = layout
         self.word = word
         self.rhyme = rhyme
         self._favorites = favorites
         self.isFavorite = isFavorite
+        self.onDismiss = onDismiss
     }
     
     func toggleState() {
@@ -40,14 +43,12 @@ struct FavoritesItemView: View {
         } catch {
             print(error)
         }
-        withAnimation {
-            favorites = DictionaryHelper().mutateFavorite(
-                favorites,
-                isFavorite ? .remove : .add,
-                data: rhyme,
-                key: word
-            )
-        }
+        favorites = DictionaryHelper().mutateFavorite(
+            favorites,
+            isFavorite ? .remove : .add,
+            data: rhyme,
+            key: word
+        )
     }
     
     var body: some View {
@@ -56,17 +57,18 @@ struct FavoritesItemView: View {
             VStack(alignment: .center) {
                 Spacer()
                 HStack(alignment: .center, spacing: -20){
+                    FavoritesToggle(
+                        action: toggleState,
+                        isActivated: isFavorite,
+                        size: .large
+                    )
                     Spacer()
                     Text(word)
                         .font(.footnote)
                         .fontWeight(.black)
                         .foregroundColor(.secondary)
                     Spacer()
-                    FavoritesToggle(
-                        action: toggleState,
-                        isActivated: isFavorite,
-                        size: .large
-                    )
+                    Button("close", action: onDismiss)
                 }
                 .padding(.horizontal,20)
                 .padding(.top, 20)
@@ -81,6 +83,9 @@ struct FavoritesItemView: View {
                         VStack{
                             ProgressView()
                         }.frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+                    }
+                    else if definitions.isEmpty {
+                        Text("wiktionaryNoDefinitions").foregroundStyle(.secondary)
                     } else {
                         HTMLContentView(
                             htmlElements: definitions,
@@ -92,7 +97,8 @@ struct FavoritesItemView: View {
                             """,
                             linkOptions: HTMLContentLinkOptions(
                                 baseUrl: "https://en.wiktionary.org/",
-                                target: "_blank"
+                                target: "_blank",
+                                color: ACCENT_COLOR
                             )
                         )
                     }
@@ -137,7 +143,8 @@ struct PreviewFavoritesItemView: View {
             word: "test",
             rhyme: "best",
             favorites: $favorites,
-            isFavorite: favorites["test"]?.rhymes.contains("best") ?? false )
+            isFavorite: favorites["test"]?.rhymes.contains("best") ?? false ,
+            onDismiss: {print("dismiss")})
     }
 }
 
