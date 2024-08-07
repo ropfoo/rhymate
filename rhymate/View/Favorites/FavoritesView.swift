@@ -38,50 +38,53 @@ struct FavoritesView: View {
             }
             
             ScrollView{
-                // iterate over each stored favorite
-                ForEach(Array($favorites.wrappedValue.keys), id: \.self) {key in
-                    // check if favorite has rhymes
-                    if !(favorites[key]?.rhymes.isEmpty ?? false) {
-                        VStack{
-                            Button(
-                                action: {
-                                    sheet = RhymeWithFavorites(word: key, rhymes: $favorites.wrappedValue[key]?.rhymes ?? [])
-                                }
-                            ){
-                                let fadeColor =
-                                colorScheme == .dark ? 0.06 : 0.925
-                                ZStack{
-                                    FadeInOutRow(
-                                        rgbColorIn: fadeColor,
-                                        rgbColorOut: fadeColor
-                                    )
-                                    VStack{
-                                        Text(key)
-                                            .fontWeight(.black)
-                                            .font(.system(.caption))
-                                            .foregroundColor(.primary)
-                                        HStack{
-                                            ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
-                                                Text(rhyme)
-                                                    .font(.footnote)
-                                                    .lineLimit(1)
-                                                    .fixedSize()
-                                                    .padding(.horizontal, 5)
-                                                    .foregroundColor(.primary)
-                                                    .opacity(0.6)
-                                            }
-                                        }
-                                        .frame(
-                                            maxWidth: 300,
-                                            alignment: .center
-                                        )
+                LazyVGrid(
+                    columns:[GridItem(
+                        .adaptive(minimum: 400)
+                    )],
+                    spacing: 10
+                ){
+                    // iterate over each stored favorite
+                    ForEach(Array($favorites.wrappedValue.keys), id: \.self) {key in
+                        // check if favorite has rhymes
+                        if !(favorites[key]?.rhymes.isEmpty ?? false) {
+                            VStack{
+                                Button(
+                                    action: {
+                                        sheet = RhymeWithFavorites(word: key, rhymes: $favorites.wrappedValue[key]?.rhymes ?? [])
                                     }
-                                }.padding(10)
+                                ){
+                                    ZStack{
+                                        VStack{
+                                            Text(key)
+                                                .fontWeight(.black)
+                                                .font(.system(.subheadline))
+                                                .foregroundColor(.primary)
+                                            Spacer()
+                                            HStack{
+                                                ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
+                                                    Text(rhyme)
+                                                        .font(.footnote)
+                                                        .lineLimit(1)
+                                                        .fixedSize()
+                                                        .padding(.horizontal, 5)
+                                                        .foregroundColor(.primary)
+                                                        .opacity(0.6)
+                                                }
+                                            }
+                                            .frame(
+                                                minWidth: 0,
+                                                maxWidth: .infinity,
+                                                alignment: .center
+                                            )
+                                        }
+                                    }.padding(10)
+                                }
                             }
+                            .background(.quinary)
+                            .cornerRadius(20)
+                            .padding(5)
                         }
-                        .background(.quinary)
-                        .cornerRadius(20)
-                        .padding(5)
                     }
                 }
                 .padding(30)
