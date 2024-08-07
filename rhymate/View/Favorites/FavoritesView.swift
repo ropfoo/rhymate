@@ -38,56 +38,12 @@ struct FavoritesView: View {
             }
             
             ScrollView{
-                LazyVGrid(
-                    columns:[GridItem(
-                        .adaptive(minimum: 400)
-                    )],
-                    spacing: 10
-                ){
-                    // iterate over each stored favorite
-                    ForEach(Array($favorites.wrappedValue.keys), id: \.self) {key in
-                        // check if favorite has rhymes
-                        if !(favorites[key]?.rhymes.isEmpty ?? false) {
-                            VStack{
-                                Button(
-                                    action: {
-                                        sheet = RhymeWithFavorites(word: key, rhymes: $favorites.wrappedValue[key]?.rhymes ?? [])
-                                    }
-                                ){
-                                    ZStack{
-                                        VStack{
-                                            Text(key)
-                                                .fontWeight(.black)
-                                                .font(.system(.subheadline))
-                                                .foregroundColor(.primary)
-                                            Spacer()
-                                            HStack{
-                                                ForEach($favorites.wrappedValue[key]?.rhymes ?? [], id: \.self){ rhyme in
-                                                    Text(rhyme)
-                                                        .font(.footnote)
-                                                        .lineLimit(1)
-                                                        .fixedSize()
-                                                        .padding(.horizontal, 5)
-                                                        .foregroundColor(.primary)
-                                                        .opacity(0.6)
-                                                }
-                                            }
-                                            .frame(
-                                                minWidth: 0,
-                                                maxWidth: .infinity,
-                                                alignment: .center
-                                            )
-                                        }
-                                    }.padding(10)
-                                }
-                            }
-                            .background(.quinary)
-                            .cornerRadius(20)
-                            .padding(5)
-                        }
+                FavoritesGrid(
+                    favorites: $favorites,
+                    onItemTap: { rhymeWithFavoirtes in
+                        sheet = rhymeWithFavoirtes
                     }
-                }
-                .padding(30)
+                )
             }
             .sheet(
                 item: $sheet,
