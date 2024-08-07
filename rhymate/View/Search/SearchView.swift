@@ -87,7 +87,8 @@ struct SearchView: View {
                                         isSearchFocused = false
                                     }
                                 }
-                            )
+                            ).navigationTitle("recent")
+
                         }
                     }
                     .frame(
@@ -125,12 +126,13 @@ struct SearchView: View {
                     Spacer()
                 } else {
                     ScrollView{
+                        Spacer()
                         RhymesGrid(
                             rhymes:$rhymes,
                             word: $word,
                             favorites: $favorites
                         )
-                    }
+                    }.navigationTitle("\($word.wrappedValue)")
                 }
             }
             .toolbar {

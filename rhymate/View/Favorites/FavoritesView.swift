@@ -40,8 +40,8 @@ struct FavoritesView: View {
             ScrollView{
                 FavoritesGrid(
                     favorites: $favorites,
-                    onItemTap: { rhymeWithFavoirtes in
-                        sheet = rhymeWithFavoirtes
+                    onItemTap: { rhymeWithFavorites in
+                        sheet = rhymeWithFavorites
                     }
                 )
             }
@@ -83,6 +83,7 @@ struct FavoritesView: View {
                 minHeight: 0,
                 maxHeight: .infinity
             )
+            .navigationTitle("favorites")
             .toolbar {
                 ToolbarItem {
                     Spacer()

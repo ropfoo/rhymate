@@ -6,24 +6,26 @@ struct SearchOverlay: View {
     
     
     var body: some View {
-        ScrollView{
-            VStack(alignment:.leading){
-                ForEach($searchHistory, id: \.self){
-                    term in
-                    Button(
-                        "\(term.wrappedValue)",
-                        action: {onItemSelect(term.wrappedValue)}
-                    ).padding(.bottom, 5)
+        VStack{
+            ScrollView{
+                VStack(alignment:.leading){
+                    ForEach($searchHistory, id: \.self){
+                        term in
+                        Button(
+                            "\(term.wrappedValue)",
+                            action: {onItemSelect(term.wrappedValue)}
+                        ).padding(.bottom, 5)
+                    }
                 }
+                
             }
-            .padding()
-            .padding(.leading, 40)
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                alignment: .leading
-            )
         }
+        .padding()
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            alignment: .leading
+        )
     }
 }
 

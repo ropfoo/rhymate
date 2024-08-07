@@ -22,14 +22,14 @@ struct FavoritesGrid: View {
                 }
             }
         }
-        .padding(30)
+        .padding()
     }
 }
 
 struct PreviewFavoritesGrid: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View{
-        FavoritesGrid(favorites: $favorites, onItemTap: { rhymeWithFavorite in print("")})
+        FavoritesGrid(favorites: $favorites, onItemTap: { rhymeWithFavorites in print("\(rhymeWithFavorites.rhymes)")})
     }
 }
 
