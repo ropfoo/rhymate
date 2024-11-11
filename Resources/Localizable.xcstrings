@@ -115,7 +115,21 @@
         }
       }
     },
+    "settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
     "Some text message" : {
+
+    },
+    "This is a settings view" : {
 
     },
     "wiktionaryDefinitonHeadline %@" : {

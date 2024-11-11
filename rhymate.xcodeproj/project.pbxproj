@@ -21,6 +21,7 @@
 		EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A902C34003600829799 /* DatamuseFetcher.swift */; };
 		EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A922C3471D800829799 /* RhymesStorage.swift */; };
 		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
+		EC324DEF2CE2A93500A245F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DEE2CE2A93500A245F4 /* SettingsView.swift */; };
 		EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */; };
 		EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */; };
 		EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */; };
@@ -91,6 +92,7 @@
 		EC238A902C34003600829799 /* DatamuseFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatamuseFetcher.swift; sourceTree = "<group>"; };
 		EC238A922C3471D800829799 /* RhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorage.swift; sourceTree = "<group>"; };
 		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
+		EC324DEE2CE2A93500A245F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGrid.swift; sourceTree = "<group>"; };
 		EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridItem.swift; sourceTree = "<group>"; };
 		EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetail.swift; sourceTree = "<group>"; };
@@ -233,6 +235,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		EC324DED2CE2A90E00A245F4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EC324DEE2CE2A93500A245F4 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		EC37ABBB2C63A01A00B28B58 /* FavoriteGrid */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC324DED2CE2A90E00A245F4 /* Settings */,
 				ECBD84582C45138C00193BA2 /* UIUtils */,
 				ECD4E5712C3FBFC4004D02CF /* Favorites */,
 				ECB1A5E22C3E6F700087EDF9 /* RhymeItem */,
@@ -547,6 +558,7 @@
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
 				ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */,
 				EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */,
+				EC324DEF2CE2A93500A245F4 /* SettingsView.swift in Sources */,
 				ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */,
 				EC238A872C329CEB00829799 /* SearchInputView.swift in Sources */,
 				ECD720F42C5C0930007CE080 /* SearchOverlay.swift in Sources */,

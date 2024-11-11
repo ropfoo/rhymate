@@ -69,7 +69,6 @@ struct SearchView: View {
     }
     
     var body: some View {
-        NavigationStack{
             VStack {
                 if showOverlay {
                     VStack{
@@ -88,7 +87,6 @@ struct SearchView: View {
                                     }
                                 }
                             ).navigationTitle("recent")
-
                         }
                     }
                     .frame(
@@ -134,13 +132,6 @@ struct SearchView: View {
                         )
                     }.navigationTitle("\($word.wrappedValue)")
                 }
-            }
-            .toolbar {
-                ToolbarItem {
-                    Spacer()
-                }
-            }
-            Spacer()
             SearchInputView(
                 input: $input,
                 word: $word,
