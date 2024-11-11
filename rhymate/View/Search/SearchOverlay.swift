@@ -4,7 +4,6 @@ struct SearchOverlay: View {
     @Binding var searchHistory: [String]
     let onItemSelect: (_ selection: String) -> Void
     
-    
     var body: some View {
         VStack{
             ScrollView{
@@ -15,9 +14,12 @@ struct SearchOverlay: View {
                             "\(term.wrappedValue)",
                             action: {onItemSelect(term.wrappedValue)}
                         ).padding(.bottom, 5)
-                    }
+                    }.frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        alignment: .leading
+                    )
                 }
-                
             }
         }
         .padding()
