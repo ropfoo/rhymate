@@ -25,7 +25,11 @@ struct DatamuseFetcher {
         // fetch data from datamuse
         var urlComponents = URLComponents(string: baseUrlWords.absoluteString)!
         urlComponents.queryItems = [
+            // defines the query term to rhyme
             URLQueryItem(name: "rel_rhy", value: word),
+            
+            // defines the vocabulary to use (es -> spanish, enwiki -> english)
+            URLQueryItem(name: "v", value: "enwiki"),
         ]
         let url = urlComponents.url!
         if let rhymesResponse: DatamuseRhymeResponse = try await fetcher.get(url) {
