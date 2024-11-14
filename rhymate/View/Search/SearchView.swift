@@ -10,9 +10,11 @@ struct SearchView: View {
     @State var word: String = ""
     @State var input: String = ""
     @State var searchError: SearchError? = nil
-    @Binding var favorites: FavoriteRhymes
-    @State private var showOverlay: Bool = false
     @State var searchHistory: [String]
+    @State private var showOverlay: Bool = false
+    @State private var isSearchTop: Bool = false
+    
+    @Binding var favorites: FavoriteRhymes
     @FocusState private var isSearchFocused: Bool
     
     init(favorites: Binding<FavoriteRhymes>) {
@@ -21,11 +23,29 @@ struct SearchView: View {
         self.searchHistory = self.searchStorage.get()
     }
     
+    private func setIsSearchTop(isTop: Bool) {
+        if isTop {
+            withAnimation{
+                isSearchTop = true
+                showOverlay = true
+                isSearchFocused = true
+            }
+        } else {
+            withAnimation{
+                rhymes = []
+                input = ""
+                isSearchTop = false
+                showOverlay = false
+                isSearchFocused = false
+            }
+        }
+    }
+    
     private func submit() async {
         // handle empty input
         if input == "" {
             rhymes = []
-            showOverlay = false
+            setIsSearchTop(isTop: false)
             return
         }
         
@@ -65,80 +85,86 @@ struct SearchView: View {
         withAnimation{
             isLoading = false
             showOverlay = false
+            isSearchTop = true
         }
     }
     
     var body: some View {
-            VStack {
-                if showOverlay {
-                    VStack{
-                        if isLoading {
-                            ProgressView()
-                                .scaleEffect(1.5, anchor: .center)
-                        } else {
-                            SearchOverlay(
-                                searchHistory: $searchHistory,
-                                onItemSelect: { selection in
-                                    word = selection
-                                    input = selection
-                                    Task{
-                                        await submit()
-                                        isSearchFocused = false
-                                    }
-                                }
-                            ).navigationTitle("recent")
-                        }
-                    }
-                    .frame(
-                        minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity
-                    )
-                    .background(.background)
-                } else if let searchError {
-                    Spacer()
-                    VStack(alignment: .center){
-                        switch searchError {
-                        case .noResults:
-                            FallbackView(
-                                "fallbackNoRhymesFound \(word)",
-                                "exclamationmark.magnifyingglass"
-                            )
-                        case .network:
-                            FallbackView(
-                                "fallbackNoInternetConnection",
-                                "network.slash"
-                            )
-                        case .generic:
-                            FallbackView(
-                                "fallbackUnexpectedError",
-                                "exclamationmark.triangle"
-                            )
-                        }
-                    }
-                    Spacer()
-                } else if rhymes.isEmpty{
-                    Spacer()
-                    FallbackView("fallbackNoInput", "magnifyingglass")
-                    Spacer()
-                } else {
-                    ScrollView{
-                        Spacer()
-                        RhymesGrid(
-                            rhymes:$rhymes,
-                            word: $word,
-                            favorites: $favorites
-                        )
-                    }.navigationTitle("\($word.wrappedValue)")
-                }
+        VStack {
             SearchInputView(
                 input: $input,
                 word: $word,
                 showOverlay: $showOverlay,
+                isSearchTop: $isSearchTop,
                 isSearchFocused: $isSearchFocused,
+                setIsSearchTop: setIsSearchTop,
                 onSubmit: submit
+            ).offset(
+                y: isSearchTop || showOverlay ? 0 : 70
             )
+            
+            if showOverlay {
+                VStack(alignment: .trailing){
+                    if isLoading {
+                        ProgressView()
+                            .scaleEffect(1.5, anchor: .center)
+                    } else {
+                        SearchOverlay(
+                            searchHistory: $searchHistory,
+                            onItemSelect: { selection in
+                                word = selection
+                                input = selection
+                                Task{
+                                    await submit()
+                                    isSearchFocused = false
+                                }
+                            }
+                        )
+                    }
+                }
+                .frame(
+                    minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity
+                )
+                .background(.background)
+            } else if let searchError {
+                Spacer()
+                VStack(alignment: .center){
+                    switch searchError {
+                    case .noResults:
+                        FallbackView(
+                            "fallbackNoRhymesFound \(word)",
+                            "exclamationmark.magnifyingglass"
+                        )
+                    case .network:
+                        FallbackView(
+                            "fallbackNoInternetConnection",
+                            "network.slash"
+                        )
+                    case .generic:
+                        FallbackView(
+                            "fallbackUnexpectedError",
+                            "exclamationmark.triangle"
+                        )
+                    }
+                }
+                Spacer()
+            } else if rhymes.isEmpty{
+                Spacer()
+                FallbackView("fallbackNoInput", "magnifyingglass")
+                Spacer()
+            } else {
+                ScrollView{
+                    //                    Spacer()
+                    RhymesGrid(
+                        rhymes:$rhymes,
+                        word: $word,
+                        favorites: $favorites
+                    )
+                }.navigationTitle("\($word.wrappedValue)")
+            }
         }
     }
 }

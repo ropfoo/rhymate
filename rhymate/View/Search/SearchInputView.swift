@@ -4,7 +4,9 @@ struct SearchInputView: View {
     @Binding var input: String
     @Binding var word: String
     @Binding var showOverlay: Bool
+    @Binding var isSearchTop: Bool
     @FocusState.Binding var isSearchFocused: Bool
+    let setIsSearchTop: (Bool) -> Void
     let onSubmit: () async -> Void
     
     private func formatInput(_ value: String) -> String {
@@ -28,27 +30,15 @@ struct SearchInputView: View {
     
     var body: some View {
         VStack{
-            if showOverlay {
-                HStack(alignment: .lastTextBaseline){
-                    Button("done", action: {
-                        withAnimation{
-                            showOverlay = false
-                            isSearchFocused = false
-                        }
-                    })
-                }
-                .transition(.opacity)
-                .padding(.horizontal)
-                .padding(.vertical, 5)
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    alignment: .trailing
-                )
-            }
             HStack{
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.secondary)
+                VStack{
+                    Image(systemName: isSearchTop ? "chevron.backward":"magnifyingglass")
+                        .foregroundColor(.secondary)
+                }
+                .padding()
+                .onTapGesture {
+                    setIsSearchTop(!isSearchTop)
+                }
                 TextField(
                     LocalizedStringKey("searchInput"),
                     text:$input,
@@ -58,17 +48,20 @@ struct SearchInputView: View {
                 .focused($isSearchFocused)
                 .frame(maxWidth: 900)
             }
-            .padding()
             .background(.quaternary)
             .cornerRadius(20)
             .onTapGesture {
                 isSearchFocused = true
+                
             }
-            
+            .onChange(of: isSearchFocused) { isFocused in
+                withAnimation{
+                    isSearchTop = isFocused || !input.isEmpty
+                }}
+            }
+        .padding(.horizontal)
         }
-        .padding()
     }
-}
 
 #Preview {
     PreviewSearchView()
