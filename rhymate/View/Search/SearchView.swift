@@ -90,80 +90,86 @@ struct SearchView: View {
     }
     
     var body: some View {
-        VStack {
-            SearchInputView(
-                input: $input,
-                word: $word,
-                showOverlay: $showOverlay,
-                isSearchTop: $isSearchTop,
-                isSearchFocused: $isSearchFocused,
-                setIsSearchTop: setIsSearchTop,
-                onSubmit: submit
-            ).offset(
-                y: isSearchTop || showOverlay ? 0 : 70
-            )
-            
-            if showOverlay {
-                VStack(alignment: .trailing){
-                    if isLoading {
-                        ProgressView()
-                            .scaleEffect(1.5, anchor: .center)
-                    } else {
-                        SearchOverlay(
-                            searchHistory: $searchHistory,
-                            onItemSelect: { selection in
-                                word = selection
-                                input = selection
-                                Task{
-                                    await submit()
-                                    isSearchFocused = false
+        NavigationStack{
+            VStack {
+                SearchInputView(
+                    input: $input,
+                    word: $word,
+                    showOverlay: $showOverlay,
+                    isSearchTop: $isSearchTop,
+                    isSearchFocused: $isSearchFocused,
+                    setIsSearchTop: setIsSearchTop,
+                    onSubmit: submit
+                ).offset(
+                    y: isSearchTop || showOverlay ? 0 : 280
+                ).toolbar{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: SettingsView()){
+                            Image(systemName: "person.circle.fill")
+                        }
+                    }
+                }
+                
+                if showOverlay {
+                    VStack(alignment: .trailing){
+                        if isLoading {
+                            ProgressView()
+                                .scaleEffect(1.5, anchor: .center)
+                        } else {
+                            SearchOverlay(
+                                searchHistory: $searchHistory,
+                                onItemSelect: { selection in
+                                    word = selection
+                                    input = selection
+                                    Task{
+                                        await submit()
+                                        isSearchFocused = false
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
-                }
-                .frame(
-                    minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity
-                )
-                .background(.background)
-            } else if let searchError {
-                Spacer()
-                VStack(alignment: .center){
-                    switch searchError {
-                    case .noResults:
-                        FallbackView(
-                            "fallbackNoRhymesFound \(word)",
-                            "exclamationmark.magnifyingglass"
-                        )
-                    case .network:
-                        FallbackView(
-                            "fallbackNoInternetConnection",
-                            "network.slash"
-                        )
-                    case .generic:
-                        FallbackView(
-                            "fallbackUnexpectedError",
-                            "exclamationmark.triangle"
-                        )
-                    }
-                }
-                Spacer()
-            } else if rhymes.isEmpty{
-                Spacer()
-                FallbackView("fallbackNoInput", "magnifyingglass")
-                Spacer()
-            } else {
-                ScrollView{
-                    //                    Spacer()
-                    RhymesGrid(
-                        rhymes:$rhymes,
-                        word: $word,
-                        favorites: $favorites
+                    .frame(
+                        minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
+                        maxWidth: .infinity,
+                        minHeight: 0,
+                        maxHeight: .infinity
                     )
-                }.navigationTitle("\($word.wrappedValue)")
+                    .background(.background)
+                } else if let searchError {
+                    Spacer()
+                    VStack(alignment: .center){
+                        switch searchError {
+                        case .noResults:
+                            FallbackView(
+                                "fallbackNoRhymesFound \(word)",
+                                "exclamationmark.magnifyingglass"
+                            )
+                        case .network:
+                            FallbackView(
+                                "fallbackNoInternetConnection",
+                                "network.slash"
+                            )
+                        case .generic:
+                            FallbackView(
+                                "fallbackUnexpectedError",
+                                "exclamationmark.triangle"
+                            )
+                        }
+                    }
+                    Spacer()
+                } else if rhymes.isEmpty{
+                    Spacer()
+                
+                } else {
+                    ScrollView{
+                        RhymesGrid(
+                            rhymes:$rhymes,
+                            word: $word,
+                            favorites: $favorites
+                        ).padding(.top, 15)
+                    }
+                }
             }
         }
     }

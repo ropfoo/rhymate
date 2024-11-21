@@ -22,6 +22,7 @@
 		EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A922C3471D800829799 /* RhymesStorage.swift */; };
 		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
 		EC324DEF2CE2A93500A245F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DEE2CE2A93500A245F4 /* SettingsView.swift */; };
+		EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DF02CEFAA5100A245F4 /* AboutView.swift */; };
 		EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */; };
 		EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */; };
 		EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */; };
@@ -93,6 +94,7 @@
 		EC238A922C3471D800829799 /* RhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorage.swift; sourceTree = "<group>"; };
 		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
 		EC324DEE2CE2A93500A245F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EC324DF02CEFAA5100A245F4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGrid.swift; sourceTree = "<group>"; };
 		EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridItem.swift; sourceTree = "<group>"; };
 		EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetail.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				EC324DEE2CE2A93500A245F4 /* SettingsView.swift */,
+				EC324DF02CEFAA5100A245F4 /* AboutView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,
 				ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */,
 				ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */,
+				EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */,
 				ECD720F22C5C0410007CE080 /* Search.swift in Sources */,
 				EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
@@ -753,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -790,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

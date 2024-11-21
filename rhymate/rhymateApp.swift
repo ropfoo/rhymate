@@ -6,21 +6,12 @@ struct rhymateApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack{
-                TabView{
-                    SearchView(favorites: $favorites).tabItem {
-                        Label("Search", systemImage: "magnifyingglass")
-                    }
-                    FavoritesView(favorites: $favorites).tabItem {
-                        Label("Favorites", systemImage: "heart")
-                    }
+            TabView{
+                SearchView(favorites: $favorites).tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
                 }
-                .toolbar{
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: SettingsView()){
-                            Image(systemName: "gear")
-                        }
-                    }
+                FavoritesView(favorites: $favorites).tabItem {
+                    Label("Favorites", systemImage: "heart")
                 }
             }
         }

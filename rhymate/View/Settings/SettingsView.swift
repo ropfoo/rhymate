@@ -1,17 +1,14 @@
 import SwiftUI
 
+
 struct SettingsView: View {
     var body: some View {
         NavigationStack{
-            VStack{
-                ScrollView{
-                    VStack(alignment:.leading){
-                        Text("This is a settings view")
-                    }
+            List {
+                NavigationLink(destination: AboutView()){
+                    Text("About")
                 }
             }
-            .navigationTitle("settings")
-            .padding()
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,

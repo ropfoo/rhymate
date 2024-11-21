@@ -34,6 +34,8 @@ struct SearchInputView: View {
                 VStack{
                     Image(systemName: isSearchTop ? "chevron.backward":"magnifyingglass")
                         .foregroundColor(.secondary)
+                        .font(isSearchTop ? .headline : .title3)
+
                 }
                 .padding()
                 .onTapGesture {
@@ -45,11 +47,12 @@ struct SearchInputView: View {
                     onEditingChanged: handleChange,
                     onCommit: handleCommit
                 )
+                .padding(isSearchTop ? 0 : 20)
                 .focused($isSearchFocused)
                 .frame(maxWidth: 900)
             }
             .background(.quaternary)
-            .cornerRadius(20)
+            .cornerRadius(isSearchTop ? 20: 25)
             .onTapGesture {
                 isSearchFocused = true
                 

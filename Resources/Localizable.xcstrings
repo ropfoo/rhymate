@@ -4,7 +4,24 @@
     "%@" : {
 
     },
+    "about" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "About" : {
+
+    },
     "close" : {
+
+    },
+    "Datamuse API" : {
 
     },
     "fallbackFavoritesText" : {
@@ -87,6 +104,17 @@
     "Favorites" : {
 
     },
+    "info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        }
+      }
+    },
     "recent" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -97,6 +125,9 @@
           }
         }
       }
+    },
+    "Rhymate uses the Datamuse API to find rhyming words and Wiktionary for word definitions." : {
+
     },
     "Search" : {
 
@@ -112,18 +143,7 @@
         }
       }
     },
-    "settings" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        }
-      }
-    },
-    "This is a settings view" : {
+    "Wiktionary API" : {
 
     },
     "wiktionaryDefinitonHeadline %@" : {
