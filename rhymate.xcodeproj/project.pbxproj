@@ -33,6 +33,8 @@
 		EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E52C3B1BE8008E9884 /* Datamuse.swift */; };
 		EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782E72C3C5B4B008E9884 /* Rhyme.swift */; };
 		EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */; };
+		EC81FCEB2DF9F77E008512CF /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCEA2DF9F77E008512CF /* SearchResultManager.swift */; };
+		EC81FCEE2DF9F7DB008512CF /* SearchResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCED2DF9F7DB008512CF /* SearchResultError.swift */; };
 		ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */; };
 		ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* Util.swift */; };
 		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
@@ -52,7 +54,7 @@
 		ECD720EE2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */; };
 		ECD720F02C5C0366007CE080 /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720EF2C5C0366007CE080 /* SearchHistoryStorage.swift */; };
 		ECD720F22C5C0410007CE080 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720F12C5C0410007CE080 /* Search.swift */; };
-		ECD720F42C5C0930007CE080 /* SearchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720F32C5C0930007CE080 /* SearchOverlay.swift */; };
+		ECD720F42C5C0930007CE080 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720F32C5C0930007CE080 /* SearchHistory.swift */; };
 		ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */; };
 		ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		EC7782E52C3B1BE8008E9884 /* Datamuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datamuse.swift; sourceTree = "<group>"; };
 		EC7782E72C3C5B4B008E9884 /* Rhyme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rhyme.swift; sourceTree = "<group>"; };
 		EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesToggle.swift; sourceTree = "<group>"; };
+		EC81FCEA2DF9F77E008512CF /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
+		EC81FCED2DF9F7DB008512CF /* SearchResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultError.swift; sourceTree = "<group>"; };
 		ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorage.swift; sourceTree = "<group>"; };
 		ECB1A5DC2C3C744A0087EDF9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -124,7 +128,7 @@
 		ECD720ED2C56329E007CE080 /* WiktionaryDefinitionsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitionsStorageTests.swift; sourceTree = "<group>"; };
 		ECD720EF2C5C0366007CE080 /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 		ECD720F12C5C0410007CE080 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		ECD720F32C5C0930007CE080 /* SearchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOverlay.swift; sourceTree = "<group>"; };
+		ECD720F32C5C0930007CE080 /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcherTests.swift; sourceTree = "<group>"; };
 		ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,9 +231,10 @@
 		EC238A8A2C33506D00829799 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				EC81FCEC2DF9F7C8008512CF /* SearchResult */,
 				EC238A5E2C321F6800829799 /* SearchView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
-				ECD720F32C5C0930007CE080 /* SearchOverlay.swift */,
+				ECD720F32C5C0930007CE080 /* SearchHistory.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -317,6 +322,15 @@
 				EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		EC81FCEC2DF9F7C8008512CF /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				EC81FCEA2DF9F77E008512CF /* SearchResultManager.swift */,
+				EC81FCED2DF9F7DB008512CF /* SearchResultError.swift */,
+			);
+			path = SearchResult;
 			sourceTree = "<group>";
 		};
 		ECB1A5E22C3E6F700087EDF9 /* RhymeItem */ = {
@@ -549,11 +563,13 @@
 				EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */,
 				ECD720F22C5C0410007CE080 /* Search.swift in Sources */,
 				EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */,
+				EC81FCEB2DF9F77E008512CF /* SearchResultManager.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
 				ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */,
 				ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */,
 				ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */,
+				EC81FCEE2DF9F7DB008512CF /* SearchResultError.swift in Sources */,
 				EC7304562C538C72006BCEAA /* WiktionaryDefinitionsStorage.swift in Sources */,
 				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
@@ -561,7 +577,7 @@
 				EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */,
 				EC324DEF2CE2A93500A245F4 /* SettingsView.swift in Sources */,
 				ECBDC3DA2C46D1D200943D83 /* WiktionaryFetcher.swift in Sources */,
-				ECD720F42C5C0930007CE080 /* SearchOverlay.swift in Sources */,
+				ECD720F42C5C0930007CE080 /* SearchHistory.swift in Sources */,
 				EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */,
 				ECD720F02C5C0366007CE080 /* SearchHistoryStorage.swift in Sources */,
 				ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */,

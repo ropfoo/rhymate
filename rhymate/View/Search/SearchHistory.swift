@@ -1,14 +1,14 @@
 import SwiftUI
 
-struct SearchOverlay: View {
-    @Binding var searchHistory: [String]
+struct SearchHistoryList: View {
+    @Binding var history: [String]
     let onItemSelect: (_ selection: String) -> Void
-    
+        
     var body: some View {
         VStack{
             ScrollView{
                 VStack(alignment:.leading){
-                    ForEach($searchHistory, id: \.self){
+                    ForEach($history, id: \.self){
                         term in
                         Button(
                             "\(term.wrappedValue)",
@@ -35,8 +35,8 @@ struct SearchOverlay: View {
 struct SearchOverlayPreview: View {
     @State var searchHistory = ["test", "balloon"]
     var body: some View{
-        SearchOverlay(
-            searchHistory: $searchHistory,
+        SearchHistoryList(
+            history: $searchHistory,
             onItemSelect: {word in print("select \(word)")}
         )
     }
