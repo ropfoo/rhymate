@@ -7,12 +7,16 @@ struct SearchView: View {
     
     @State var rhymes: DatamuseRhymeResponse = []
     @State var isLoading: Bool = false
-    @State var word: String = ""
     @State var input: String = ""
     @State var searchError: SearchError? = nil
     @State var searchHistory: [String]
     @State private var showOverlay: Bool = false
-    @State private var isSearchTop: Bool = false
+    
+    enum SearchScope: String, CaseIterable {
+        case inbox, favorites
+    }
+    
+    @State private var searchScope = SearchScope.inbox
     
     @Binding var favorites: FavoriteRhymes
     @FocusState private var isSearchFocused: Bool
@@ -23,34 +27,23 @@ struct SearchView: View {
         self.searchHistory = self.searchStorage.get()
     }
     
-    private func setIsSearchTop(isTop: Bool) {
-        if isTop {
-            withAnimation{
-                isSearchTop = true
-                showOverlay = true
-                isSearchFocused = true
-            }
-        } else {
-            withAnimation{
-                rhymes = []
-                input = ""
-                isSearchTop = false
-                showOverlay = false
-                isSearchFocused = false
-            }
-        }
+    private func formatInput(_ value: String) -> String {
+        return value
+            .trimmingCharacters(in: .punctuationCharacters)
+            .trimmingCharacters(in: .symbols)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     private func submit() async {
+        print("submit", input)
         // handle empty input
         if input == "" {
             rhymes = []
-            setIsSearchTop(isTop: false)
             return
         }
         
         // set input to formatted word
-        input = word
+        let searchTerm = formatInput(input)
         
         withAnimation{
             searchError = nil
@@ -58,17 +51,17 @@ struct SearchView: View {
         }
         
         do {
-            let rhymesResponse = try await fetcher.getRhymes(forWord: word)
+            let rhymesResponse = try await fetcher.getRhymes(forWord: searchTerm)
             if rhymesResponse.isEmpty {
                 withAnimation{ searchError = .noResults }
             }
             rhymes = rhymesResponse
             
             // store word in search storage
-            try searchStorage.mutate(.add, word)
+            try searchStorage.mutate(.add, searchTerm)
             withAnimation{
-                var newHistory = searchHistory.filter{!$0.contains(word)}
-                newHistory.insert(word, at: 0)
+                var newHistory = searchHistory.filter{!$0.contains(searchTerm)}
+                newHistory.insert(searchTerm, at: 0)
                 searchHistory = newHistory
             }
         } catch {
@@ -85,31 +78,12 @@ struct SearchView: View {
         withAnimation{
             isLoading = false
             showOverlay = false
-            isSearchTop = true
         }
     }
     
     var body: some View {
         NavigationStack{
             VStack {
-                SearchInputView(
-                    input: $input,
-                    word: $word,
-                    showOverlay: $showOverlay,
-                    isSearchTop: $isSearchTop,
-                    isSearchFocused: $isSearchFocused,
-                    setIsSearchTop: setIsSearchTop,
-                    onSubmit: submit
-                ).offset(
-                    y: isSearchTop || showOverlay ? 0 : 280
-                ).toolbar{
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: SettingsView()){
-                            Image(systemName: "person.circle.fill")
-                        }
-                    }
-                }
-                
                 if showOverlay {
                     VStack(alignment: .trailing){
                         if isLoading {
@@ -119,7 +93,6 @@ struct SearchView: View {
                             SearchOverlay(
                                 searchHistory: $searchHistory,
                                 onItemSelect: { selection in
-                                    word = selection
                                     input = selection
                                     Task{
                                         await submit()
@@ -142,7 +115,7 @@ struct SearchView: View {
                         switch searchError {
                         case .noResults:
                             FallbackView(
-                                "fallbackNoRhymesFound \(word)",
+                                "fallbackNoRhymesFound \(input)",
                                 "exclamationmark.magnifyingglass"
                             )
                         case .network:
@@ -165,13 +138,32 @@ struct SearchView: View {
                     ScrollView{
                         RhymesGrid(
                             rhymes:$rhymes,
-                            word: $word,
+                            word: $input,
                             favorites: $favorites
                         ).padding(.top, 15)
                     }
                 }
             }
+            .toolbar{
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: SettingsView()){
+                        Image(systemName: "person.circle.fill")
+                    }
+                }
+            }
         }
+        .searchable(text: $input)
+        .searchScopes($searchScope) {
+                ForEach(SearchScope.allCases, id: \.self) { scope in
+                    Text(scope.rawValue.capitalized)
+                }
+        }
+        .onSubmit(of: .search, {
+            Task {
+                await submit()
+            }
+        })
+        .onChange(of: searchScope) { t in print(t) }
     }
 }
 
