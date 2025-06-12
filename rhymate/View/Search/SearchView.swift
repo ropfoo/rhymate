@@ -12,6 +12,7 @@ struct SearchView: View {
     @State var searchHistory: [String]
     @State private var searchScope = SearchScope.result
     @State private var navigateToResults: Bool = false
+    @State private var debounceTask: Task<Void, Never>? = nil
     
     @Binding var favorites: FavoriteRhymes
     @Binding private var isSearchFocused: Bool
@@ -38,23 +39,33 @@ struct SearchView: View {
     
     private func search(searchTerm: String) async {
         let term = Formatter().formatInput(searchTerm)
+        if term == "" {
+            return withAnimation{isLoading = false; searchError = nil; suggestions = [] }
+        }
         if term.count < 3 {
-            suggestions = []
-            return
+            return withAnimation{isLoading = false; searchError = .noResults; suggestions = [] }
         }
         
         do {
             withAnimation{ isLoading = true }
             let suggestionsResponse = try await fetcher.getSuggestions(forWord: term)
             if suggestionsResponse.isEmpty {
-                withAnimation{ searchError = .noResults }
+               return withAnimation{isLoading = false; searchError = .noResults }
             }
+            print(suggestionsResponse)
             suggestions = suggestionsResponse
-            withAnimation{ isLoading = false }
+            withAnimation{ isLoading = false; searchError = nil }
         } catch {
-            withAnimation{ searchError = ErrorHelper().getSearchError(error: error) }
+            if let urlError = error as? URLError, urlError.code == .cancelled {
+                // Ignore cancelled requests
+                return withAnimation{ isLoading = false; searchError = nil}
+            }
+            return withAnimation{
+                isLoading = false
+                searchError = ErrorHelper().getSearchError(error: error)
+                suggestions = [] 
+            }
         }
-        withAnimation{ isLoading = false }
     }
     
     var body: some View {
@@ -84,7 +95,16 @@ struct SearchView: View {
             }
         }
         .onSubmit(of: .search, { navigateToResults = true } )
-        .onChange(of: input) { i in Task { await search(searchTerm: i) } }
+        .onChange(of: input) { i in
+            withAnimation { isLoading = true }
+            debounceTask?.cancel()
+            debounceTask = Task { [input = i] in
+                try? await Task.sleep(nanoseconds: 300_000_000)
+                if !Task.isCancelled {
+                    await search(searchTerm: input)
+                }
+            }
+        }
     }
 }
 
