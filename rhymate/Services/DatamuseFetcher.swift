@@ -14,13 +14,9 @@ struct DatamuseFetcher {
         self.fetcher = Fetcher(configuration: configuration)
     }
     
-    private func formatSearchTerm(_ term: String) -> String {
-        term.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
     /// Fetch Ryhmes from Datamuse API (https://api.datamuse.com/words?rel_rhy=word)
     func getRhymes(forWord: String) async throws -> DatamuseRhymeResponse {
-        let word = formatSearchTerm(forWord)
+        let word = Formatter().formatInput(forWord)
         
         // prefer local store if word already exists in UserDefaults
         if let localResult = rhymesStorage.get(word: word), !localResult.isEmpty {
@@ -50,7 +46,7 @@ struct DatamuseFetcher {
     
     /// Fetch rhyme suggestions from Datamuse API (https://api.datamuse.com/sug?s=word)
     func getSuggestions(forWord: String) async throws -> [DatamuseSuggestion] {
-        let word = formatSearchTerm(forWord)
+        let word = Formatter().formatInput(forWord)
 
         var urlComponents = URLComponents(string: baseUrlSuggestions.absoluteString)!
         urlComponents.queryItems = [

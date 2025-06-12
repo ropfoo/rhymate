@@ -3,46 +3,45 @@ import SwiftUI
 struct SearchResultManager: View {
     @Binding var isLoading: Bool
     @Binding var input: String
-    @Binding var word: String
     @Binding var searchError: SearchError?
     @Binding var searchScope: SearchScope
     @Binding var searchHistory: [String]
-    @Binding var rhymes: DatamuseRhymeResponse
+    @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
-    
-    let handleSumbit: () async -> Void
+    let onRhymesFetch: (String) -> Void
     
     var body: some View {
         VStack {
             if isLoading {
-                ProgressView()
-                    .scaleEffect(1.5, anchor: .center)
+               LoadingSpinner()
             } else if (searchScope == .history) {
                 SearchHistoryList(
                     history: $searchHistory,
+//                  @TODO:  destination: RhymesScreen(input: $input, favorites: $favorites),
                     onItemSelect: { selection in
                         input = selection
-                        Task { await handleSumbit() }
                     }
                 )
             } else if let searchError {
                 Spacer()
-                SearchResultError(
-                    input: input,
-                    searchError: searchError
-                )
+                SearchResultError(input: input, searchError: searchError)
                 Spacer()
             } else {
-                ScrollView{
-                    RhymesGrid(
-                        rhymes:$rhymes,
-                        word: $input,
-                        favorites: $favorites
-                    ).padding(.top, 15)
+                List {
+                    ForEach(suggestions) { suggestion in
+                        NavigationLink(
+                            destination: RhymesScreen(
+                                word: suggestion.word,
+                                favorites: $favorites,
+                                onRhymesFetch: onRhymesFetch
+                            ),
+                            label: { Text(suggestion.word)}
+                        )
+                    }
                 }
             }
         }
-        .navigationTitle(rhymes.isEmpty ? "Search" : word)
+        .navigationTitle("Search")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink(destination: SettingsView()){
@@ -50,7 +49,5 @@ struct SearchResultManager: View {
                 }
             }
         }
-        
     }
-    
 }

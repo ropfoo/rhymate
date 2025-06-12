@@ -5,13 +5,13 @@ struct SearchView: View {
     private let fetcher = DatamuseFetcher()
     private var historyStorage: SearchHistoryStorage
     
-    @State var rhymes: DatamuseRhymeResponse = []
+    @State var suggestions: [DatamuseSuggestion] = []
     @State var isLoading: Bool = false
     @State var input: String = ""
-    @State var word: String = ""
     @State var searchError: SearchError? = nil
     @State var searchHistory: [String]
     @State private var searchScope = SearchScope.result
+    @State private var navigateToResults: Bool = false
     
     @Binding var favorites: FavoriteRhymes
     @Binding private var isSearchFocused: Bool
@@ -23,37 +23,8 @@ struct SearchView: View {
         self._isSearchFocused = isSearchFocused
     }
     
-    private func formatInput(_ value: String) -> String {
-        return value
-            .trimmingCharacters(in: .punctuationCharacters)
-            .trimmingCharacters(in: .symbols)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
-    private func submit() async {
-        // handle empty input
-        if input == "" {
-            rhymes = []
-            return
-        }
-        
-        // set input to formatted word
-        let searchTerm = formatInput(input)
-        word = searchTerm
-        
-        withAnimation{
-            searchError = nil
-            isLoading = true
-        }
-        
+    private func storeSearchTerm(_ searchTerm: String) {
         do {
-            let rhymesResponse = try await fetcher.getRhymes(forWord: searchTerm)
-            if rhymesResponse.isEmpty {
-                withAnimation{ searchError = .noResults }
-            }
-            rhymes = rhymesResponse
-            
-            // store word in search storage
             try historyStorage.mutate(.add, searchTerm)
             withAnimation{
                 var newHistory = searchHistory.filter{!$0.contains(searchTerm)}
@@ -61,34 +32,46 @@ struct SearchView: View {
                 searchHistory = newHistory
             }
         } catch {
-            withAnimation{
-                switch error._code {
-                case -1009:
-                    searchError = .network
-                default:
-                    searchError = .generic
-                }
-            }
             print(error)
         }
-        withAnimation{
-            isLoading = false
+    }
+    
+    private func search(searchTerm: String) async {
+        let term = Formatter().formatInput(searchTerm)
+        if term.count < 3 {
+            suggestions = []
+            return
         }
+        
+        do {
+            withAnimation{ isLoading = true }
+            let suggestionsResponse = try await fetcher.getSuggestions(forWord: term)
+            if suggestionsResponse.isEmpty {
+                withAnimation{ searchError = .noResults }
+            }
+            suggestions = suggestionsResponse
+            withAnimation{ isLoading = false }
+        } catch {
+            withAnimation{ searchError = ErrorHelper().getSearchError(error: error) }
+        }
+        withAnimation{ isLoading = false }
     }
     
     var body: some View {
         NavigationStack{
-          SearchResultManager(
-            isLoading: $isLoading,
-            input: $input,
-            word: $word,
-            searchError: $searchError,
-            searchScope: $searchScope,
-            searchHistory: $searchHistory,
-            rhymes: $rhymes,
-            favorites: $favorites,
-            handleSumbit: submit
-          )
+            SearchResultManager(
+                isLoading: $isLoading,
+                input: $input,
+                searchError: $searchError,
+                searchScope: $searchScope,
+                searchHistory: $searchHistory,
+                suggestions: $suggestions,
+                favorites: $favorites,
+                onRhymesFetch: storeSearchTerm
+            )
+            .navigationDestination(isPresented: $navigateToResults) {
+                RhymesScreen(word: input, favorites: $favorites, onRhymesFetch: storeSearchTerm)
+            }
         }
         .searchable(
             text: $input,
@@ -99,12 +82,8 @@ struct SearchView: View {
                 Text(scope.rawValue.capitalized)
             }
         }
-        .onSubmit(of: .search, {
-            Task {
-                await submit()
-            }
-        })
-        .onChange(of: searchScope) { t in print(t) }
+        .onSubmit(of: .search, { navigateToResults = true } )
+        .onChange(of: input) { i in Task { await search(searchTerm: i) } }
     }
 }
 

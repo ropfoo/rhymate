@@ -35,8 +35,13 @@
 		EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */; };
 		EC81FCEB2DF9F77E008512CF /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCEA2DF9F77E008512CF /* SearchResultManager.swift */; };
 		EC81FCEE2DF9F7DB008512CF /* SearchResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCED2DF9F7DB008512CF /* SearchResultError.swift */; };
+		EC81FCF32DFAC194008512CF /* RhymesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCF22DFAC194008512CF /* RhymesScreen.swift */; };
+		EC81FCF52DFAC6EB008512CF /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCF42DFAC6EB008512CF /* ErrorHelper.swift */; };
+		EC81FCF72DFAC85F008512CF /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCF62DFAC85F008512CF /* Mutation.swift */; };
+		EC81FCF92DFAE333008512CF /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCF82DFAE333008512CF /* Formatter.swift */; };
+		EC81FCFB2DFB2186008512CF /* LoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81FCFA2DFB2186008512CF /* LoadingSpinner.swift */; };
 		ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */; };
-		ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* Util.swift */; };
+		ECB1A5DD2C3C744A0087EDF9 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */; };
 		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
 		ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */; };
 		ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84412C41016700193BA2 /* DictionaryHelper.swift */; };
@@ -108,8 +113,13 @@
 		EC7782EA2C3C5F67008E9884 /* FavoritesToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesToggle.swift; sourceTree = "<group>"; };
 		EC81FCEA2DF9F77E008512CF /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
 		EC81FCED2DF9F7DB008512CF /* SearchResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultError.swift; sourceTree = "<group>"; };
+		EC81FCF22DFAC194008512CF /* RhymesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesScreen.swift; sourceTree = "<group>"; };
+		EC81FCF42DFAC6EB008512CF /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
+		EC81FCF62DFAC85F008512CF /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
+		EC81FCF82DFAE333008512CF /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		EC81FCFA2DFB2186008512CF /* LoadingSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSpinner.swift; sourceTree = "<group>"; };
 		ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorage.swift; sourceTree = "<group>"; };
-		ECB1A5DC2C3C744A0087EDF9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorageTests.swift; sourceTree = "<group>"; };
 		ECBD84412C41016700193BA2 /* DictionaryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryHelper.swift; sourceTree = "<group>"; };
@@ -191,6 +201,7 @@
 				EC7782DE2C39CA87008E9884 /* Services */,
 				EC7782DD2C39CA19008E9884 /* Storage */,
 				EC7782DC2C39C904008E9884 /* View */,
+				EC81FCF12DFAC12C008512CF /* Screens */,
 				EC238A5C2C321F6800829799 /* rhymateApp.swift */,
 				EC238A602C321F6900829799 /* Assets.xcassets */,
 				EC238A622C321F6900829799 /* Preview Content */,
@@ -308,7 +319,8 @@
 			children = (
 				EC7782E52C3B1BE8008E9884 /* Datamuse.swift */,
 				EC7782E72C3C5B4B008E9884 /* Rhyme.swift */,
-				ECB1A5DC2C3C744A0087EDF9 /* Util.swift */,
+				ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */,
+				EC81FCF62DFAC85F008512CF /* Mutation.swift */,
 				ECB1A5DE2C3C84730087EDF9 /* Storage.swift */,
 				ECBDC3DB2C46D1F200943D83 /* Wiktionary.swift */,
 				ECD720F12C5C0410007CE080 /* Search.swift */,
@@ -333,6 +345,14 @@
 			path = SearchResult;
 			sourceTree = "<group>";
 		};
+		EC81FCF12DFAC12C008512CF /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EC81FCF22DFAC194008512CF /* RhymesScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		ECB1A5E22C3E6F700087EDF9 /* RhymeItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +366,8 @@
 			children = (
 				ECBD84412C41016700193BA2 /* DictionaryHelper.swift */,
 				ECBD84452C42678C00193BA2 /* Fetcher.swift */,
+				EC81FCF42DFAC6EB008512CF /* ErrorHelper.swift */,
+				EC81FCF82DFAE333008512CF /* Formatter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -372,6 +394,7 @@
 			children = (
 				ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */,
 				ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */,
+				EC81FCFA2DFB2186008512CF /* LoadingSpinner.swift */,
 			);
 			path = UIUtils;
 			sourceTree = "<group>";
@@ -547,6 +570,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC81FCF72DFAC85F008512CF /* Mutation.swift in Sources */,
+				EC81FCF32DFAC194008512CF /* RhymesScreen.swift in Sources */,
 				EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */,
 				EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */,
 				ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */,
@@ -556,14 +581,17 @@
 				EC238A892C33132600829799 /* FavoritesView.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,
 				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
+				EC81FCF52DFAC6EB008512CF /* ErrorHelper.swift in Sources */,
 				ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */,
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,
 				ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */,
 				ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */,
+				EC81FCFB2DFB2186008512CF /* LoadingSpinner.swift in Sources */,
 				EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */,
 				ECD720F22C5C0410007CE080 /* Search.swift in Sources */,
 				EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */,
 				EC81FCEB2DF9F77E008512CF /* SearchResultManager.swift in Sources */,
+				EC81FCF92DFAE333008512CF /* Formatter.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
 				ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */,
@@ -571,7 +599,7 @@
 				ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */,
 				EC81FCEE2DF9F7DB008512CF /* SearchResultError.swift in Sources */,
 				EC7304562C538C72006BCEAA /* WiktionaryDefinitionsStorage.swift in Sources */,
-				ECB1A5DD2C3C744A0087EDF9 /* Util.swift in Sources */,
+				ECB1A5DD2C3C744A0087EDF9 /* JSONable.swift in Sources */,
 				EC5A28C52C3FC6EE00DEDFFF /* FavoritesDetail.swift in Sources */,
 				ECBD845A2C4513BE00193BA2 /* FadeInOutRow.swift in Sources */,
 				EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */,
