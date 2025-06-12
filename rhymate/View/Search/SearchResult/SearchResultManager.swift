@@ -4,7 +4,6 @@ struct SearchResultManager: View {
     @Binding var isLoading: Bool
     @Binding var input: String
     @Binding var searchError: SearchError?
-    @Binding var searchScope: SearchScope
     @Binding var searchHistory: [String]
     @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
@@ -14,7 +13,7 @@ struct SearchResultManager: View {
         VStack {
             if isLoading {
                LoadingSpinner()
-            } else if (searchScope == .history) {
+            } else if (input == "") {
                 SearchHistoryList(
                     history: $searchHistory,
                     destination: { entry in

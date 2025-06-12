@@ -4,15 +4,23 @@ struct SearchHistoryList: View {
     @Binding var history: [String]
     let destination: (String) -> RhymesScreen
     
+    @State private var maxHistoryCount: Int = 3
+    
     var body: some View {
         VStack{
+            Spacer()
+            Text("Latest")
             List{
-                ForEach($history, id: \.self){
-                    term in
+                ForEach(Array(history.suffix(maxHistoryCount)).indices, id: \.self) { idx in
+                    let suffixHistory = Array($history.suffix(maxHistoryCount))
+                    let term = suffixHistory[idx]
                     NavigationLink(
                         destination: { destination(term.wrappedValue) },
                         label: { Text("\(term.wrappedValue)") }
                     )
+                }
+                Button("Show all") {
+                    withAnimation{ maxHistoryCount = history.count }
                 }
             }
         }

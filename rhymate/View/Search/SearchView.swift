@@ -10,18 +10,17 @@ struct SearchView: View {
     @State var input: String = ""
     @State var searchError: SearchError? = nil
     @State var searchHistory: [String]
-    @State private var searchScope = SearchScope.result
     @State private var navigateToResults: Bool = false
     @State private var debounceTask: Task<Void, Never>? = nil
     
     @Binding var favorites: FavoriteRhymes
-    @Binding private var isSearchFocused: Bool
+    @FocusState private var isSearchFocused: Bool
     
     init(favorites: Binding<FavoriteRhymes>, isSearchFocused: Binding<Bool>) {
         self.historyStorage = SearchHistoryStorage()
         self._favorites = favorites
         self.searchHistory = self.historyStorage.get()
-        self._isSearchFocused = isSearchFocused
+        self.isSearchFocused = self.isSearchFocused
     }
     
     private func storeSearchTerm(_ searchTerm: String) {
@@ -74,7 +73,6 @@ struct SearchView: View {
                 isLoading: $isLoading,
                 input: $input,
                 searchError: $searchError,
-                searchScope: $searchScope,
                 searchHistory: $searchHistory,
                 suggestions: $suggestions,
                 favorites: $favorites,
@@ -89,14 +87,12 @@ struct SearchView: View {
             prompt: "Find a rhyme"
             // isPresented: $isSearchFocused
         )
-        .searchScopes($searchScope) {
-            ForEach(SearchScope.allCases, id: \.self) { scope in
-                Text(scope.rawValue.capitalized)
-            }
-        }
+//        @available(iOS 18.0, *)
+//        .searchFocused($isSearchFocused)
         .onSubmit(of: .search, { navigateToResults = true } )
         .onChange(of: input) { i in
-            withAnimation { isLoading = true }
+            isLoading = i.isEmpty == false;
+            suggestions = []
             debounceTask?.cancel()
             debounceTask = Task { [input = i] in
                 try? await Task.sleep(nanoseconds: 300_000_000)

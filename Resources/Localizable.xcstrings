@@ -118,6 +118,9 @@
         }
       }
     },
+    "Latest" : {
+
+    },
     "recent" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -145,6 +148,12 @@
           }
         }
       }
+    },
+    "Show all" : {
+
+    },
+    "test" : {
+
     },
     "Wiktionary API" : {
 
