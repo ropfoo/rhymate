@@ -32,19 +32,23 @@ struct RhymesScreen: View {
     }
 
     var body: some View {
-        if isLoading {
-            LoadingSpinner()
-        } else if(searchError != nil) {
-            SearchResultError(input: word, searchError: $searchError.wrappedValue ?? .generic)
-        } else {
-            ScrollView {
-                RhymesGrid(
-                    rhymes:$rhymes,
-                    word: Binding<String>(get: { word }, set: { _ in }),
-                    favorites: $favorites
-                ).onAppear { Task { await getRhymes(forWord: word) } }
-            }.navigationTitle(word)
+        VStack{
+            if isLoading {
+                LoadingSpinner()
+            } else if(searchError != nil) {
+                SearchResultError(input: word, searchError: $searchError.wrappedValue ?? .generic)
+            } else {
+                ScrollView {
+                    RhymesGrid(
+                        rhymes:$rhymes,
+                        word: Binding<String>(get: { word }, set: { _ in }),
+                        favorites: $favorites
+                    )
+                }
+            }
         }
+        .navigationTitle(word)
+        .onAppear { Task { await getRhymes(forWord: word) } }
     }
 }
 
