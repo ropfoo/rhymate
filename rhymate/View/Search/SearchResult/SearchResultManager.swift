@@ -17,9 +17,12 @@ struct SearchResultManager: View {
             } else if (searchScope == .history) {
                 SearchHistoryList(
                     history: $searchHistory,
-//                  @TODO:  destination: RhymesScreen(input: $input, favorites: $favorites),
-                    onItemSelect: { selection in
-                        input = selection
+                    destination: { entry in
+                        RhymesScreen(
+                            word: entry,
+                            favorites: $favorites,
+                            onRhymesFetch: onRhymesFetch
+                        )
                     }
                 )
             } else if let searchError {

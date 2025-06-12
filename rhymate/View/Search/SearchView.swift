@@ -75,6 +75,7 @@ struct SearchView: View {
         }
         .searchable(
             text: $input,
+            prompt: "Find a rhyme"
             // isPresented: $isSearchFocused
         )
         .searchScopes($searchScope) {

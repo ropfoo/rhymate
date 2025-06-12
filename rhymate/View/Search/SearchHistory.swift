@@ -2,42 +2,39 @@ import SwiftUI
 
 struct SearchHistoryList: View {
     @Binding var history: [String]
-    let onItemSelect: (_ selection: String) -> Void
-        
+    let destination: (String) -> RhymesScreen
+    
     var body: some View {
         VStack{
-            ScrollView{
-                VStack(alignment:.leading){
-                    ForEach($history, id: \.self){
-                        term in
-                        Button(
-                            "\(term.wrappedValue)",
-                            action: {onItemSelect(term.wrappedValue)}
-                        ).padding(.bottom, 5)
-                    }.frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        alignment: .leading
+            List{
+                ForEach($history, id: \.self){
+                    term in
+                    NavigationLink(
+                        destination: { destination(term.wrappedValue) },
+                        label: { Text("\(term.wrappedValue)") }
                     )
                 }
             }
         }
-        .padding()
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            alignment: .leading
-        )
     }
 }
 
 
 struct SearchOverlayPreview: View {
     @State var searchHistory = ["test", "balloon"]
+    @State var favorites: FavoriteRhymes = .init()
+    func onRhymesFetch(_ word: String) { print(word) }
+    
     var body: some View{
         SearchHistoryList(
             history: $searchHistory,
-            onItemSelect: {word in print("select \(word)")}
+            destination: { entry in
+                RhymesScreen(
+                    word: entry,
+                    favorites: $favorites,
+                    onRhymesFetch: onRhymesFetch
+                )
+            }
         )
     }
 }
