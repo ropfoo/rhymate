@@ -13,23 +13,24 @@ struct SearchResultManager: View {
         VStack {
             if isLoading {
                LoadingSpinner()
-            } else if (input == "") {
-                SearchHistoryList(
-                    history: $searchHistory,
-                    destination: { entry in
-                        RhymesScreen(
-                            word: entry,
-                            favorites: $favorites,
-                            onRhymesFetch: onRhymesFetch
-                        )
-                    }
-                )
             } else if let searchError {
                 Spacer()
                 SearchResultError(input: input, searchError: searchError)
                 Spacer()
             } else {
                 List {
+                    if (input == "") {
+                        SearchHistoryList(
+                            history: $searchHistory,
+                            destination: { entry in
+                                RhymesScreen(
+                                    word: entry,
+                                    favorites: $favorites,
+                                    onRhymesFetch: onRhymesFetch
+                                )
+                            }
+                        )
+                    }
                     ForEach(suggestions) { suggestion in
                         NavigationLink(
                             destination: RhymesScreen(
