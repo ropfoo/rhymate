@@ -24,6 +24,9 @@
     "Datamuse API" : {
 
     },
+    "Delete history" : {
+
+    },
     "fallbackFavoritesText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +110,9 @@
     "Find a rhyme" : {
 
     },
+    "History" : {
+
+    },
     "info" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -117,9 +123,6 @@
           }
         }
       }
-    },
-    "Latest" : {
-
     },
     "recent" : {
       "extractionState" : "manual",

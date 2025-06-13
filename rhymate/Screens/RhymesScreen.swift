@@ -24,7 +24,6 @@ struct RhymesScreen: View {
                 withAnimation{ searchError = .noResults }
             }
             rhymes = rhymesResponse
-            onRhymesFetch(searchTerm)
         } catch {
             withAnimation { searchError = ErrorHelper().getSearchError(error: error) }
         }
@@ -49,6 +48,11 @@ struct RhymesScreen: View {
         }
         .navigationTitle(word)
         .onAppear { Task { await getRhymes(forWord: word) } }
+        .onDisappear {
+            let searchTerm = Formatter().formatInput(word)
+
+            onRhymesFetch(searchTerm)
+        }
     }
 }
 

@@ -4,7 +4,7 @@ struct SearchResultManager: View {
     @Binding var isLoading: Bool
     @Binding var input: String
     @Binding var searchError: SearchError?
-    @Binding var searchHistory: [String]
+    @Binding var searchHistory: [SearchHistoryEntry]
     @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
     let onRhymesFetch: (String) -> Void

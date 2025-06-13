@@ -9,7 +9,7 @@ struct SearchView: View {
     @State var isLoading: Bool = false
     @State var input: String = ""
     @State var searchError: SearchError? = nil
-    @State var searchHistory: [String]
+    @State var searchHistory: [SearchHistoryEntry]
     @State private var navigateToResults: Bool = false
     @State private var debounceTask: Task<Void, Never>? = nil
     
@@ -26,11 +26,8 @@ struct SearchView: View {
     private func storeSearchTerm(_ searchTerm: String) {
         do {
             try historyStorage.mutate(.add, searchTerm)
-            withAnimation{
-                var newHistory = searchHistory.filter{!$0.contains(searchTerm)}
-                newHistory.insert(searchTerm, at: 0)
-                searchHistory = newHistory
-            }
+//            searchHistory = historyStorage.get()
+            withAnimation{ searchHistory = historyStorage.get() }
         } catch {
             print(error)
         }

@@ -1,23 +1,33 @@
 import SwiftUI
 
 struct SearchHistoryList: View {
-    @Binding var history: [String]
+    @Binding var history: [SearchHistoryEntry]
     let destination: (String) -> RhymesScreen
     
-    @State private var maxHistoryCount: Int = 3
+    private let maxHistoryCount: Int = 4
     
     var body: some View {
-        Section(header: Text("Latest")) {
-            ForEach(Array(history.suffix(maxHistoryCount)).indices, id: \.self) { idx in
-                let suffixHistory = Array($history.suffix(maxHistoryCount))
-                let term = suffixHistory[idx]
-                NavigationLink(
-                    destination: { destination(term.wrappedValue) },
-                    label: { Text("\(term.wrappedValue)") }
-                )
-            }
-            Button("Show all") {
-                withAnimation{ maxHistoryCount = history.count }
+        if history.isEmpty {
+            EmptyView()
+        } else {
+            Section(header: Text("History")) {
+                let suffixIndices = history.indices.prefix(maxHistoryCount)
+                ForEach(Array(suffixIndices), id: \.self) { idx in
+                    let entry = $history[idx]
+                    NavigationLink(
+                        destination: { destination(entry.input.wrappedValue) },
+                        label: { Text("\(entry.input.wrappedValue)") }
+                    )
+                }
+                if history.count > maxHistoryCount {
+                    NavigationLink(
+                        destination: SearchHistoryScreen(
+                            history: $history,
+                            destination: destination
+                        ),
+                        label: {Text("Show all")}
+                    ).foregroundStyle(.accent)
+                }
             }
         }
     }
@@ -25,7 +35,11 @@ struct SearchHistoryList: View {
 
 
 struct SearchOverlayPreview: View {
-    @State var searchHistory = ["test", "balloon"]
+    @State var searchHistory = [
+        SearchHistoryEntry(
+            input: "test",
+            timestamp: Date().timeIntervalSinceReferenceDate)
+    ]
     @State var favorites: FavoriteRhymes = .init()
     func onRhymesFetch(_ word: String) { print(word) }
     
