@@ -48,7 +48,6 @@ struct SearchView: View {
             if suggestionsResponse.isEmpty {
                return withAnimation{isLoading = false; searchError = .noResults }
             }
-            print(suggestionsResponse)
             suggestions = suggestionsResponse
             withAnimation{ isLoading = false; searchError = nil }
         } catch {
