@@ -1,0 +1,1 @@
+typealias JSONable = Decodable & Encodable

@@ -18,7 +18,6 @@ struct FallbackView: View {
             Text(localizedKey)
                 .font(.footnote)
                 .foregroundColor(.secondary)
-
         }
     }
 }

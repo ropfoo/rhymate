@@ -22,6 +22,16 @@ struct StorageHandler {
             do {
                 let storageData  = try JSONDecoder().decode(T.self, from: storageJSON)
                 return storageData
+            } catch let error as DecodingError {
+                switch error {
+                case .typeMismatch:
+                    print("Type mismatch when decoding. Removing key \(key) from UserDefaults.")
+                    UserDefaults.standard.removeObject(forKey: key)
+                default:
+                    print("Decoding error: \(error). Removing key \(key) from UserDefaults.")
+                    UserDefaults.standard.removeObject(forKey: key)
+                }
+                return nil
             } catch {
                 print(error)
                 return nil

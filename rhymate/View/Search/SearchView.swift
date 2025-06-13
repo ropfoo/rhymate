@@ -3,172 +3,97 @@ import SwiftUI
 
 struct SearchView: View {
     private let fetcher = DatamuseFetcher()
-    private var searchStorage: SearchHistoryStorage
+    private var historyStorage: SearchHistoryStorage
     
-    @State var rhymes: DatamuseRhymeResponse = []
+    @State var suggestions: [DatamuseSuggestion] = []
     @State var isLoading: Bool = false
-    @State var word: String = ""
     @State var input: String = ""
     @State var searchError: SearchError? = nil
-    @State var searchHistory: [String]
-    @State private var showOverlay: Bool = false
-    @State private var isSearchTop: Bool = false
+    @State var searchHistory: [SearchHistoryEntry]
+    @State private var navigateToResults: Bool = false
+    @State private var debounceTask: Task<Void, Never>? = nil
     
     @Binding var favorites: FavoriteRhymes
     @FocusState private var isSearchFocused: Bool
     
-    init(favorites: Binding<FavoriteRhymes>) {
-        self.searchStorage = SearchHistoryStorage()
+    init(favorites: Binding<FavoriteRhymes>, isSearchFocused: Binding<Bool>) {
+        self.historyStorage = SearchHistoryStorage()
         self._favorites = favorites
-        self.searchHistory = self.searchStorage.get()
+        self.searchHistory = self.historyStorage.get()
+        self.isSearchFocused = self.isSearchFocused
     }
     
-    private func setIsSearchTop(isTop: Bool) {
-        if isTop {
-            withAnimation{
-                isSearchTop = true
-                showOverlay = true
-                isSearchFocused = true
-            }
-        } else {
-            withAnimation{
-                rhymes = []
-                input = ""
-                isSearchTop = false
-                showOverlay = false
-                isSearchFocused = false
-            }
+    private func storeSearchTerm(_ searchTerm: String) {
+        do {
+            try historyStorage.mutate(.add, searchTerm)
+//            searchHistory = historyStorage.get()
+            withAnimation{ searchHistory = historyStorage.get() }
+        } catch {
+            print(error)
         }
     }
     
-    private func submit() async {
-        // handle empty input
-        if input == "" {
-            rhymes = []
-            setIsSearchTop(isTop: false)
-            return
+    private func search(searchTerm: String) async {
+        let term = Formatter().formatInput(searchTerm)
+        if term == "" {
+            return withAnimation{isLoading = false; searchError = nil; suggestions = [] }
         }
-        
-        // set input to formatted word
-        input = word
-        
-        withAnimation{
-            searchError = nil
-            isLoading = true
+        if term.count < 3 {
+            return withAnimation{isLoading = false; searchError = .noResults; suggestions = [] }
         }
         
         do {
-            let rhymesResponse = try await fetcher.getRhymes(forWord: word)
-            if rhymesResponse.isEmpty {
-                withAnimation{ searchError = .noResults }
+            withAnimation{ isLoading = true }
+            let suggestionsResponse = try await fetcher.getSuggestions(forWord: term)
+            if suggestionsResponse.isEmpty {
+               return withAnimation{isLoading = false; searchError = .noResults }
             }
-            rhymes = rhymesResponse
-            
-            // store word in search storage
-            try searchStorage.mutate(.add, word)
-            withAnimation{
-                var newHistory = searchHistory.filter{!$0.contains(word)}
-                newHistory.insert(word, at: 0)
-                searchHistory = newHistory
-            }
+            suggestions = suggestionsResponse
+            withAnimation{ isLoading = false; searchError = nil }
         } catch {
-            withAnimation{
-                switch error._code {
-                case -1009:
-                    searchError = .network
-                default:
-                    searchError = .generic
-                }
+            if let urlError = error as? URLError, urlError.code == .cancelled {
+                // Ignore cancelled requests
+                return withAnimation{ isLoading = false; searchError = nil}
             }
-            print(error)
-        }
-        withAnimation{
-            isLoading = false
-            showOverlay = false
-            isSearchTop = true
+            return withAnimation{
+                isLoading = false
+                searchError = ErrorHelper().getSearchError(error: error)
+                suggestions = [] 
+            }
         }
     }
     
     var body: some View {
         NavigationStack{
-            VStack {
-                SearchInputView(
-                    input: $input,
-                    word: $word,
-                    showOverlay: $showOverlay,
-                    isSearchTop: $isSearchTop,
-                    isSearchFocused: $isSearchFocused,
-                    setIsSearchTop: setIsSearchTop,
-                    onSubmit: submit
-                ).offset(
-                    y: isSearchTop || showOverlay ? 0 : 280
-                ).toolbar{
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: SettingsView()){
-                            Image(systemName: "person.circle.fill")
-                        }
-                    }
-                }
-                
-                if showOverlay {
-                    VStack(alignment: .trailing){
-                        if isLoading {
-                            ProgressView()
-                                .scaleEffect(1.5, anchor: .center)
-                        } else {
-                            SearchOverlay(
-                                searchHistory: $searchHistory,
-                                onItemSelect: { selection in
-                                    word = selection
-                                    input = selection
-                                    Task{
-                                        await submit()
-                                        isSearchFocused = false
-                                    }
-                                }
-                            )
-                        }
-                    }
-                    .frame(
-                        minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity
-                    )
-                    .background(.background)
-                } else if let searchError {
-                    Spacer()
-                    VStack(alignment: .center){
-                        switch searchError {
-                        case .noResults:
-                            FallbackView(
-                                "fallbackNoRhymesFound \(word)",
-                                "exclamationmark.magnifyingglass"
-                            )
-                        case .network:
-                            FallbackView(
-                                "fallbackNoInternetConnection",
-                                "network.slash"
-                            )
-                        case .generic:
-                            FallbackView(
-                                "fallbackUnexpectedError",
-                                "exclamationmark.triangle"
-                            )
-                        }
-                    }
-                    Spacer()
-                } else if rhymes.isEmpty{
-                    Spacer()
-                
-                } else {
-                    ScrollView{
-                        RhymesGrid(
-                            rhymes:$rhymes,
-                            word: $word,
-                            favorites: $favorites
-                        ).padding(.top, 15)
-                    }
+            SearchResultManager(
+                isLoading: $isLoading,
+                input: $input,
+                searchError: $searchError,
+                searchHistory: $searchHistory,
+                suggestions: $suggestions,
+                favorites: $favorites,
+                onRhymesFetch: storeSearchTerm
+            )
+            .navigationDestination(isPresented: $navigateToResults) {
+                RhymesScreen(word: input, favorites: $favorites, onRhymesFetch: storeSearchTerm)
+            }
+        }
+        .searchable(
+            text: $input,
+            prompt: "Find a rhyme"
+            // isPresented: $isSearchFocused
+        )
+//        @available(iOS 18.0, *)
+//        .searchFocused($isSearchFocused)
+        .onSubmit(of: .search, { navigateToResults = true } )
+        .onChange(of: input) { i in
+            isLoading = i.isEmpty == false;
+            suggestions = []
+            debounceTask?.cancel()
+            debounceTask = Task { [input = i] in
+                try? await Task.sleep(nanoseconds: 300_000_000)
+                if !Task.isCancelled {
+                    await search(searchTerm: input)
                 }
             }
         }
@@ -177,8 +102,9 @@ struct SearchView: View {
 
 struct PreviewSearchView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+    @State var isSearchFocused: Bool = false
     var body: some View {
-        SearchView(favorites: $favorites)
+        SearchView(favorites: $favorites, isSearchFocused: $isSearchFocused)
     }
 }
 

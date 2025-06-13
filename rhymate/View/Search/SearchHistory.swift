@@ -1,0 +1,62 @@
+import SwiftUI
+
+struct SearchHistoryList: View {
+    @Binding var history: [SearchHistoryEntry]
+    let destination: (String) -> RhymesScreen
+    
+    private let maxHistoryCount: Int = 4
+    
+    var body: some View {
+        if history.isEmpty {
+            EmptyView()
+        } else {
+            Section(header: Text("History")) {
+                let suffixIndices = history.indices.prefix(maxHistoryCount)
+                ForEach(Array(suffixIndices), id: \.self) { idx in
+                    let entry = $history[idx]
+                    NavigationLink(
+                        destination: { destination(entry.input.wrappedValue) },
+                        label: { Text("\(entry.input.wrappedValue)") }
+                    )
+                }
+                if history.count > maxHistoryCount {
+                    NavigationLink(
+                        destination: SearchHistoryScreen(
+                            history: $history,
+                            destination: destination
+                        ),
+                        label: {Text("Show all")}
+                    ).foregroundStyle(.accent)
+                }
+            }
+        }
+    }
+}
+
+
+struct SearchOverlayPreview: View {
+    @State var searchHistory = [
+        SearchHistoryEntry(
+            input: "test",
+            timestamp: Date().timeIntervalSinceReferenceDate)
+    ]
+    @State var favorites: FavoriteRhymes = .init()
+    func onRhymesFetch(_ word: String) { print(word) }
+    
+    var body: some View{
+        SearchHistoryList(
+            history: $searchHistory,
+            destination: { entry in
+                RhymesScreen(
+                    word: entry,
+                    favorites: $favorites,
+                    onRhymesFetch: onRhymesFetch
+                )
+            }
+        )
+    }
+}
+
+#Preview {
+    SearchOverlayPreview()
+}
