@@ -5,7 +5,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             List {
-                NavigationLink(destination: AboutView()){
+                NavigationLink(destination: AboutScreen()){
                     Text("About")
                 }
             }

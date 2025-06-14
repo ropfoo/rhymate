@@ -27,7 +27,7 @@ struct SearchResultManager: View {
                             }
                         )
                         Section(){
-                            NavigationLink(destination: AboutView(), label: {
+                            NavigationLink(destination: AboutScreen(), label: {
                                 Text("About")
                             })
                         }

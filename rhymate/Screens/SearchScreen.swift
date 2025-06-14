@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct SearchView: View {
+struct SearchScreen: View {
     private let fetcher = DatamuseFetcher()
     private var historyStorage: SearchHistoryStorage
     
@@ -79,10 +79,9 @@ struct SearchView: View {
         }
         .searchable(
             text: $input,
+            placement: .navigationBarDrawer(displayMode: .always),
             prompt: "Find a rhyme"
-            // isPresented: $isSearchFocused
         )
-//        .searchFocused($isSearchFocused)
         .onSubmit(of: .search, { navigateToResults = true } )
         .onChange(of: input) { i in
             isLoading = i.isEmpty == false;
@@ -102,7 +101,7 @@ struct PreviewSearchView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     @State var isSearchFocused: Bool = false
     var body: some View {
-        SearchView(favorites: $favorites, isSearchFocused: $isSearchFocused)
+        SearchScreen(favorites: $favorites, isSearchFocused: $isSearchFocused)
     }
 }
 
