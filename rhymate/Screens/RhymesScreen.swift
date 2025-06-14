@@ -3,7 +3,7 @@ import SwiftUI
 struct RhymesScreen: View {
     var word: String
     @Binding var favorites: FavoriteRhymes
-    var onRhymesFetch: ((String) -> Void)
+    var onDisappear: ((String) -> Void)?
 
     private let fetcher = DatamuseFetcher()
     
@@ -50,8 +50,7 @@ struct RhymesScreen: View {
         .onAppear { Task { await getRhymes(forWord: word) } }
         .onDisappear {
             let searchTerm = Formatter().formatInput(word)
-
-            onRhymesFetch(searchTerm)
+            onDisappear?(searchTerm)
         }
     }
 }

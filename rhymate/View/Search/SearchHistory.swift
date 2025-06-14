@@ -41,17 +41,12 @@ struct SearchOverlayPreview: View {
             timestamp: Date().timeIntervalSinceReferenceDate)
     ]
     @State var favorites: FavoriteRhymes = .init()
-    func onRhymesFetch(_ word: String) { print(word) }
     
     var body: some View{
         SearchHistoryList(
             history: $searchHistory,
             destination: { entry in
-                RhymesScreen(
-                    word: entry,
-                    favorites: $favorites,
-                    onRhymesFetch: onRhymesFetch
-                )
+                RhymesScreen(word: entry,favorites: $favorites)
             }
         )
     }

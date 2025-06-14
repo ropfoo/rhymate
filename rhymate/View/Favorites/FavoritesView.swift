@@ -84,13 +84,6 @@ struct FavoritesView: View {
                 maxHeight: .infinity
             )
             .navigationTitle("favorites")
-            .toolbar{
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: SettingsView()){
-                        Image(systemName: "person.circle.fill")
-                    }
-                }
-            }
         }
     }
 }

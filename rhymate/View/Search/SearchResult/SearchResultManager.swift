@@ -7,8 +7,8 @@ struct SearchResultManager: View {
     @Binding var searchHistory: [SearchHistoryEntry]
     @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
-    let onRhymesFetch: (String) -> Void
-    
+    var onRhymesScreenDisappear: ((String) -> Void)?
+
     var body: some View {
         VStack {
             if isLoading {
@@ -23,20 +23,21 @@ struct SearchResultManager: View {
                         SearchHistoryList(
                             history: $searchHistory,
                             destination: { entry in
-                                RhymesScreen(
-                                    word: entry,
-                                    favorites: $favorites,
-                                    onRhymesFetch: onRhymesFetch
-                                )
+                                RhymesScreen(word: entry,favorites: $favorites)
                             }
                         )
+                        Section(){
+                            NavigationLink(destination: AboutView(), label: {
+                                Text("About")
+                            })
+                        }
                     }
                     ForEach(suggestions) { suggestion in
                         NavigationLink(
                             destination: RhymesScreen(
                                 word: suggestion.word,
                                 favorites: $favorites,
-                                onRhymesFetch: onRhymesFetch
+                                onDisappear: onRhymesScreenDisappear
                             ),
                             label: { Text(suggestion.word)}
                         )
@@ -45,12 +46,5 @@ struct SearchResultManager: View {
             }
         }
         .navigationTitle("Search")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: SettingsView()){
-                    Image(systemName: "person.circle.fill")
-                }
-            }
-        }
     }
 }

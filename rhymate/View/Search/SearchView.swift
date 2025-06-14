@@ -26,7 +26,6 @@ struct SearchView: View {
     private func storeSearchTerm(_ searchTerm: String) {
         do {
             try historyStorage.mutate(.add, searchTerm)
-//            searchHistory = historyStorage.get()
             withAnimation{ searchHistory = historyStorage.get() }
         } catch {
             print(error)
@@ -72,10 +71,10 @@ struct SearchView: View {
                 searchHistory: $searchHistory,
                 suggestions: $suggestions,
                 favorites: $favorites,
-                onRhymesFetch: storeSearchTerm
+                onRhymesScreenDisappear: storeSearchTerm
             )
             .navigationDestination(isPresented: $navigateToResults) {
-                RhymesScreen(word: input, favorites: $favorites, onRhymesFetch: storeSearchTerm)
+                RhymesScreen(word: input, favorites: $favorites, onDisappear: storeSearchTerm)
             }
         }
         .searchable(
@@ -83,7 +82,6 @@ struct SearchView: View {
             prompt: "Find a rhyme"
             // isPresented: $isSearchFocused
         )
-//        @available(iOS 18.0, *)
 //        .searchFocused($isSearchFocused)
         .onSubmit(of: .search, { navigateToResults = true } )
         .onChange(of: input) { i in
