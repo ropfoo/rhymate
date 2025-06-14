@@ -7,10 +7,13 @@ struct rhymateApp: App {
     var body: some Scene {
         WindowGroup {
             TabView{
-                SearchView(favorites: $favorites, isSearchFocused: $isRhymeSearchFocused).tabItem {
+                SearchScreen(
+                    favorites: $favorites,
+                    isSearchFocused: $isRhymeSearchFocused
+                ).tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-                FavoritesView(favorites: $favorites).tabItem {
+                FavoritesScreen(favorites: $favorites).tabItem {
                     Label("Favorites", systemImage: "heart")
                 }
             }

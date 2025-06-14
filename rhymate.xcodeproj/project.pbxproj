@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A5C2C321F6800829799 /* rhymateApp.swift */; };
-		EC238A5F2C321F6800829799 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A5E2C321F6800829799 /* SearchView.swift */; };
+		EC238A5F2C321F6800829799 /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A5E2C321F6800829799 /* SearchScreen.swift */; };
 		EC238A612C321F6900829799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC238A602C321F6900829799 /* Assets.xcassets */; };
 		EC238A642C321F6900829799 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC238A632C321F6900829799 /* Preview Assets.xcassets */; };
 		EC238A6E2C321F6900829799 /* rhymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A6D2C321F6900829799 /* rhymateTests.swift */; };
 		EC238A782C321F6900829799 /* rhymateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A772C321F6900829799 /* rhymateUITests.swift */; };
 		EC238A7A2C321F6900829799 /* rhymateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A792C321F6900829799 /* rhymateUITestsLaunchTests.swift */; };
-		EC238A892C33132600829799 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A882C33132600829799 /* FavoritesView.swift */; };
+		EC238A892C33132600829799 /* FavoritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A882C33132600829799 /* FavoritesScreen.swift */; };
 		EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8B2C33509100829799 /* RhymeItemView.swift */; };
 		EC238A8E2C3363A000829799 /* RhymesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A8D2C3363A000829799 /* RhymesGrid.swift */; };
 		EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A902C34003600829799 /* DatamuseFetcher.swift */; };
 		EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A922C3471D800829799 /* RhymesStorage.swift */; };
 		EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A942C35ACD900829799 /* StorageHandler.swift */; };
 		EC324DEF2CE2A93500A245F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DEE2CE2A93500A245F4 /* SettingsView.swift */; };
-		EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DF02CEFAA5100A245F4 /* AboutView.swift */; };
+		EC324DF12CEFAA5100A245F4 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC324DF02CEFAA5100A245F4 /* AboutScreen.swift */; };
 		EC37ABBA2C639ED300B28B58 /* FavoritesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */; };
 		EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */; };
 		EC4313D82DFC56910023D835 /* SearchHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4313D72DFC56910023D835 /* SearchHistoryScreen.swift */; };
@@ -85,7 +85,7 @@
 /* Begin PBXFileReference section */
 		EC238A592C321F6800829799 /* rhymate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rhymate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC238A5C2C321F6800829799 /* rhymateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateApp.swift; sourceTree = "<group>"; };
-		EC238A5E2C321F6800829799 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		EC238A5E2C321F6800829799 /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
 		EC238A602C321F6900829799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC238A632C321F6900829799 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EC238A692C321F6900829799 /* rhymateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rhymateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,14 +93,14 @@
 		EC238A732C321F6900829799 /* rhymateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rhymateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC238A772C321F6900829799 /* rhymateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateUITests.swift; sourceTree = "<group>"; };
 		EC238A792C321F6900829799 /* rhymateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EC238A882C33132600829799 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		EC238A882C33132600829799 /* FavoritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreen.swift; sourceTree = "<group>"; };
 		EC238A8B2C33509100829799 /* RhymeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeItemView.swift; sourceTree = "<group>"; };
 		EC238A8D2C3363A000829799 /* RhymesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesGrid.swift; sourceTree = "<group>"; };
 		EC238A902C34003600829799 /* DatamuseFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatamuseFetcher.swift; sourceTree = "<group>"; };
 		EC238A922C3471D800829799 /* RhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymesStorage.swift; sourceTree = "<group>"; };
 		EC238A942C35ACD900829799 /* StorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHandler.swift; sourceTree = "<group>"; };
 		EC324DEE2CE2A93500A245F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EC324DF02CEFAA5100A245F4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		EC324DF02CEFAA5100A245F4 /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
 		EC37ABB92C639ED300B28B58 /* FavoritesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGrid.swift; sourceTree = "<group>"; };
 		EC37ABBC2C63A05900B28B58 /* FavoritesGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridItem.swift; sourceTree = "<group>"; };
 		EC4313D72DFC56910023D835 /* SearchHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryScreen.swift; sourceTree = "<group>"; };
@@ -245,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				EC81FCEC2DF9F7C8008512CF /* SearchResult */,
-				EC238A5E2C321F6800829799 /* SearchView.swift */,
 				EC238A8D2C3363A000829799 /* RhymesGrid.swift */,
 				ECD720F32C5C0930007CE080 /* SearchHistory.swift */,
 			);
@@ -256,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				EC324DEE2CE2A93500A245F4 /* SettingsView.swift */,
-				EC324DF02CEFAA5100A245F4 /* AboutView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -350,6 +348,9 @@
 		EC81FCF12DFAC12C008512CF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EC238A5E2C321F6800829799 /* SearchScreen.swift */,
+				EC238A882C33132600829799 /* FavoritesScreen.swift */,
+				EC324DF02CEFAA5100A245F4 /* AboutScreen.swift */,
 				EC81FCF22DFAC194008512CF /* RhymesScreen.swift */,
 				EC4313D72DFC56910023D835 /* SearchHistoryScreen.swift */,
 			);
@@ -421,7 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				EC37ABBB2C63A01A00B28B58 /* FavoriteGrid */,
-				EC238A882C33132600829799 /* FavoritesView.swift */,
 				EC5A28C42C3FC6EE00DEDFFF /* FavoritesDetail.swift */,
 				EC5A28C62C404C9C00DEDFFF /* FavoritesItemView.swift */,
 			);
@@ -578,10 +578,10 @@
 				EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */,
 				EC238A952C35ACD900829799 /* StorageHandler.swift in Sources */,
 				ECBDC3D42C46AB4200943D83 /* HTMLContentView.swift in Sources */,
-				EC238A5F2C321F6800829799 /* SearchView.swift in Sources */,
+				EC238A5F2C321F6800829799 /* SearchScreen.swift in Sources */,
 				EC7782EB2C3C5F67008E9884 /* FavoritesToggle.swift in Sources */,
 				EC238A8C2C33509100829799 /* RhymeItemView.swift in Sources */,
-				EC238A892C33132600829799 /* FavoritesView.swift in Sources */,
+				EC238A892C33132600829799 /* FavoritesScreen.swift in Sources */,
 				EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */,
 				EC238A932C3471D800829799 /* RhymesStorage.swift in Sources */,
 				EC81FCF52DFAC6EB008512CF /* ErrorHelper.swift in Sources */,
@@ -590,7 +590,7 @@
 				ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */,
 				ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */,
 				EC81FCFB2DFB2186008512CF /* LoadingSpinner.swift in Sources */,
-				EC324DF12CEFAA5100A245F4 /* AboutView.swift in Sources */,
+				EC324DF12CEFAA5100A245F4 /* AboutScreen.swift in Sources */,
 				ECD720F22C5C0410007CE080 /* Search.swift in Sources */,
 				EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */,
 				EC4313D82DFC56910023D835 /* SearchHistoryScreen.swift in Sources */,
@@ -805,8 +805,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -842,8 +842,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = demonyze.rhymate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

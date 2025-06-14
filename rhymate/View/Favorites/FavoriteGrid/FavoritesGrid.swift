@@ -22,7 +22,7 @@ struct FavoritesGrid: View {
                 }
             }
         }
-        .padding()
+//        .padding()
     }
 }
 

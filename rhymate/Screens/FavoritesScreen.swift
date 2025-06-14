@@ -3,7 +3,7 @@ import SwiftUI
 
 
 
-struct FavoritesView: View {
+struct FavoritesScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var favorites: FavoriteRhymes
     @State private var sheet: RhymeWithFavorites?
@@ -78,12 +78,7 @@ struct FavoritesView: View {
                     .presentationDragIndicator(.hidden)
                 }
                 .presentationDetents([.large])
-            }
-            .frame(
-                minHeight: 0,
-                maxHeight: .infinity
-            )
-            .navigationTitle("favorites")
+            }.navigationTitle("favorites")
         }
     }
 }
@@ -91,7 +86,7 @@ struct FavoritesView: View {
 struct PreviewFavoritesView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View {
-        FavoritesView(favorites: $favorites)
+        FavoritesScreen(favorites: $favorites)
     }
 }
 
