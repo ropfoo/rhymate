@@ -63,7 +63,7 @@ struct SearchScreen: View {
     }
     
     var body: some View {
-        NavigationStack{
+        VStack{
             SearchResultManager(
                 isLoading: $isLoading,
                 input: $input,

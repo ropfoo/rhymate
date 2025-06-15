@@ -26,7 +26,8 @@ struct FavoritesDetail: View {
                             onPress: {onItemPress(rhyme)},
                             rhyme: rhyme,
                             word: word,
-                            favorites: $favorites
+                            isFavorite: true,
+                            toggleFavorite: {}
                         )
                     }
                     .frame(

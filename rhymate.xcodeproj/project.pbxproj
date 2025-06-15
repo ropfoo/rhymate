@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC0D1F912DFEE34B00E46E52 /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0D1F902DFEE34B00E46E52 /* RootScreen.swift */; };
 		EC238A5D2C321F6800829799 /* rhymateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A5C2C321F6800829799 /* rhymateApp.swift */; };
 		EC238A5F2C321F6800829799 /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC238A5E2C321F6800829799 /* SearchScreen.swift */; };
 		EC238A612C321F6900829799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC238A602C321F6900829799 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC0D1F902DFEE34B00E46E52 /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
 		EC238A592C321F6800829799 /* rhymate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rhymate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC238A5C2C321F6800829799 /* rhymateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rhymateApp.swift; sourceTree = "<group>"; };
 		EC238A5E2C321F6800829799 /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		EC81FCF12DFAC12C008512CF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EC0D1F902DFEE34B00E46E52 /* RootScreen.swift */,
 				EC238A5E2C321F6800829799 /* SearchScreen.swift */,
 				EC238A882C33132600829799 /* FavoritesScreen.swift */,
 				EC324DF02CEFAA5100A245F4 /* AboutScreen.swift */,
@@ -573,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC0D1F912DFEE34B00E46E52 /* RootScreen.swift in Sources */,
 				EC81FCF72DFAC85F008512CF /* Mutation.swift in Sources */,
 				EC81FCF32DFAC194008512CF /* RhymesScreen.swift in Sources */,
 				EC238A912C34003600829799 /* DatamuseFetcher.swift in Sources */,

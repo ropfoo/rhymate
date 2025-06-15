@@ -47,7 +47,9 @@ struct RhymesScreen: View {
             }
         }
         .navigationTitle(word)
+
         .onAppear { Task { await getRhymes(forWord: word) } }
+        .onChange(of:word) {w in Task { await getRhymes(forWord: w) }}
         .onDisappear {
             let searchTerm = Formatter().formatInput(word)
             onDisappear?(searchTerm)

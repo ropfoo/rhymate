@@ -7,37 +7,63 @@ struct RhymesGrid: View {
     @Binding var favorites: FavoriteRhymes
     @State private var sheetDetail: RhymeItem?
     
+    func toggleFavorite(_ rhyme: String) {
+        do {
+            try FavoriteRhymesStorage().mutate(
+                isFavorite(rhyme) ? .remove : .add,
+                key: word,
+                rhyme
+            )
+        } catch {
+            print(error)
+        }
+        favorites = DictionaryHelper().mutateFavorite(
+            favorites,
+            isFavorite(rhyme) ? .remove : .add,
+            data: rhyme,
+            key: word
+        )
+    }
+    
+    func isFavorite(_ rhyme: String) -> Bool {
+        return favorites[word]?.rhymes.contains(rhyme) ?? false
+    }
+    
     var body: some View {
         LazyVGrid(
             columns:[GridItem(
                 .adaptive(minimum: 300)
             )],
-            spacing: 10
+            spacing: 15
         ){
             ForEach($rhymes) { rhyme in
+                let item = RhymeItem(
+                    id: rhyme.word.wrappedValue,
+                    word: word,
+                    rhyme: rhyme.word.wrappedValue
+                )
+                
                 RhymeItemView(
-                    onPress: {
-                        sheetDetail=RhymeItem(
-                            id: rhyme.word.wrappedValue,
-                            word: word,
-                            rhyme: rhyme.word.wrappedValue)
-                    },
+                    onPress: { sheetDetail=item },
                     rhyme:rhyme.word.wrappedValue,
                     word: $word.wrappedValue,
-                    favorites: $favorites)
+                    isFavorite: isFavorite(item.rhyme),
+                    toggleFavorite: { toggleFavorite(item.rhyme) },
+                )
             }
         }
         .sheet(
             item: $sheetDetail,
             onDismiss: {sheetDetail = nil}
         )
-        { detail in
+        { item in
             FavoritesItemView(
                 .detail,
                 word: word,
-                rhyme: detail.rhyme,
+                rhyme: item.rhyme,
                 favorites: $favorites,
-                isFavorite: favorites[word]?.rhymes.contains(detail.rhyme) ?? false,
+                isFavorite: isFavorite(item.rhyme),
+                toggFavorite: { toggleFavorite(item.rhyme) },
                 onDismiss: {sheetDetail = nil}
             )
             .presentationDetents([.medium, .large])

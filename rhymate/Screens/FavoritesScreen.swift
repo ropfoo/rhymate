@@ -72,6 +72,7 @@ struct FavoritesScreen: View {
                         rhyme: rhymeItem.rhyme,
                         favorites: $favorites,
                         isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false,
+                        toggFavorite: {},
                         onDismiss: { sheetDetail = nil }
                     )
                     .presentationDetents([.medium, .large])
