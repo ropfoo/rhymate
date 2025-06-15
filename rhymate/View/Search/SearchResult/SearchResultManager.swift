@@ -21,11 +21,13 @@ struct SearchResultManager: View {
                 List {
                     if (input.isEmpty) {
                         Section(){
-                            NavigationLink(destination: FavoritesScreen(
-                                favorites: $favorites
-                            ), label: {
-                                Label("Favorites", systemImage: "heart")
-                            })
+                            if UIDevice.current.userInterfaceIdiom != .phone {
+                                NavigationLink(destination: FavoritesScreen(
+                                    favorites: $favorites
+                                ), label: {
+                                    Label("Favorites", systemImage: "heart")
+                                })
+                            }
                             NavigationLink(destination: SearchHistoryScreen(
                                 history: $searchHistory,
                                 destination: { entry in
@@ -51,7 +53,7 @@ struct SearchResultManager: View {
                             label: { Text(suggestion.word)}
                         )
                     }
-                }.padding(.top, input.isEmpty ? 20 : 0)
+                }
             }
         }
         .navigationTitle("Search")

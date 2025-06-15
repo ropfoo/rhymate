@@ -1,6 +1,6 @@
 import Foundation
 
-let ACCENT_COLOR = "#6CC7AF"
+let ACCENT_COLOR = "#2ABF91"
 
 // API URLs
 let DATAMUSE_API_URL = URL(string: "https://api.datamuse.com")!

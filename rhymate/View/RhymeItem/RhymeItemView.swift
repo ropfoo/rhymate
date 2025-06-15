@@ -41,13 +41,13 @@ struct RhymeItemView: View {
         HStack{
             if layout == .grid {
                 Button(action: toggleFavorite, label: {
-                    Image(systemName: "heart.fill")
-                        .foregroundColor(isFavorite ? .accentColor : .gray.opacity(0.4))
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(isFavorite ? .accentColor : .gray.opacity(0.6))
                         .font(.system(size: 14))
                 })
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderless)
-                .padding(.trailing, 3)
+                .padding(.leading, 15)
             }
             Button(action: onPress, label: {
                 Text(rhyme)
@@ -59,12 +59,10 @@ struct RhymeItemView: View {
                     .frame(
                         maxWidth: .infinity,
                         alignment: .leading
-                        //                        alignment: layout == .grid ? .center : .leading
                     )
             })
             
         }
-        .padding(.vertical, 5)
         .background(.quinary)
         .cornerRadius(25)
     }

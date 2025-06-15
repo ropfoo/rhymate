@@ -32,7 +32,7 @@ struct RhymesGrid: View {
     var body: some View {
         LazyVGrid(
             columns:[GridItem(
-                .adaptive(minimum: 300)
+                .adaptive(minimum: 400)
             )],
             spacing: 15
         ){
