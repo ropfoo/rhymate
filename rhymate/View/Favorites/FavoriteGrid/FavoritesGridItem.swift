@@ -3,52 +3,35 @@ import SwiftUI
 struct FavoritesGridItem: View {
     let rhymes: [String]
     let word: String
-    let onTap: (_ rhymeWithFavorites: RhymeWithFavorites) -> Void
     
     var body: some View {
-        VStack{
-            Button(
-                action: {
-                    onTap(RhymeWithFavorites(word: word, rhymes: rhymes))
-                }
-            ){
-                ZStack{
-                    VStack{
-                        Text(word)
-                            .fontWeight(.black)
-                            .font(.system(.subheadline))
-                            .foregroundColor(.primary)
-                        Spacer()
-                        HStack{
-                            ForEach(rhymes, id: \.self){ rhyme in
-                                Text(rhyme)
-                                    .font(.footnote)
-                                    .lineLimit(1)
-                                    .fixedSize()
-                                    .padding(.horizontal, 5)
-                                    .foregroundColor(.primary)
-                                    .opacity(0.6)
-                            }
-                        }
-                        .frame(
-                            minWidth: 0,
-                            maxWidth: .infinity,
-                            alignment: .center
-                        )
-                    }
-                }.padding(10)
-            }
+        HStack(alignment: .center){
+            VStack(alignment: .leading, spacing: 4){
+                Text(word)
+                    .fontWeight(.black)
+                    .font(.system(.subheadline))
+                    .foregroundColor(.primary)
+                Text(rhymes.joined(separator: ", "))
+                    .font(.footnote)
+                    .foregroundColor(.primary)
+                    .opacity(0.6)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }.padding()
+            Spacer()
+            Image(systemName: "chevron.right").padding()
         }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            alignment: .center
+        )
         .background(.quinary)
-        .cornerRadius(20)
-        .padding(5)
+        .cornerRadius(12)
+        .padding(4)
     }
 }
 
 #Preview {
-    FavoritesGridItem(
-        rhymes: ["best", "chest"], word: "test", onTap: {
-            rhymeWithFavorites in print(rhymeWithFavorites.rhymes)
-        }
-    )
+    FavoritesGridItem(rhymes: ["best", "chest"], word: "test")
 }

@@ -74,7 +74,11 @@ struct SearchScreen: View {
                 onRhymesScreenDisappear: storeSearchTerm
             )
             .navigationDestination(isPresented: $navigateToResults) {
-                RhymesScreen(word: input, favorites: $favorites, onDisappear: storeSearchTerm)
+                RhymesScreen(
+                    word: Formatter().formatInput(input),
+                    favorites: $favorites,
+                    onDisappear: storeSearchTerm
+                )
             }
         }
         .searchable(

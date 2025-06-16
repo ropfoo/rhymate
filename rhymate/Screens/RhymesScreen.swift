@@ -40,7 +40,7 @@ struct RhymesScreen: View {
                 SearchResultError(input: word, searchError: $searchError.wrappedValue ?? .generic)
             } else {
                 ScrollView {
-                    RhymesGrid(rhymes: rhymes,favorites: $favorites)
+                    RhymesGrid(word: word, rhymes: rhymes, favorites: $favorites)
                 }
             }
         }

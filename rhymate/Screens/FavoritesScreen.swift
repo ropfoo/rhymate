@@ -6,7 +6,6 @@ import SwiftUI
 struct FavoritesScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var favorites: FavoriteRhymes
-    @State private var sheet: RhymeWithFavorites?
     
     private func hasFavoritesWithRhymes() -> Bool {
         var hasFavorite: Bool = false
@@ -37,23 +36,9 @@ struct FavoritesScreen: View {
             }
             
             ScrollView{
-                FavoritesGrid(
-                    favorites: $favorites,
-                    onItemTap: { rhymeWithFavorites in
-                        sheet = rhymeWithFavorites
-                    }
-                )
-            }
-            .sheet(
-                item: $sheet,
-                onDismiss: { sheet = nil }
-            ){ detail in
-                FavoritesDetail(
-                    word: detail.word,
-                    favorites: $favorites,
-                    onDismiss: { sheet = nil }
-                )
-            }.navigationTitle("favorites")
+                FavoritesGrid(favorites: $favorites)
+            }.padding()
+            .navigationTitle("favorites")
         }
     }
 }

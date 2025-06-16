@@ -23,14 +23,25 @@ struct FavoritesToggle: View {
         }
     }
     
+    var buttonShape: ButtonBorderShape = {
+        if #available(iOS 17, *) {
+            return .circle
+        }
+        return .capsule
+    }()
+    
     var body: some View {
         Button(
             action: action
         ){
             Image(systemName: isActivated ? "heart.fill" : "heart")
+                .padding(3)
         }
+        .tint(.secondary.opacity(0.8))
+        .buttonBorderShape(buttonShape)
+        .buttonStyle(.bordered)
         .font(.system(size: sizeValue))
-        .foregroundColor(.accentColor)
+        .foregroundColor(isActivated ? .accentColor : .gray.opacity(0.8))
     }
 }
 

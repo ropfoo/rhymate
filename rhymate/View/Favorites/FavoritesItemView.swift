@@ -37,24 +37,6 @@ struct FavoritesItemView: View {
         self.toggleFavorite = toggleFavorite
     }
     
-//    func toggleState() {
-//        do {
-//            try FavoriteRhymesStorage().mutate(
-//                isFavorite ? .remove : .add,
-//                key: word,
-//                rhyme
-//            )
-//        } catch {
-//            print(error)
-//        }
-//        favorites = DictionaryHelper().mutateFavorite(
-//            favorites,
-//            isFavorite ? .remove : .add,
-//            data: rhyme,
-//            key: word
-//        )
-//    }
-    
     var body: some View {
         switch layout {
         case .detail:

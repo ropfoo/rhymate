@@ -11,7 +11,7 @@ struct RhymeItemView: View {
     private var rhyme: String
     private var word: String
     @State private var sheetDetail: RhymeItem?
-     var isFavorite: Bool
+    var isFavorite: Bool
     var toggleFavorite: () -> Void
     
     init(
@@ -34,14 +34,7 @@ struct RhymeItemView: View {
     var body:some View {
         HStack{
             if layout == .grid {
-                Button(action: toggleFavorite, label: {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(isFavorite ? .accentColor : .gray.opacity(0.6))
-                        .font(.system(size: 14))
-                })
-                .buttonBorderShape(.capsule)
-                .buttonStyle(.borderless)
-                .padding(.leading, 15)
+                FavoritesToggle(action: toggleFavorite, isActivated: isFavorite)
             }
             Button(action: onPress, label: {
                 Text(rhyme)
@@ -55,16 +48,15 @@ struct RhymeItemView: View {
                         alignment: .leading
                     )
             })
-            
+            .background(.quinary)
+            .cornerRadius(10)
         }
-        .background(.quinary)
-        .cornerRadius(25)
     }
 }
 
 //struct PreviewRhymeItemView: View {
 //    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-//    
+//
 //    var body: some View {
 //        RhymeItemView(onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
 //        RhymeItemView(.favorite,onPress: {}, rhyme: "best", word: "test", favorites: $favorites)

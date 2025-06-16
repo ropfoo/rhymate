@@ -2,11 +2,12 @@ import Foundation
 import SwiftUI
 
 struct RhymesGrid: View {
+    var layout: RhymeItemLayout = .grid
+    var word: String
     var rhymes: [RhymeItem]
     @Binding var favorites: FavoriteRhymes
     
     @State private var sheetDetail: RhymeItem?
-    var word: String { rhymes.first?.word ?? "" }
     
     func toggleFavorite(_ rhyme: String) {
         do {
@@ -33,12 +34,14 @@ struct RhymesGrid: View {
     var body: some View {
         LazyVGrid(
             columns:[GridItem(
-                .adaptive(minimum: 400)
+                .adaptive(minimum: 400),
+                spacing: 32
             )],
-            spacing: 15
+            spacing: 8
         ){
             ForEach(rhymes) { item in
                 RhymeItemView(
+                    layout,
                     onPress: { sheetDetail = item },
                     rhyme: item.rhyme,
                     word: word,
@@ -64,14 +67,8 @@ struct RhymesGrid: View {
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.hidden)
         }
-        .padding(.horizontal, 20)
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        )}
+        .padding()
+    }
 }
 
 struct PreviewRhymesGrid: View {
@@ -82,7 +79,7 @@ struct PreviewRhymesGrid: View {
     ]
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View {
-        RhymesGrid(rhymes: rhymes, favorites: $favorites)
+        RhymesGrid(word: "test", rhymes: rhymes, favorites: $favorites)
     }
 }
 
