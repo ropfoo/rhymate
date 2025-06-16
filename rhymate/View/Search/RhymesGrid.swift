@@ -2,10 +2,11 @@ import Foundation
 import SwiftUI
 
 struct RhymesGrid: View {
-    @Binding var rhymes: DatamuseRhymeResponse
-    @Binding var word: String
+    var rhymes: [RhymeItem]
     @Binding var favorites: FavoriteRhymes
+    
     @State private var sheetDetail: RhymeItem?
+    var word: String { rhymes.first?.word ?? "" }
     
     func toggleFavorite(_ rhyme: String) {
         do {
@@ -36,17 +37,11 @@ struct RhymesGrid: View {
             )],
             spacing: 15
         ){
-            ForEach($rhymes) { rhyme in
-                let item = RhymeItem(
-                    id: rhyme.word.wrappedValue,
-                    word: word,
-                    rhyme: rhyme.word.wrappedValue
-                )
-                
+            ForEach(rhymes) { item in
                 RhymeItemView(
-                    onPress: { sheetDetail=item },
-                    rhyme:rhyme.word.wrappedValue,
-                    word: $word.wrappedValue,
+                    onPress: { sheetDetail = item },
+                    rhyme: item.rhyme,
+                    word: word,
                     isFavorite: isFavorite(item.rhyme),
                     toggleFavorite: { toggleFavorite(item.rhyme) },
                 )
@@ -63,7 +58,7 @@ struct RhymesGrid: View {
                 rhyme: item.rhyme,
                 favorites: $favorites,
                 isFavorite: isFavorite(item.rhyme),
-                toggFavorite: { toggleFavorite(item.rhyme) },
+                toggleFavorite: { toggleFavorite(item.rhyme) },
                 onDismiss: {sheetDetail = nil}
             )
             .presentationDetents([.medium, .large])
@@ -80,16 +75,14 @@ struct RhymesGrid: View {
 }
 
 struct PreviewRhymesGrid: View {
-    @State var rhymes: DatamuseRhymeResponse = [
-        DatamuseRhyme(word: "west", score: 10, numSyllables: 2),
-        DatamuseRhyme(word: "best", score: 10, numSyllables: 2),
-        DatamuseRhyme(word: "chest", score: 10, numSyllables: 2),
+    @State var rhymes: [RhymeItem] = [
+        RhymeItem(word: "test", rhyme: "west"),
+        RhymeItem(word: "test", rhyme: "best"),
+        RhymeItem(word: "test", rhyme: "chest"),
     ]
-    @State var word: String = "test"
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View {
-        RhymesGrid(rhymes: $rhymes, word: $word, favorites:$favorites)
-        
+        RhymesGrid(rhymes: rhymes, favorites: $favorites)
     }
 }
 

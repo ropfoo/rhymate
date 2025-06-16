@@ -24,7 +24,7 @@ struct FavoritesItemView: View {
         rhyme: String,
         favorites: Binding<FavoriteRhymes>,
         isFavorite: Bool,
-        toggFavorite: @escaping () -> Void,
+        toggleFavorite: @escaping () -> Void,
         onDismiss: @escaping () -> Void
 
     ) {
@@ -34,7 +34,7 @@ struct FavoritesItemView: View {
         self._favorites = favorites
         self.isFavorite = isFavorite
         self.onDismiss = onDismiss
-        self.toggleFavorite = toggFavorite
+        self.toggleFavorite = toggleFavorite
     }
     
 //    func toggleState() {

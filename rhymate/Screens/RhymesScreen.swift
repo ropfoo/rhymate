@@ -8,7 +8,7 @@ struct RhymesScreen: View {
     private let fetcher = DatamuseFetcher()
     
     @State private var isLoading: Bool = false
-    @State private var rhymes: DatamuseRhymeResponse = []
+    @State private var rhymes: [RhymeItem] = []
     @State private var searchError: SearchError? = nil
 
     private func getRhymes(forWord: String) async {
@@ -23,7 +23,9 @@ struct RhymesScreen: View {
             if rhymesResponse.isEmpty {
                 withAnimation{ searchError = .noResults }
             }
-            rhymes = rhymesResponse
+            rhymes = rhymesResponse.map { rhyme -> RhymeItem in
+                return RhymeItem(word: forWord, rhyme: rhyme.word)
+            }
         } catch {
             withAnimation { searchError = ErrorHelper().getSearchError(error: error) }
         }
@@ -38,11 +40,7 @@ struct RhymesScreen: View {
                 SearchResultError(input: word, searchError: $searchError.wrappedValue ?? .generic)
             } else {
                 ScrollView {
-                    RhymesGrid(
-                        rhymes:$rhymes,
-                        word: Binding<String>(get: { word }, set: { _ in }),
-                        favorites: $favorites
-                    )
+                    RhymesGrid(rhymes: rhymes,favorites: $favorites)
                 }
             }
         }

@@ -1,11 +1,5 @@
 import SwiftUI
 
-struct RhymeItem: Identifiable {
-    let id: String
-    let word: String
-    let rhyme: String
-}
-
 enum RhymeItemLayout {
     case grid
     case favorite

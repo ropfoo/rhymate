@@ -7,7 +7,6 @@ struct FavoritesScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var favorites: FavoriteRhymes
     @State private var sheet: RhymeWithFavorites?
-    @State private var sheetDetail: RhymeItem?
     
     private func hasFavoritesWithRhymes() -> Bool {
         var hasFavorite: Bool = false
@@ -52,33 +51,8 @@ struct FavoritesScreen: View {
                 FavoritesDetail(
                     word: detail.word,
                     favorites: $favorites,
-                    onItemPress: {
-                        rhyme in
-                        sheetDetail = RhymeItem(
-                            id: detail.word,
-                            word: detail.word,
-                            rhyme: rhyme
-                        )
-                    },
                     onDismiss: { sheet = nil }
                 )
-                .sheet(
-                    item: $sheetDetail,
-                    onDismiss: { sheetDetail = nil }
-                ){ rhymeItem in
-                    FavoritesItemView(
-                        .detail,
-                        word: rhymeItem.word,
-                        rhyme: rhymeItem.rhyme,
-                        favorites: $favorites,
-                        isFavorite: favorites[rhymeItem.word]?.rhymes.contains(rhymeItem.rhyme) ?? false,
-                        toggFavorite: {},
-                        onDismiss: { sheetDetail = nil }
-                    )
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.hidden)
-                }
-                .presentationDetents([.large])
             }.navigationTitle("favorites")
         }
     }

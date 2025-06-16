@@ -4,10 +4,12 @@ import SwiftUI
 struct FavoritesDetail: View {
     let word: String
     @Binding var favorites: FavoriteRhymes
-    let onItemPress: (_ rhyme: String) -> Void
     let onDismiss: () -> Void
 
     var body: some View {
+        let items: [RhymeItem] = (favorites[word]?.rhymes.map { r -> RhymeItem in
+            RhymeItem(word: word, rhyme: r)
+        }) ?? []
         VStack(alignment: .leading){
             HStack{
                 Text(word)
@@ -18,23 +20,7 @@ struct FavoritesDetail: View {
                 Button("close", action: onDismiss)
             }
             ScrollView{
-                Spacer(minLength: 30)
-                VStack(alignment: .trailing){
-                    ForEach($favorites.wrappedValue[word]?.rhymes ?? [],id: \.self){ rhyme in
-                        RhymeItemView(
-                            .favorite,
-                            onPress: {onItemPress(rhyme)},
-                            rhyme: rhyme,
-                            word: word,
-                            isFavorite: true,
-                            toggleFavorite: {}
-                        )
-                    }
-                    .frame(
-                        minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/,
-                        maxWidth: .infinity
-                    )
-                }
+                RhymesGrid(rhymes: items, favorites: $favorites)
             }
         }
         .padding(30)
@@ -47,8 +33,7 @@ struct PreviewFavoritesDetail: View {
         FavoritesDetail(
             word: "Test",
             favorites: $favorites,
-            onItemPress: {rhyme in print("\(rhyme)")},
-            onDismiss: {print("dismiss")}
+            onDismiss: { print("dismiss") }
         )
     }
 }
