@@ -7,20 +7,6 @@ struct RootScreen: View {
     @State var isRhymeSearchFocused: Bool = false
     
     var body: some View {
-//            TabView{
-//                NavigationStack {
-//                    SearchScreen(
-//                        favorites: $favorites,
-//                        isSearchFocused: $isRhymeSearchFocused
-//                    )
-//                }.tabItem {
-//                    Label("Search", systemImage: "magnifyingglass")
-//                }
-//    
-//                FavoritesScreen(favorites: $favorites).tabItem {
-//                    Label("Favorites", systemImage: "heart")
-//                }
-//            }
         if horizontalSizeClass == .compact {
             TabView{
                 NavigationStack {
@@ -40,16 +26,32 @@ struct RootScreen: View {
         else {
             NavigationSplitView {
                 NavigationStack {
-                    SearchScreen(
-                        favorites: $favorites,
-                        isSearchFocused: $isRhymeSearchFocused
-                    ).navigationSplitViewStyle(.balanced)
+                    List {
+                        NavigationLink(
+                            destination: SearchScreen(
+                                favorites: $favorites,
+                                isSearchFocused: $isRhymeSearchFocused
+                            ),
+                            label: { Label("Search", systemImage: "magnifyingglass") }
+                        )
+                        NavigationLink(
+                            destination: FavoritesScreen(favorites: $favorites),
+                            label: { Label("Favorites", systemImage: "heart") }
+                        )
+                    }.navigationSplitViewStyle(.balanced)
                 }
-
+            }
+            content:{
+                NavigationStack{
+                    FavoritesScreen(favorites: $favorites)
+                }
             }
             detail: {
                 NavigationStack {
-                    EmptyView()
+                    SearchScreen(
+                        favorites: $favorites,
+                        isSearchFocused: $isRhymeSearchFocused
+                    )
                 }
             }
         }

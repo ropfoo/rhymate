@@ -21,13 +21,6 @@ struct SearchResultManager: View {
                 List {
                     if (input.isEmpty) {
                         Section(){
-                            if UIDevice.current.userInterfaceIdiom != .phone {
-                                NavigationLink(destination: FavoritesScreen(
-                                    favorites: $favorites
-                                ), label: {
-                                    Label("Favorites", systemImage: "heart")
-                                })
-                            }
                             NavigationLink(destination: SearchHistoryScreen(
                                 history: $searchHistory,
                                 destination: { entry in
