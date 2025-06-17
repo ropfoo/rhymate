@@ -37,16 +37,22 @@ struct RhymeItemView: View {
                 FavoritesToggle(action: toggleFavorite, isActivated: isFavorite)
             }
             Button(action: onPress, label: {
-                Text(rhyme)
-                    .font(.system(.headline))
-                    .fontWeight(.bold)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .foregroundColor(.primary)
-                    .frame(
-                        maxWidth: .infinity,
-                        alignment: .leading
-                    )
+                HStack{
+                    Text(rhyme)
+                        .font(.system(.headline))
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .leading
+                        )
+                    if UIDevice.current.userInterfaceIdiom != .phone {
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 15)
+
             })
             .background(.quinary)
             .cornerRadius(10)

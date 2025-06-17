@@ -7,6 +7,20 @@ struct RootScreen: View {
     @State var isRhymeSearchFocused: Bool = false
     
     var body: some View {
+//            TabView{
+//                NavigationStack {
+//                    SearchScreen(
+//                        favorites: $favorites,
+//                        isSearchFocused: $isRhymeSearchFocused
+//                    )
+//                }.tabItem {
+//                    Label("Search", systemImage: "magnifyingglass")
+//                }
+//    
+//                FavoritesScreen(favorites: $favorites).tabItem {
+//                    Label("Favorites", systemImage: "heart")
+//                }
+//            }
         if horizontalSizeClass == .compact {
             TabView{
                 NavigationStack {
@@ -17,7 +31,7 @@ struct RootScreen: View {
                 }.tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-
+                
                 FavoritesScreen(favorites: $favorites).tabItem {
                     Label("Favorites", systemImage: "heart")
                 }
@@ -29,10 +43,14 @@ struct RootScreen: View {
                     SearchScreen(
                         favorites: $favorites,
                         isSearchFocused: $isRhymeSearchFocused
-                    )
+                    ).navigationSplitViewStyle(.balanced)
                 }
-            } detail: {
-                FavoritesScreen(favorites: $favorites)
+
+            }
+            detail: {
+                NavigationStack {
+                    EmptyView()
+                }
             }
         }
     }

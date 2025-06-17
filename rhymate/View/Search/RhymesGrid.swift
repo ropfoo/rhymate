@@ -9,6 +9,9 @@ struct RhymesGrid: View {
     
     @State private var sheetDetail: RhymeItem?
     
+    @State private var navigationRhyme: String = ""
+    @State private var shouldNavigate: Bool = false
+    
     func toggleFavorite(_ rhyme: String) {
         do {
             try FavoriteRhymesStorage().mutate(
@@ -19,7 +22,7 @@ struct RhymesGrid: View {
         } catch {
             print(error)
         }
-        favorites = DictionaryHelper().mutateFavorite(
+        favorites = FavoritesOrganizer().mutate(
             favorites,
             isFavorite(rhyme) ? .remove : .add,
             data: rhyme,
@@ -42,13 +45,31 @@ struct RhymesGrid: View {
             ForEach(rhymes) { item in
                 RhymeItemView(
                     layout,
-                    onPress: { sheetDetail = item },
+                    onPress: {
+                        if UIDevice.current.userInterfaceIdiom == .phone {
+                            sheetDetail = item
+                        } else {
+                            navigationRhyme = item.rhyme
+                            shouldNavigate = true
+                        }
+                    },
                     rhyme: item.rhyme,
                     word: word,
                     isFavorite: isFavorite(item.rhyme),
                     toggleFavorite: { toggleFavorite(item.rhyme) },
                 )
             }
+        }
+        .navigationDestination(isPresented: $shouldNavigate) {
+            FavoritesItemView(
+                .detail,
+                word: word,
+                rhyme: $navigationRhyme.wrappedValue,
+                favorites: $favorites,
+                isFavorite: isFavorite($navigationRhyme.wrappedValue),
+                toggleFavorite: { toggleFavorite($navigationRhyme.wrappedValue) },
+                onDismiss: {sheetDetail = nil}
+            )
         }
         .sheet(
             item: $sheetDetail,

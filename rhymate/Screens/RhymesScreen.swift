@@ -16,7 +16,7 @@ struct RhymesScreen: View {
             rhymes = []
             return
         }
-        let searchTerm = Formatter().formatInput(forWord)
+        let searchTerm = Formatter().normalize(forWord)
         withAnimation{ searchError = nil; isLoading = true }
         do {
             let rhymesResponse = try await fetcher.getRhymes(forWord: searchTerm)
@@ -49,7 +49,7 @@ struct RhymesScreen: View {
         .onAppear { Task { await getRhymes(forWord: word) } }
         .onChange(of:word) {w in Task { await getRhymes(forWord: w) }}
         .onDisappear {
-            let searchTerm = Formatter().formatInput(word)
+            let searchTerm = Formatter().normalize(word)
             onDisappear?(searchTerm)
         }
     }

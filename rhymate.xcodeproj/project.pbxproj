@@ -46,7 +46,7 @@
 		ECB1A5DD2C3C744A0087EDF9 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */; };
 		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
 		ECB1A5E12C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */; };
-		ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84412C41016700193BA2 /* DictionaryHelper.swift */; };
+		ECBD84422C41016700193BA2 /* FavoritesOrganizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84412C41016700193BA2 /* FavoritesOrganizer.swift */; };
 		ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84452C42678C00193BA2 /* Fetcher.swift */; };
 		ECBD84492C42F90E00193BA2 /* FetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD84482C42F90E00193BA2 /* FetcherTests.swift */; };
 		ECBD844D2C42FBF100193BA2 /* TestProtocolHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBD844C2C42FBF100193BA2 /* TestProtocolHandler.swift */; };
@@ -126,7 +126,7 @@
 		ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		ECB1A5E02C3D1E0E0087EDF9 /* FavoriteRhymesStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorageTests.swift; sourceTree = "<group>"; };
-		ECBD84412C41016700193BA2 /* DictionaryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryHelper.swift; sourceTree = "<group>"; };
+		ECBD84412C41016700193BA2 /* FavoritesOrganizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesOrganizer.swift; sourceTree = "<group>"; };
 		ECBD84452C42678C00193BA2 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		ECBD84482C42F90E00193BA2 /* FetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherTests.swift; sourceTree = "<group>"; };
 		ECBD844C2C42FBF100193BA2 /* TestProtocolHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProtocolHandler.swift; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 		ECBD84402C41013F00193BA2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				ECBD84412C41016700193BA2 /* DictionaryHelper.swift */,
+				ECBD84412C41016700193BA2 /* FavoritesOrganizer.swift */,
 				ECBD84452C42678C00193BA2 /* Fetcher.swift */,
 				EC81FCF42DFAC6EB008512CF /* ErrorHelper.swift */,
 				EC81FCF82DFAE333008512CF /* Formatter.swift */,
@@ -602,7 +602,7 @@
 				EC81FCF92DFAE333008512CF /* Formatter.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
-				ECBD84422C41016700193BA2 /* DictionaryHelper.swift in Sources */,
+				ECBD84422C41016700193BA2 /* FavoritesOrganizer.swift in Sources */,
 				ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */,
 				ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */,
 				EC81FCEE2DF9F7DB008512CF /* SearchResultError.swift in Sources */,

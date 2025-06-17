@@ -37,7 +37,8 @@ struct FavoritesScreen: View {
             
             ScrollView{
                 FavoritesGrid(favorites: $favorites)
-            }.padding()
+                    .padding()
+            }
             .navigationTitle("favorites")
         }
     }

@@ -9,7 +9,6 @@ struct FavoritesGrid: View {
             )],
             spacing: 4
         ){
-            // iterate over each stored favorite
             ForEach(Array($favorites.wrappedValue.keys), id: \.self) {key in
                 // check if favorite has rhymes
                 if !(favorites[key]?.rhymes.isEmpty ?? false) {

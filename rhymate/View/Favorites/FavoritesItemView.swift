@@ -26,7 +26,7 @@ struct FavoritesItemView: View {
         isFavorite: Bool,
         toggleFavorite: @escaping () -> Void,
         onDismiss: @escaping () -> Void
-
+        
     ) {
         self.layout = layout
         self.word = word
@@ -57,14 +57,16 @@ struct FavoritesItemView: View {
                         .fontWeight(.black)
                         .foregroundColor(.secondary)
                     Spacer()
-                    Button("close", action: onDismiss)
-                        .frame(width: 50)
-                    
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        Button("close", action: onDismiss)
+                            .frame(width: 50)
+                    } else {
+                        Text("").frame(width: 50)
+                    }
                 }
                 .padding(.horizontal,20)
                 .padding(.top, 20)
                 .padding(.bottom, 15)
-                
                 
                 Text(rhyme)
                     .font(.title)
@@ -151,6 +153,6 @@ struct FavoritesItemView: View {
 //        Spacer()
 //        PreviewFavoritesItemView(layout: .detail)
 //        Spacer()
-//        
+//
 //    }
 //}
