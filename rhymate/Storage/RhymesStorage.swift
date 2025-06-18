@@ -1,6 +1,6 @@
 import Foundation
 
-typealias RhymesHistory = [String: DatamuseRhymeResponse]
+typealias RhymesHistory = [String: [DatamuseRhyme]]
 
 struct RhymesStorage: RhymeStorage{
     let RHYMES_HISTORY_KEY = "rhymesHistory"
@@ -22,7 +22,7 @@ struct RhymesStorage: RhymeStorage{
     func mutate(
         _ type: Mutation,
         key: String,
-        _ data: DatamuseRhymeResponse? = nil
+        _ data: [DatamuseRhyme]? = nil
     ) throws  {
         switch type {
         case .add:
@@ -37,7 +37,7 @@ struct RhymesStorage: RhymeStorage{
     }
     
     /// Get rhymes for given word from UserDefaults
-    func get(word: String) -> DatamuseRhymeResponse? {
+    func get(word: String) -> [DatamuseRhyme]? {
         let currentRhymes = getRhymesHistory()
         if let rhymes = currentRhymes[word]  {
             return rhymes

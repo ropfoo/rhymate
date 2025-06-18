@@ -15,8 +15,8 @@ struct DatamuseFetcher {
     }
     
     /// Fetch Ryhmes from Datamuse API (https://api.datamuse.com/words?rel_rhy=word)
-    func getRhymes(forWord: String) async throws -> DatamuseRhymeResponse {
-        let word = Formatter().formatInput(forWord)
+    func getRhymes(forWord: String) async throws -> [DatamuseRhyme] {
+        let word = Formatter().normalize(forWord)
         
         // prefer local store if word already exists in UserDefaults
         if let localResult = rhymesStorage.get(word: word), !localResult.isEmpty {
@@ -33,7 +33,7 @@ struct DatamuseFetcher {
             URLQueryItem(name: "v", value: "enwiki"),
         ]
         let url = urlComponents.url!
-        if let rhymesResponse: DatamuseRhymeResponse = try await fetcher.get(url) {
+        if let rhymesResponse: [DatamuseRhyme] = try await fetcher.get(url) {
             let sortedRhymeResponse = rhymesResponse.sorted{
                 $0.score ?? 0 > $1.score ?? 0
             }
@@ -46,7 +46,7 @@ struct DatamuseFetcher {
     
     /// Fetch rhyme suggestions from Datamuse API (https://api.datamuse.com/sug?s=word)
     func getSuggestions(forWord: String) async throws -> [DatamuseSuggestion] {
-        let word = Formatter().formatInput(forWord)
+        let word = Formatter().normalize(forWord)
 
         var urlComponents = URLComponents(string: baseUrlSuggestions.absoluteString)!
         urlComponents.queryItems = [

@@ -8,27 +8,31 @@ struct SearchResultManager: View {
     @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
     var onRhymesScreenDisappear: ((String) -> Void)?
-
+    
     var body: some View {
         VStack {
             if isLoading {
-               LoadingSpinner()
+                LoadingSpinner()
             } else if let searchError {
                 Spacer()
                 SearchResultError(input: input, searchError: searchError)
                 Spacer()
             } else {
                 List {
-                    if (input == "") {
-                        SearchHistoryList(
-                            history: $searchHistory,
-                            destination: { entry in
-                                RhymesScreen(word: entry,favorites: $favorites)
-                            }
-                        )
+                    if (input.isEmpty) {
+                        Section(){
+                            NavigationLink(destination: SearchHistoryScreen(
+                                history: $searchHistory,
+                                destination: { entry in
+                                    RhymesScreen(word: entry,favorites: $favorites)
+                                }
+                            ), label: {
+                                Label("History", systemImage: "clock")
+                            })
+                        }
                         Section(){
                             NavigationLink(destination: AboutScreen(), label: {
-                                Text("About")
+                                Label("About", systemImage: "info.circle")
                             })
                         }
                     }

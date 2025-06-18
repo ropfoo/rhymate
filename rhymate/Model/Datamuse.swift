@@ -9,5 +9,3 @@ struct DatamuseSuggestion: JSONable & Identifiable {
     var word: String
     var id: String { word }
 }
-
-typealias DatamuseRhymeResponse = [DatamuseRhyme]

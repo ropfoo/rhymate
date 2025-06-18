@@ -1,11 +1,4 @@
-import Foundation
 import SwiftUI
-
-struct RhymeItem: Identifiable {
-    let id: String
-    let word: String
-    let rhyme: String
-}
 
 enum RhymeItemLayout {
     case grid
@@ -18,73 +11,64 @@ struct RhymeItemView: View {
     private var rhyme: String
     private var word: String
     @State private var sheetDetail: RhymeItem?
-    @State private var isFavorite: Bool
-    
-    @Binding var favorites: FavoriteRhymes
-    
-    let favoriteStorage = FavoriteRhymesStorage()
+    var isFavorite: Bool
+    var toggleFavorite: () -> Void
     
     init(
         _ layout: RhymeItemLayout = .grid,
         onPress: @escaping () -> Void,
         rhyme: String,
         word: String,
-        favorites: Binding<FavoriteRhymes>
+        isFavorite: Bool,
+        toggleFavorite: @escaping () -> Void,
     ) {
         self.layout = layout
         self.onPress = onPress
         self.rhyme = rhyme
         self.word = word
-        self._favorites = favorites
         self.sheetDetail = nil
-        self.isFavorite = favoriteStorage.isFavorite(rhyme: rhyme, forWord: word)
+        self.isFavorite = isFavorite
+        self.toggleFavorite = toggleFavorite
     }
     
     var body:some View {
-        ZStack(alignment: .topLeading){
-            if layout == .grid &&
-                favorites[word]?.rhymes.contains(rhyme) ?? false
-            {
-                VStack{
-                    Image(systemName: "heart.fill")
-                        .foregroundColor(.accentColor)
-                        .font(.system(size: 10))
-                }
-                .padding(5)
-                .frame(width: 20, height: 20)
-                .background(.background)
-                .cornerRadius(100)
-                .offset(x: 0, y: -10)
-                .zIndex(1)
-                .shadow(radius: 1)
+        HStack{
+            if layout == .grid {
+                FavoritesToggle(action: toggleFavorite, isActivated: isFavorite)
             }
             Button(action: onPress, label: {
-                Text(rhyme)
-                    .font(.system(.subheadline))
-                    .fontWeight(.bold)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .foregroundColor(.primary)
-                    .frame(
-                        maxWidth: .infinity,
-                        alignment: layout == .grid ? .center : .leading
-                    )
+                HStack{
+                    Text(rhyme)
+                        .font(.system(.headline))
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .leading
+                        )
+                    if UIDevice.current.userInterfaceIdiom != .phone {
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 15)
+
             })
             .background(.quinary)
-            .cornerRadius(25)
+            .cornerRadius(10)
         }
     }
 }
 
-struct PreviewRhymeItemView: View {
-    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-    
-    var body: some View {
-        RhymeItemView(onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
-        RhymeItemView(.favorite,onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
-    }
-}
-
-#Preview {
-    PreviewRhymeItemView()
-}
+//struct PreviewRhymeItemView: View {
+//    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+//
+//    var body: some View {
+//        RhymeItemView(onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
+//        RhymeItemView(.favorite,onPress: {}, rhyme: "best", word: "test", favorites: $favorites)
+//    }
+//}
+//
+//#Preview {
+//    PreviewRhymeItemView()
+//}

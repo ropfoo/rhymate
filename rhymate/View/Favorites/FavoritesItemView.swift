@@ -15,6 +15,7 @@ struct FavoritesItemView: View {
     let rhyme: String
     @Binding var favorites: FavoriteRhymes
     var isFavorite: Bool
+    var toggleFavorite: () -> Void
     var onDismiss: () -> Void
     
     init(
@@ -23,7 +24,9 @@ struct FavoritesItemView: View {
         rhyme: String,
         favorites: Binding<FavoriteRhymes>,
         isFavorite: Bool,
+        toggleFavorite: @escaping () -> Void,
         onDismiss: @escaping () -> Void
+        
     ) {
         self.layout = layout
         self.word = word
@@ -31,24 +34,7 @@ struct FavoritesItemView: View {
         self._favorites = favorites
         self.isFavorite = isFavorite
         self.onDismiss = onDismiss
-    }
-    
-    func toggleState() {
-        do {
-            try FavoriteRhymesStorage().mutate(
-                isFavorite ? .remove : .add,
-                key: word,
-                rhyme
-            )
-        } catch {
-            print(error)
-        }
-        favorites = DictionaryHelper().mutateFavorite(
-            favorites,
-            isFavorite ? .remove : .add,
-            data: rhyme,
-            key: word
-        )
+        self.toggleFavorite = toggleFavorite
     }
     
     var body: some View {
@@ -59,7 +45,7 @@ struct FavoritesItemView: View {
                 HStack(alignment: .center){
                     HStack{
                         FavoritesToggle(
-                            action: toggleState,
+                            action: toggleFavorite,
                             isActivated: isFavorite,
                             size: .large
                         )
@@ -71,14 +57,16 @@ struct FavoritesItemView: View {
                         .fontWeight(.black)
                         .foregroundColor(.secondary)
                     Spacer()
-                    Button("close", action: onDismiss)
-                        .frame(width: 50)
-                    
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        Button("close", action: onDismiss)
+                            .frame(width: 50)
+                    } else {
+                        Text("").frame(width: 50)
+                    }
                 }
                 .padding(.horizontal,20)
                 .padding(.top, 20)
                 .padding(.bottom, 15)
-                
                 
                 Text(rhyme)
                     .font(.title)
@@ -127,7 +115,7 @@ struct FavoritesItemView: View {
                     .padding(.horizontal)
                 Spacer()
                 FavoritesToggle(
-                    action: toggleState,
+                    action: toggleFavorite,
                     isActivated: isFavorite)
                 .padding(.horizontal, 12)
                 
@@ -144,27 +132,27 @@ struct FavoritesItemView: View {
     }
 }
 
-struct PreviewFavoritesItemView: View {
-    let layout: FavoritesItemLayout
-    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-    var body: some View{
-        FavoritesItemView(
-            layout,
-            word: "test",
-            rhyme: "best",
-            favorites: $favorites,
-            isFavorite: favorites["test"]?.rhymes.contains("best") ?? false ,
-            onDismiss: {print("dismiss")})
-    }
-}
-
-#Preview {
-    VStack{
-        Spacer()
-        PreviewFavoritesItemView(layout: .list)
-        Spacer()
-        PreviewFavoritesItemView(layout: .detail)
-        Spacer()
-        
-    }
-}
+//struct PreviewFavoritesItemView: View {
+//    let layout: FavoritesItemLayout
+//    @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
+//    var body: some View{
+//        FavoritesItemView(
+//            layout,
+//            word: "test",
+//            rhyme: "best",
+//            favorites: $favorites,
+//            isFavorite: favorites["test"]?.rhymes.contains("best") ?? false ,
+//            onDismiss: {print("dismiss")})
+//    }
+//}
+//
+//#Preview {
+//    VStack{
+//        Spacer()
+//        PreviewFavoritesItemView(layout: .list)
+//        Spacer()
+//        PreviewFavoritesItemView(layout: .detail)
+//        Spacer()
+//
+//    }
+//}
