@@ -46,7 +46,7 @@ struct FavoritesOrganizer{
         // Group keys by their lowercase representation
         var groupedKeys: [String: [String]] = [:]
         for key in favorites.keys {
-            let normalized = Formatter().normalize(key)
+            let normalized = Formatter.normalize(key)
             groupedKeys[normalized, default: []].append(key)
         }
 

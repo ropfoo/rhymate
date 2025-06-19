@@ -33,7 +33,7 @@ struct SearchScreen: View {
     }
     
     private func search(searchTerm: String) async {
-        let term = Formatter().normalize(searchTerm)
+        let term = Formatter.normalize(searchTerm)
         if term == "" {
             return withAnimation{isLoading = false; searchError = nil; suggestions = [] }
         }
@@ -56,7 +56,7 @@ struct SearchScreen: View {
             }
             return withAnimation{
                 isLoading = false
-                searchError = ErrorHelper().getSearchError(error: error)
+                searchError = SearchError.from(error)
                 suggestions = [] 
             }
         }
@@ -75,7 +75,7 @@ struct SearchScreen: View {
             )
             .navigationDestination(isPresented: $navigateToResults) {
                 RhymesScreen(
-                    word: Formatter().normalize(input),
+                    word: Formatter.normalize(input),
                     favorites: $favorites,
                     onDisappear: storeSearchTerm
                 )

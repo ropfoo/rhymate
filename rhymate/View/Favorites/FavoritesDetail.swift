@@ -6,10 +6,6 @@ struct FavoritesDetail: View {
     @Binding var favorites: FavoriteRhymes
 
     var body: some View {
-        let items: [RhymeItem] = (favorites[word]?.rhymes.map { rhyme -> RhymeItem in
-            RhymeItem(word: word, rhyme: rhyme)
-        }) ?? []
-        
         VStack(alignment: .leading){
             HStack{
                 Text(word)
@@ -21,7 +17,7 @@ struct FavoritesDetail: View {
                 RhymesGrid(
                     layout: .favorite,
                     word: word,
-                    rhymes: items,
+                    rhymes: favorites[word]?.rhymes ?? [],
                     favorites: $favorites
                 )
             }

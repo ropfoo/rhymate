@@ -4,34 +4,51 @@ struct RhymesScreen: View {
     var word: String
     @Binding var favorites: FavoriteRhymes
     var onDisappear: ((String) -> Void)?
-
-    private let fetcher = DatamuseFetcher()
+    
+    private let lyricService = LyricService()
     
     @State private var isLoading: Bool = false
-    @State private var rhymes: [RhymeItem] = []
+    @State private var rhymes: [String] = []
     @State private var searchError: SearchError? = nil
-
+    
     private func getRhymes(forWord: String) async {
         if forWord == "" {
             rhymes = []
             return
         }
-        let searchTerm = Formatter().normalize(forWord)
-        withAnimation{ searchError = nil; isLoading = true }
-        do {
-            let rhymesResponse = try await fetcher.getRhymes(forWord: searchTerm)
-            if rhymesResponse.isEmpty {
-                withAnimation{ searchError = .noResults }
-            }
-            rhymes = rhymesResponse.map { rhyme -> RhymeItem in
-                return RhymeItem(word: forWord, rhyme: rhyme.word)
-            }
-        } catch {
-            withAnimation { searchError = ErrorHelper().getSearchError(error: error) }
+        let searchTerm = Formatter.normalize(forWord)
+        updateState(suggestions: rhymes, error: nil, loading: true)
+        
+        let result = await lyricService.getSuggestions(forText: searchTerm, .word)
+        switch result {
+        case .success(let suggestions):
+            return updateState(
+                suggestions: suggestions,
+                error: nil,
+                loading: false
+            )
+        case .failure(let err):
+            return updateState(
+                suggestions: [],
+                error: err,
+                loading: false
+            )
         }
-        withAnimation{ isLoading = false }
     }
-
+    
+    private func updateState(
+        suggestions: [String],
+        error: SearchError?,
+        loading: Bool
+    ) {
+        withAnimation{
+            rhymes = suggestions
+            searchError = error
+            isLoading = loading
+        }
+        
+    }
+    
     var body: some View {
         VStack{
             if isLoading {
@@ -45,16 +62,16 @@ struct RhymesScreen: View {
             }
         }
         .navigationTitle(word)
-
+        
         .onAppear { Task { await getRhymes(forWord: word) } }
         .onChange(of:word) {w in Task { await getRhymes(forWord: w) }}
         .onDisappear {
-            let searchTerm = Formatter().normalize(word)
+            let searchTerm = Formatter.normalize(word)
             onDisappear?(searchTerm)
         }
     }
 }
 
 #Preview {
-//    RhymesScreen()
+    //    RhymesScreen()
 }

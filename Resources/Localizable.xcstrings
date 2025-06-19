@@ -127,6 +127,9 @@
         }
       }
     },
+    "Live content: %@" : {
+
+    },
     "recent" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -154,6 +157,9 @@
           }
         }
       }
+    },
+    "Selected: %@" : {
+
     },
     "Show all" : {
 

@@ -4,7 +4,7 @@ import SwiftUI
 struct RhymesGrid: View {
     var layout: RhymeItemLayout = .grid
     var word: String
-    var rhymes: [RhymeItem]
+    var rhymes: [String]
     @Binding var favorites: FavoriteRhymes
     
     @State private var sheetDetail: RhymeItem?
@@ -42,21 +42,21 @@ struct RhymesGrid: View {
             )],
             spacing: 8
         ){
-            ForEach(rhymes) { item in
+            ForEach(rhymes, id: \.self) { rhyme in
                 RhymeItemView(
                     layout,
                     onPress: {
                         if UIDevice.current.userInterfaceIdiom == .phone {
-                            sheetDetail = item
+                            sheetDetail = RhymeItem(word: word, rhyme: rhyme)
                         } else {
-                            navigationRhyme = item.rhyme
+                            navigationRhyme = rhyme
                             shouldNavigate = true
                         }
                     },
-                    rhyme: item.rhyme,
+                    rhyme: rhyme,
                     word: word,
-                    isFavorite: isFavorite(item.rhyme),
-                    toggleFavorite: { toggleFavorite(item.rhyme) },
+                    isFavorite: isFavorite(rhyme),
+                    toggleFavorite: { toggleFavorite(rhyme) },
                 )
             }
         }
@@ -93,11 +93,7 @@ struct RhymesGrid: View {
 }
 
 struct PreviewRhymesGrid: View {
-    @State var rhymes: [RhymeItem] = [
-        RhymeItem(word: "test", rhyme: "west"),
-        RhymeItem(word: "test", rhyme: "best"),
-        RhymeItem(word: "test", rhyme: "chest"),
-    ]
+    @State var rhymes = ["west", "best", "chest"]
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     var body: some View {
         RhymesGrid(word: "test", rhymes: rhymes, favorites: $favorites)

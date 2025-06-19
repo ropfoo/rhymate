@@ -24,7 +24,7 @@ struct FavoriteRhymesStorage: RhymeStorage {
     /// Check if value is in favorites
     func isFavorite(rhyme: String, forWord: String) -> Bool {
         let currentFavoriteRhymes = getFavoriteRhymes()
-        let word = Formatter().normalize(forWord)
+        let word = Formatter.normalize(forWord)
         if let rhymeWithFavorites = currentFavoriteRhymes[word] {
             return rhymeWithFavorites.rhymes.contains(rhyme)
         }
@@ -35,7 +35,7 @@ struct FavoriteRhymesStorage: RhymeStorage {
     func mutate(_ type: Mutation, key: String, _ data: String?) throws  {
         let data = data ?? ""
         var currentFavorites = getFavoriteRhymes()
-        let word = Formatter().normalize(key)
+        let word = Formatter.normalize(key)
         currentFavorites = organizer.mutate(currentFavorites, type, data: data, key: word)
         try storageHandler.setJSON(value: currentFavorites, key: FAVORITE_RHYMES_STORAGE_KEY)
     }
