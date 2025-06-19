@@ -48,6 +48,11 @@
 		ECA8F6D82E03FF07009212D0 /* LyricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6D72E03FEA7009212D0 /* LyricType.swift */; };
 		ECA8F6DB2E042C3C009212D0 /* LyricTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6DA2E042C3C009212D0 /* LyricTypeTest.swift */; };
 		ECA8F6DD2E042FA6009212D0 /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6DC2E042F9B009212D0 /* SearchError.swift */; };
+		ECA8F6DF2E0440BD009212D0 /* LyricAssistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6DE2E0440BD009212D0 /* LyricAssistent.swift */; };
+		ECA8F6E52E0448EE009212D0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6E42E0448EE009212D0 /* GrowingTextView.swift */; };
+		ECA8F6E82E0458C7009212D0 /* hideKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6E72E0458BD009212D0 /* hideKeyboardOnTap.swift */; };
+		ECA8F6EA2E045CC4009212D0 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6E92E045CC4009212D0 /* RoundedCorners.swift */; };
+		ECA8F6EC2E045D26009212D0 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8F6EB2E045D26009212D0 /* KeyboardObserver.swift */; };
 		ECB1A5DB2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */; };
 		ECB1A5DD2C3C744A0087EDF9 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */; };
 		ECB1A5DF2C3C84730087EDF9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1A5DE2C3C84730087EDF9 /* Storage.swift */; };
@@ -134,6 +139,11 @@
 		ECA8F6D72E03FEA7009212D0 /* LyricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricType.swift; sourceTree = "<group>"; };
 		ECA8F6DA2E042C3C009212D0 /* LyricTypeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricTypeTest.swift; sourceTree = "<group>"; };
 		ECA8F6DC2E042F9B009212D0 /* SearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchError.swift; sourceTree = "<group>"; };
+		ECA8F6DE2E0440BD009212D0 /* LyricAssistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricAssistent.swift; sourceTree = "<group>"; };
+		ECA8F6E42E0448EE009212D0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
+		ECA8F6E72E0458BD009212D0 /* hideKeyboardOnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hideKeyboardOnTap.swift; sourceTree = "<group>"; };
+		ECA8F6E92E045CC4009212D0 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		ECA8F6EB2E045D26009212D0 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		ECB1A5DA2C3C701E0087EDF9 /* FavoriteRhymesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRhymesStorage.swift; sourceTree = "<group>"; };
 		ECB1A5DC2C3C744A0087EDF9 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		ECB1A5DE2C3C84730087EDF9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -212,6 +222,7 @@
 			children = (
 				ECD1C82E2C5FAE3C009D16A9 /* rhymate.entitlements */,
 				ECBD84562C43DADB00193BA2 /* Constants.swift */,
+				ECA8F6E62E0458A5009212D0 /* Extensions */,
 				ECBD84402C41013F00193BA2 /* Utils */,
 				EC7782E42C3B1BB2008E9884 /* Model */,
 				EC7782DE2C39CA87008E9884 /* Services */,
@@ -286,6 +297,7 @@
 		EC7782DC2C39C904008E9884 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECA8F6ED2E046191009212D0 /* Editor */,
 				ECA5518F2E032128009DD4A5 /* Composer */,
 				EC324DED2CE2A90E00A245F4 /* Settings */,
 				ECBD84582C45138C00193BA2 /* UIUtils */,
@@ -294,6 +306,7 @@
 				EC7782E92C3C5F56008E9884 /* Buttons */,
 				EC238A8A2C33506D00829799 /* Search */,
 				ECBD84532C43BC9400193BA2 /* FallbackView.swift */,
+				ECA8F6DE2E0440BD009212D0 /* LyricAssistent.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -395,6 +408,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ECA8F6E62E0458A5009212D0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ECA8F6E72E0458BD009212D0 /* hideKeyboardOnTap.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ECA8F6ED2E046191009212D0 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				ECA8F6E42E0448EE009212D0 /* GrowingTextView.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		ECB1A5E22C3E6F700087EDF9 /* RhymeItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +435,7 @@
 		ECBD84402C41013F00193BA2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				ECA8F6EB2E045D26009212D0 /* KeyboardObserver.swift */,
 				ECBD84412C41016700193BA2 /* FavoritesOrganizer.swift */,
 				ECBD84452C42678C00193BA2 /* Fetcher.swift */,
 				EC81FCF82DFAE333008512CF /* Formatter.swift */,
@@ -436,6 +466,7 @@
 				ECBD84592C4513BE00193BA2 /* FadeInOutRow.swift */,
 				ECBDC3D32C46AB4200943D83 /* HTMLContentView.swift */,
 				EC81FCFA2DFB2186008512CF /* LoadingSpinner.swift */,
+				ECA8F6E92E045CC4009212D0 /* RoundedCorners.swift */,
 			);
 			path = UIUtils;
 			sourceTree = "<group>";
@@ -610,6 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA8F6EA2E045CC4009212D0 /* RoundedCorners.swift in Sources */,
 				EC0D1F912DFEE34B00E46E52 /* RootScreen.swift in Sources */,
 				EC81FCF72DFAC85F008512CF /* Mutation.swift in Sources */,
 				EC81FCF32DFAC194008512CF /* RhymesScreen.swift in Sources */,
@@ -627,6 +659,7 @@
 				EC7782E82C3C5B4B008E9884 /* Rhyme.swift in Sources */,
 				ECBD84542C43BC9400193BA2 /* FallbackView.swift in Sources */,
 				ECBD84572C43DADB00193BA2 /* Constants.swift in Sources */,
+				ECA8F6DF2E0440BD009212D0 /* LyricAssistent.swift in Sources */,
 				EC81FCFB2DFB2186008512CF /* LoadingSpinner.swift in Sources */,
 				ECA8F6D82E03FF07009212D0 /* LyricType.swift in Sources */,
 				EC324DF12CEFAA5100A245F4 /* AboutScreen.swift in Sources */,
@@ -639,7 +672,10 @@
 				ECA8F6DD2E042FA6009212D0 /* SearchError.swift in Sources */,
 				EC81FCF92DFAE333008512CF /* Formatter.swift in Sources */,
 				EC7782E62C3B1BE8008E9884 /* Datamuse.swift in Sources */,
+				ECA8F6EC2E045D26009212D0 /* KeyboardObserver.swift in Sources */,
+				ECA8F6E52E0448EE009212D0 /* GrowingTextView.swift in Sources */,
 				EC5A28C72C404C9C00DEDFFF /* FavoritesItemView.swift in Sources */,
+				ECA8F6E82E0458C7009212D0 /* hideKeyboardOnTap.swift in Sources */,
 				ECBD84422C41016700193BA2 /* FavoritesOrganizer.swift in Sources */,
 				ECBD84462C42678C00193BA2 /* Fetcher.swift in Sources */,
 				ECBDC3DC2C46D1F200943D83 /* Wiktionary.swift in Sources */,
