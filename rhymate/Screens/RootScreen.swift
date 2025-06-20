@@ -6,22 +6,23 @@ struct RootScreen: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     @State var isRhymeSearchFocused: Bool = false
     
-    @State var text: String = "Hello word"
+    @State var text: String = "Hello word, there are a fiew more words here so yeah i guess"
     
     var body: some View {
         if horizontalSizeClass == .compact {
             TabView{
-                LyricAssistent(text: $text, favorites: $favorites).tabItem {
-                    Label("Compose", systemImage: "square.and.pencil")
-                }
-                NavigationStack {
-                    SearchScreen(
-                        favorites: $favorites,
-                        isSearchFocused: $isRhymeSearchFocused
-                    )
-                }.tabItem {
+                LyricAssistentView(text: $text, favorites: $favorites).tabItem {
                     Label("Search", systemImage: "magnifyingglass")
+//                    Label("Compose", systemImage: "square.and.pencil")
                 }
+//                NavigationStack {
+//                    SearchScreen(
+//                        favorites: $favorites,
+//                        isSearchFocused: $isRhymeSearchFocused
+//                    )
+//                }.tabItem {
+//                    Label("Search", systemImage: "magnifyingglass")
+//                }
                 
                 FavoritesScreen(favorites: $favorites).tabItem {
                     Label("Favorites", systemImage: "heart")
