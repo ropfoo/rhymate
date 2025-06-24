@@ -6,28 +6,24 @@ struct RootScreen: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
     @State var isRhymeSearchFocused: Bool = false
     
-    @State var text: String = "Hello word, there are a fiew more words here so yeah i guess"
+//    @State var text: String = "Hello word, there are a fiew more words here so yeah i guess"
+    
+    @State var text: String = "hello"
     
     var body: some View {
         if horizontalSizeClass == .compact {
             TabView{
+                CompositionsOverviewScreen().tabItem {
+                    Label("Editor", systemImage: "square.and.pencil")
+                }.modelContainer(for: Compositon.self)
+                
                 LyricAssistentView(text: $text, favorites: $favorites).tabItem {
                     Label("Search", systemImage: "magnifyingglass")
-//                    Label("Compose", systemImage: "square.and.pencil")
                 }
-//                NavigationStack {
-//                    SearchScreen(
-//                        favorites: $favorites,
-//                        isSearchFocused: $isRhymeSearchFocused
-//                    )
-//                }.tabItem {
-//                    Label("Search", systemImage: "magnifyingglass")
-//                }
                 
                 FavoritesScreen(favorites: $favorites).tabItem {
-                    Label("Favorites", systemImage: "heart")
+                    Label("Favorites", systemImage: "music.pages.fill")
                 }
-
             }
         }
         else {
@@ -35,15 +31,19 @@ struct RootScreen: View {
                 NavigationStack {
                     List {
                         NavigationLink(
-                            destination: SearchScreen(
-                                favorites: $favorites,
-                                isSearchFocused: $isRhymeSearchFocused
-                            ),
+                            destination: CompositionsOverviewScreen()
+                                .modelContainer(for: Compositon.self),
+                            label: { Label("Editor", systemImage: "square.and.pencil") }
+                        )
+                    
+                        NavigationLink(
+                            destination: LyricAssistentView(text: $text, favorites: $favorites),
                             label: { Label("Search", systemImage: "magnifyingglass") }
                         )
+                    
                         NavigationLink(
                             destination: FavoritesScreen(favorites: $favorites),
-                            label: { Label("Favorites", systemImage: "heart") }
+                            label: { Label("Favorites", systemImage: "music.pages") }
                         )
                     }.navigationSplitViewStyle(.balanced)
                 }

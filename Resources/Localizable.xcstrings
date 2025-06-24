@@ -30,6 +30,9 @@
     "Delete history" : {
 
     },
+    "Editor" : {
+
+    },
     "fallbackFavoritesText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -164,6 +167,9 @@
     "Show all" : {
 
     },
+    "Title" : {
+
+    },
     "Wiktionary API" : {
 
     },
@@ -188,6 +194,9 @@
           }
         }
       }
+    },
+    "Your Songs" : {
+
     }
   },
   "version" : "1.0"

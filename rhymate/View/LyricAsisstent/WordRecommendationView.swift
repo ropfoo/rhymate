@@ -26,7 +26,10 @@ struct WordRecommendationView: View {
                     .clipShape(Capsule())
                 }
             }
+            .padding(.horizontal)
+            .padding(.bottom)
         }
+        .scrollIndicators(.visible, axes: .horizontal)
         .onAppear() { setTextParts() }
         .onChange(of: text) { t in
             setTextParts()

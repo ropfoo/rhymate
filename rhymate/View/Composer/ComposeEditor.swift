@@ -1,34 +1,38 @@
 import SwiftUI
 
 struct ComposeEditor: View {
-    @State private var lastText = ""
+    @Binding var text: String
     @State private var selected = ""
+    @State private var height: CGFloat = 400
 
     var body: some View {
         VStack(spacing: 20) {
             TextEditorContainer(
-                initialText: "Type here...",
+                initialText: text,
+                initialHeight: height,
                 onTextChange: { updated in
                     DispatchQueue.main.async {
-                        self.lastText = updated
+                        self.text = updated
                     }
                 },
                 onSelectionChange: { selection in
                     DispatchQueue.main.async {
                         self.selected = selection
                     }
+                },
+                onHeightChange: { updatedHeight in
+                    self.height = max(updatedHeight, 400)
                 }
             )
-            .frame(height: 250)
+            .frame(height: height)
             .border(.gray)
 
             Text("Selected: \(selected)").font(.caption)
-            Text("Live content: \(lastText)").font(.caption2)
+            Text("Live content: \(text)").font(.caption2)
         }
-        .padding()
     }
 }
 
 #Preview {
-    ComposeEditor()
+//    ComposeEditor()
 }

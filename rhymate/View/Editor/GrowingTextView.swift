@@ -56,7 +56,7 @@ struct GrowingTextView: UIViewRepresentable {
             let newSize = textView.sizeThatFits(fittingSize)
             if abs(newSize.height - height) > 1 {
                 DispatchQueue.main.async {
-                    self.height = max(newSize.height, 40)
+                    self.height = max(newSize.height, 18)
                 }
             }
         }

@@ -4,7 +4,7 @@ struct LyricAssistentView: View {
     @Binding var text: String;
     @Binding var favorites: FavoriteRhymes;
     
-    @State private var height: CGFloat = 40
+    @State private var height: CGFloat = 18
     @State private var corners: UIRectCorner = .allCorners
     
     @State private var searchText: String = ""
@@ -24,7 +24,8 @@ struct LyricAssistentView: View {
             VStack {
                 GrowingTextView(text: $text, height: $height)
                     .frame(height: height)
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.top)
                 HStack {
                     Spacer()
                     if text.split(separator: " ").count > 1 {
@@ -42,13 +43,16 @@ struct LyricAssistentView: View {
                             Image(systemName: "paperplane.fill")
                                 .rotationEffect(.degrees(45))
                                 .font(.system(size: 20))
+                                .frame(width: 40, height: 40)
+                                .background(Color.secondary.opacity(0.3))
+                                .clipShape(Circle())
                         }
-                        .buttonBorderShape(.capsule)
-                        .buttonStyle(.borderless)
+                        .disabled(text.isEmpty)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
                     }
                 }
             }
-//            .padding()
             .background(Color(.secondarySystemBackground))
             .clipShape(RoundedCorners(radius: 24, corners: corners))
         }

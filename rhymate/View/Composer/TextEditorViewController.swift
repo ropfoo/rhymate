@@ -5,6 +5,7 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
 
     var onTextChange: ((String) -> Void)?
     var onSelectionChange: ((String) -> Void)?
+    var onHeightChange: ((CGFloat) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,6 +15,7 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.isEditable = true
         textView.isSelectable = true
+        textView.isScrollEnabled = false
 
         view.addSubview(textView)
         NSLayoutConstraint.activate([
@@ -22,10 +24,15 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
             textView.topAnchor.constraint(equalTo: view.topAnchor),
             textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.recalculateHeight()
+        }
     }
 
     func textViewDidChange(_ textView: UITextView) {
         onTextChange?(textView.text)
+        recalculateHeight()
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
@@ -38,4 +45,10 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
         guard textView.text != newText else { return }
         textView.text = newText
     }
+    
+    private func recalculateHeight() {
+          let fittingSize = CGSize(width: textView.bounds.width > 0 ? textView.bounds.width : 300, height: .infinity)
+          let newHeight = textView.sizeThatFits(fittingSize).height
+          onHeightChange?(newHeight)
+      }
 }
