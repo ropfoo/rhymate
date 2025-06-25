@@ -3,6 +3,7 @@ import SwiftUI
 struct LyricAssistentView: View {
     @Binding var text: String;
     @Binding var favorites: FavoriteRhymes;
+    var hasAutoSubmit = false
     
     @State private var height: CGFloat = 18
     @State private var corners: UIRectCorner = .allCorners
@@ -22,43 +23,53 @@ struct LyricAssistentView: View {
             }
             Spacer()
             VStack {
-                GrowingTextView(text: $text, height: $height)
-                    .frame(height: height)
-                    .padding(.horizontal)
-                    .padding(.top)
-                HStack {
-                    Spacer()
-                    if text.split(separator: " ").count > 1 {
-                        WordRecommendationView(
-                            text: $text,
-                            onSubmit: { word in
-                                hideKeyboard()
-                                searchText = word
-                            })
-                    } else {
-                        Button(action: {
+                if text.split(separator: " ").count > 1 {
+                    WordRecommendationView(
+                        text: $text,
+                        onSubmit: { word in
                             hideKeyboard()
-                            searchText = text;
-                        }) {
-                            Image(systemName: "paperplane.fill")
-                                .rotationEffect(.degrees(45))
-                                .font(.system(size: 20))
-                                .frame(width: 40, height: 40)
-                                .background(Color.secondary.opacity(0.3))
-                                .clipShape(Circle())
-                        }
-                        .disabled(text.isEmpty)
-                        .padding(.horizontal, 12)
-                        .padding(.bottom, 12)
-                    }
+                            searchText = word
+                        })
                 }
+                HStack(alignment: .bottom) {
+                    GrowingTextView(text: $text, height: $height)
+                        .frame(height: height)
+                        .padding(12)
+                        .background(Color(.secondarySystemBackground))
+                        .clipShape(RoundedCorners(radius: 24, corners: corners))
+                    HStack() {
+                        if text.split(separator: " ").count == 1 {
+                            Button(action: {
+                                hideKeyboard()
+                                searchText = text;
+                            }) {
+                                Image(systemName: "paperplane.fill")
+                                    .rotationEffect(.degrees(45))
+                                    .font(.system(size: 18))
+                                    .frame(width: 42, height: 42)
+                                    .background(Color.secondary.opacity(0.3))
+                                    .clipShape(Circle())
+                            }
+                            .disabled(text.isEmpty)
+                            .padding(.bottom, 2)
+                            .padding(.leading, 6)
+                        }
+                    }
+                }.padding(.horizontal)
             }
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedCorners(radius: 24, corners: corners))
+            
+            
         }
         .hideKeyboardOnTap()
         .onChange(of: keyboard.isKeyboardVisible) { isVisible in
             corners = isVisible ? [.topLeft, .topRight]  : .allCorners
+        }
+        .onAppear() {
+            if hasAutoSubmit &&
+                text.split(separator: " ").count == 1 {
+                print("run auto submit")
+                searchText = text
+            }
         }
     }
 }
@@ -66,7 +77,7 @@ struct LyricAssistentView: View {
 private struct LyricAssistentPreview: View {
     @State var text: String = "Hello World"
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-
+    
     var body: some View {
         LyricAssistentView(text: $text, favorites: $favorites)
     }

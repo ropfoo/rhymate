@@ -13,16 +13,16 @@ struct RootScreen: View {
     var body: some View {
         if horizontalSizeClass == .compact {
             TabView{
-                CompositionsOverviewScreen().tabItem {
+                CompositionsOverviewScreen(favorites: $favorites).tabItem {
                     Label("Editor", systemImage: "square.and.pencil")
                 }.modelContainer(for: Compositon.self)
                 
-                LyricAssistentView(text: $text, favorites: $favorites).tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+//                LyricAssistentView(text: $text, favorites: $favorites).tabItem {
+//                    Label("Search", systemImage: "magnifyingglass")
+//                }
                 
                 FavoritesScreen(favorites: $favorites).tabItem {
-                    Label("Favorites", systemImage: "music.pages.fill")
+                    Label("Rhymes", systemImage: "music.pages.fill")
                 }
             }
         }
@@ -31,8 +31,10 @@ struct RootScreen: View {
                 NavigationStack {
                     List {
                         NavigationLink(
-                            destination: CompositionsOverviewScreen()
-                                .modelContainer(for: Compositon.self),
+                            destination: CompositionsOverviewScreen(
+                                favorites: $favorites
+                            )
+                            .modelContainer(for: Compositon.self),
                             label: { Label("Editor", systemImage: "square.and.pencil") }
                         )
                     

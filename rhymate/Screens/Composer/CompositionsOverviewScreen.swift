@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftData
 
 struct CompositionsOverviewScreen: View {
+    @Binding var favorites: FavoriteRhymes
+    
     @Query var compositions: [Compositon]
     @Environment(\.modelContext) private var context
     
@@ -10,7 +12,11 @@ struct CompositionsOverviewScreen: View {
             List {
                 ForEach(compositions) { composition in
                     NavigationLink(
-                        destination: CompositionView(composition: composition)) {
+                        destination: CompositionView(
+                            composition: composition,
+                            favorites: $favorites
+                        )
+                    ) {
                         VStack(alignment: .leading) {
                             Text(composition.title)
                                 .font(.headline)
@@ -49,5 +55,5 @@ struct CompositionsOverviewScreen: View {
 }
 
 #Preview {
-    CompositionsOverviewScreen()
+//    CompositionsOverviewScreen()
 }

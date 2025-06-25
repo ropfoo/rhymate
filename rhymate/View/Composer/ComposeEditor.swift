@@ -2,11 +2,14 @@ import SwiftUI
 
 struct ComposeEditor: View {
     @Binding var text: String
+    @Binding var favorites: FavoriteRhymes
+    
+    @State private var isAssistentVisible = false
     @State private var selected = ""
     @State private var height: CGFloat = 400
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack {
             TextEditorContainer(
                 initialText: text,
                 initialHeight: height,
@@ -25,11 +28,29 @@ struct ComposeEditor: View {
                 }
             )
             .frame(height: height)
-            .border(.gray)
-
-            Text("Selected: \(selected)").font(.caption)
-            Text("Live content: \(text)").font(.caption2)
         }
+        .toolbar {
+            if (!selected.isEmpty) {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isAssistentVisible.toggle()
+                    } label: {
+                        Image(systemName: "apple.intelligence")
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $isAssistentVisible, content: {
+            NavigationStack {
+                LyricAssistentView(
+                    text: $selected,
+                    favorites: $favorites,
+                    hasAutoSubmit: true
+                )
+            }
+            .presentationDetents([.medium, .large])
+
+        })
     }
 }
 
