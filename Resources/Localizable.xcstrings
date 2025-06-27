@@ -24,6 +24,9 @@
     "close" : {
 
     },
+    "Create Your First Project" : {
+
+    },
     "Datamuse API" : {
 
     },
@@ -133,6 +136,9 @@
         }
       }
     },
+    "No Projects yet" : {
+
+    },
     "Projects" : {
 
     },
@@ -166,6 +172,9 @@
           }
         }
       }
+    },
+    "Select or create a composition" : {
+
     },
     "Show all" : {
 
