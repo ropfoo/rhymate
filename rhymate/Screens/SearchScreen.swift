@@ -14,13 +14,11 @@ struct SearchScreen: View {
     @State private var debounceTask: Task<Void, Never>? = nil
     
     @Binding var favorites: FavoriteRhymes
-    @FocusState private var isSearchFocused: Bool
     
-    init(favorites: Binding<FavoriteRhymes>, isSearchFocused: Binding<Bool>) {
+    init(favorites: Binding<FavoriteRhymes>) {
         self.historyStorage = SearchHistoryStorage()
         self._favorites = favorites
         self.searchHistory = self.historyStorage.get()
-        self.isSearchFocused = self.isSearchFocused
     }
     
     private func storeSearchTerm(_ searchTerm: String) {
@@ -71,10 +69,10 @@ struct SearchScreen: View {
                 searchHistory: $searchHistory,
                 suggestions: $suggestions,
                 favorites: $favorites,
-                onRhymesScreenDisappear: storeSearchTerm
+                onRhymesViewDisappear: storeSearchTerm
             )
             .navigationDestination(isPresented: $navigateToResults) {
-                RhymesScreen(
+                RhymesView(
                     word: Formatter.normalize(input),
                     favorites: $favorites,
                     onDisappear: storeSearchTerm
@@ -87,11 +85,11 @@ struct SearchScreen: View {
             prompt: "Find a rhyme"
         )
         .onSubmit(of: .search, { navigateToResults = true } )
-        .onChange(of: input) { i in
-            isLoading = i.isEmpty == false;
+        .onChange(of: input) { _, newValue in
+            isLoading = newValue.isEmpty == false;
             suggestions = []
             debounceTask?.cancel()
-            debounceTask = Task { [input = i] in
+            debounceTask = Task { [input = newValue] in
                 try? await Task.sleep(nanoseconds: 300_000_000)
                 if !Task.isCancelled {
                     await search(searchTerm: input)
@@ -103,9 +101,8 @@ struct SearchScreen: View {
 
 struct PreviewSearchView: View {
     @State var favorites = FavoriteRhymesStorage().getFavoriteRhymes()
-    @State var isSearchFocused: Bool = false
     var body: some View {
-        SearchScreen(favorites: $favorites, isSearchFocused: $isSearchFocused)
+        SearchScreen(favorites: $favorites)
     }
 }
 

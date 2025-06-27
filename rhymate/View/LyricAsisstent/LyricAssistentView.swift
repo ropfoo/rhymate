@@ -19,7 +19,7 @@ struct LyricAssistentView: View {
     var body: some View {
         VStack {
             ScrollView{
-                RhymesScreen(word: searchText, favorites: $favorites)
+                RhymesView(word: searchText, favorites: $favorites)
             }
             Spacer()
             VStack {
@@ -61,12 +61,8 @@ struct LyricAssistentView: View {
             
         }
         .hideKeyboardOnTap()
-        .onChange(of: keyboard.isKeyboardVisible) { isVisible in
-            corners = isVisible ? [.topLeft, .topRight]  : .allCorners
-        }
         .onAppear() {
-            if hasAutoSubmit &&
-                text.split(separator: " ").count == 1 {
+            if hasAutoSubmit && text.split(separator: " ").count == 1 {
                 print("run auto submit")
                 searchText = text
             }

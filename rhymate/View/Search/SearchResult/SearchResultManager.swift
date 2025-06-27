@@ -7,7 +7,7 @@ struct SearchResultManager: View {
     @Binding var searchHistory: [SearchHistoryEntry]
     @Binding var suggestions: [DatamuseSuggestion]
     @Binding var favorites: FavoriteRhymes
-    var onRhymesScreenDisappear: ((String) -> Void)?
+    var onRhymesViewDisappear: ((String) -> Void)?
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct SearchResultManager: View {
                             NavigationLink(destination: SearchHistoryScreen(
                                 history: $searchHistory,
                                 destination: { entry in
-                                    RhymesScreen(word: entry,favorites: $favorites)
+                                    RhymesView(word: entry,favorites: $favorites)
                                 }
                             ), label: {
                                 Label("History", systemImage: "clock")
@@ -38,10 +38,10 @@ struct SearchResultManager: View {
                     }
                     ForEach(suggestions) { suggestion in
                         NavigationLink(
-                            destination: RhymesScreen(
+                            destination: RhymesView(
                                 word: suggestion.word,
                                 favorites: $favorites,
-                                onDisappear: onRhymesScreenDisappear
+                                onDisappear: onRhymesViewDisappear
                             ),
                             label: { Text(suggestion.word)}
                         )

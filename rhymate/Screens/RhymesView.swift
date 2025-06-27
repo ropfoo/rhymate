@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RhymesScreen: View {
+struct RhymesView: View {
     var word: String
     @Binding var favorites: FavoriteRhymes
     var onDisappear: ((String) -> Void)?
@@ -11,34 +11,23 @@ struct RhymesScreen: View {
     @State private var rhymes: [String] = []
     @State private var searchError: SearchError? = nil
     
-    private func getRhymes(
-        forWord: String,
-        _ updateState: (
-            _ rhymes:[String],
-            _ error: SearchError?,
-            _ loading: Bool
-        ) -> Void
-    ) async {
+    private func getRhymes(forWord: String) async {
         if forWord.isEmpty {
-            return updateState([], nil, false)
+            return updateState(suggestions: [], error: nil, loading:false)
         }
         let searchTerm = Formatter.normalize(forWord)
-        updateState(rhymes, nil, true)
+        updateState(suggestions: rhymes, error: nil, loading: true)
         
         let result = await lyricService.getSuggestions(forText: searchTerm, .word)
         switch result {
         case .success(let suggestions):
-            return updateState(suggestions, nil, false)
+            return updateState(suggestions: suggestions, error: nil, loading:false)
         case .failure(let err):
-            return updateState([], err, false)
+            return updateState(suggestions: [], error: err, loading: false)
         }
     }
     
-    private func onUpdateState(
-        suggestions: [String],
-        error: SearchError?,
-        loading: Bool
-    ) {
+    private func updateState(suggestions: [String],error: SearchError?,loading: Bool) {
         withAnimation{
             rhymes = suggestions
             searchError = error
@@ -60,8 +49,10 @@ struct RhymesScreen: View {
         }
         .navigationTitle(word)
         
-        .onAppear { Task { await getRhymes(forWord: word, onUpdateState) } }
-        .onChange(of:word) {w in Task { await getRhymes(forWord: w, onUpdateState) }}
+        .onAppear { Task { await getRhymes(forWord: word) } }
+        .onChange(of: word) { _, newValue in
+            Task { await getRhymes(forWord: newValue) }
+        }
         .onDisappear {
             let searchTerm = Formatter.normalize(word)
             onDisappear?(searchTerm)

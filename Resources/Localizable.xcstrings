@@ -113,6 +113,9 @@
     "Favorites" : {
 
     },
+    "Find" : {
+
+    },
     "Find a rhyme" : {
 
     },
@@ -129,6 +132,9 @@
           }
         }
       }
+    },
+    "Projects" : {
+
     },
     "recent" : {
       "extractionState" : "manual",
@@ -191,9 +197,6 @@
           }
         }
       }
-    },
-    "Your Songs" : {
-
     }
   },
   "version" : "1.0"

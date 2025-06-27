@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SearchHistoryScreen: View {
     @Binding var history: [SearchHistoryEntry]
-    let destination: (String) -> RhymesScreen
+    let destination: (String) -> RhymesView
 
     let historyStorage = SearchHistoryStorage()
     

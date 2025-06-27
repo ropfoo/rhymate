@@ -3,10 +3,11 @@ import SwiftData
 
 struct CompositionsOverviewScreen: View {
     @Binding var favorites: FavoriteRhymes
-    
-    @Query var compositions: [Compositon]
-    @Environment(\.modelContext) private var context
-    
+    @Environment(\.modelContext) private var modelContext
+
+    @Query(sort: \Composition.updatedAt, order: .reverse)
+    private var compositions: [Composition]
+
     var body: some View {
         NavigationStack {
             List {
@@ -14,13 +15,13 @@ struct CompositionsOverviewScreen: View {
                     NavigationLink(
                         destination: CompositionView(
                             composition: composition,
-                            favorites: $favorites
+                            favorites: $favorites,
                         )
                     ) {
                         VStack(alignment: .leading) {
                             Text(composition.title)
                                 .font(.headline)
-                            Text(composition.createdAt.formatted(date: .abbreviated, time: .omitted))
+                            Text(composition.updatedAt.formatted(date: .abbreviated, time: .omitted))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -28,17 +29,17 @@ struct CompositionsOverviewScreen: View {
                 }
                 .onDelete(perform: delete)
             }
-            .navigationTitle("Your Songs")
+            .navigationTitle("Projects")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        let newCompositon = Compositon(
+                        let newComposition = Composition(
                             title: "Untitled",
                             content: "",
                             createdAt: Date.now,
                             updatedAt: Date.now
                         )
-                        context.insert(newCompositon)
+                        modelContext.insert(newComposition)
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -46,14 +47,10 @@ struct CompositionsOverviewScreen: View {
             }
         }
     }
-    
-    func delete(at offsets: IndexSet) {
+
+    private func delete(at offsets: IndexSet) {
         for index in offsets {
-            context.delete(compositions[index])
+            modelContext.delete(compositions[index])
         }
     }
-}
-
-#Preview {
-//    CompositionsOverviewScreen()
 }

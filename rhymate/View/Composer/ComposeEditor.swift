@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct ComposeEditor: View {
+    var key: String;
     @Binding var text: String
     @Binding var favorites: FavoriteRhymes
+    var onChange: (() -> Void)?
     
     @State private var isAssistentVisible = false
     @State private var selected = ""
@@ -16,6 +18,7 @@ struct ComposeEditor: View {
                 onTextChange: { updated in
                     DispatchQueue.main.async {
                         self.text = updated
+                        onChange?()
                     }
                 },
                 onSelectionChange: { selection in
@@ -27,6 +30,7 @@ struct ComposeEditor: View {
                     self.height = max(updatedHeight, 400)
                 }
             )
+            .id(key)
             .frame(height: height)
         }
         .toolbar {
@@ -35,7 +39,7 @@ struct ComposeEditor: View {
                     Button {
                         isAssistentVisible.toggle()
                     } label: {
-                        Image(systemName: "apple.intelligence")
+                        Image(systemName: "music.note")
                     }
                 }
             }
@@ -46,7 +50,15 @@ struct ComposeEditor: View {
                     text: $selected,
                     favorites: $favorites,
                     hasAutoSubmit: true
-                )
+                ).toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            isAssistentVisible.toggle()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                }
             }
             .presentationDetents([.medium, .large])
 

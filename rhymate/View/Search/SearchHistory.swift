@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SearchHistoryList: View {
     @Binding var history: [SearchHistoryEntry]
-    let destination: (String) -> RhymesScreen
+    let destination: (String) -> RhymesView
     
     private let maxHistoryCount: Int = 4
     
@@ -46,7 +46,7 @@ struct SearchOverlayPreview: View {
         SearchHistoryList(
             history: $searchHistory,
             destination: { entry in
-                RhymesScreen(word: entry,favorites: $favorites)
+                RhymesView(word: entry,favorites: $favorites)
             }
         )
     }
