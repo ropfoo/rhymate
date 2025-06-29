@@ -4,7 +4,7 @@ import SwiftUI
 struct rhymateApp: App {
     var body: some Scene {
         WindowGroup {
-            RootScreen()
+            RootView()
                 .modelContainer(for: Composition.self)
         }
     }

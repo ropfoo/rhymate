@@ -33,9 +33,6 @@
     "Delete history" : {
 
     },
-    "Editor" : {
-
-    },
     "fallbackFavoritesText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -116,10 +113,10 @@
     "Favorites" : {
 
     },
-    "Find" : {
+    "Find a rhyme" : {
 
     },
-    "Find a rhyme" : {
+    "Folders" : {
 
     },
     "History" : {
@@ -173,7 +170,10 @@
         }
       }
     },
-    "Select or create a composition" : {
+    "Select a composition" : {
+
+    },
+    "Select something" : {
 
     },
     "Show all" : {

@@ -8,12 +8,20 @@ class Composition {
     var content: String
     var createdAt: Date
     var updatedAt: Date
-    
-    init(title: String, content: String, createdAt: Date, updatedAt: Date) {
+    @Relationship var collection: CompositionCollection?
+
+    init(
+        title: String,
+        content: String,
+        createdAt: Date,
+        updatedAt: Date,
+        collection: CompositionCollection? = nil
+    ) {
         self.id = UUID()
         self.title = title
         self.content = content
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.collection = collection
     }
 }

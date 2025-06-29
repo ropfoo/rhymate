@@ -9,9 +9,11 @@ struct ComposeEditor: View {
     @State private var isAssistentVisible = false
     @State private var selected = ""
     @State private var height: CGFloat = 400
-
+    
+    @StateObject private var keyboard = KeyboardObserver()
+    
     var body: some View {
-        VStack {
+        ZStack() {
             TextEditorContainer(
                 initialText: text,
                 initialHeight: height,
@@ -27,20 +29,20 @@ struct ComposeEditor: View {
                     }
                 },
                 onHeightChange: { updatedHeight in
-                    self.height = max(updatedHeight, 400)
+                    self.height = max(updatedHeight, 600)
                 }
             )
             .id(key)
             .frame(height: height)
         }
         .toolbar {
-            if (!selected.isEmpty) {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isAssistentVisible.toggle()
-                    } label: {
-                        Image(systemName: "music.note")
-                    }
+            ToolbarItemGroup(
+                placement: keyboard.isKeyboardVisible ? .navigation : .bottomBar
+            ) {
+                Button {
+                    isAssistentVisible.toggle()
+                } label: {
+                    Image(systemName: "music.note")
                 }
             }
         }
@@ -61,11 +63,11 @@ struct ComposeEditor: View {
                 }
             }
             .presentationDetents([.medium, .large])
-
+            
         })
     }
 }
 
 #Preview {
-//    ComposeEditor()
+    //    ComposeEditor()
 }
