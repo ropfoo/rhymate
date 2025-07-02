@@ -10,19 +10,22 @@ struct RootView: View {
     
     var body: some View {
         NavigationSplitView {
-            Button(action: {
+            CompositionCollectionListView(
+                selectedCollection: $selectedCollection,
+            )
+            
+            Button {
                 isRhymesSheetVisible.toggle()
-            }) {
+            } label: {
                 Label("Rhymes", systemImage: "music.note.list")
             }
+            .buttonStyle(.bordered)
+            .padding()
             .sheet(isPresented: $isRhymesSheetVisible) {
                 NavigationStack {
                     SearchScreen(favorites: $favorites)
                 }
             }
-            CompositionCollectionListView(
-                selectedCollection: $selectedCollection,
-            )
         } content: {
             if let collection = selectedCollection {
                 CompositionListView(

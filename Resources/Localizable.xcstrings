@@ -21,6 +21,9 @@
     "About" : {
 
     },
+    "Cancel" : {
+
+    },
     "close" : {
 
     },
@@ -31,6 +34,12 @@
 
     },
     "Delete history" : {
+
+    },
+    "Done" : {
+
+    },
+    "Edit" : {
 
     },
     "fallbackFavoritesText" : {
@@ -116,9 +125,6 @@
     "Find a rhyme" : {
 
     },
-    "Folders" : {
-
-    },
     "History" : {
 
     },
@@ -132,6 +138,12 @@
           }
         }
       }
+    },
+    "Name" : {
+
+    },
+    "New Folder" : {
+
     },
     "No Projects yet" : {
 
@@ -150,10 +162,16 @@
         }
       }
     },
+    "Rename Folder" : {
+
+    },
     "Rhymate uses the Datamuse API to find rhyming words and Wiktionary for word definitions." : {
 
     },
     "Rhymes" : {
+
+    },
+    "Save" : {
 
     },
     "Search" : {
