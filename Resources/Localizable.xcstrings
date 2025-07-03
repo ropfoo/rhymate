@@ -139,6 +139,9 @@
         }
       }
     },
+    "Move" : {
+
+    },
     "Name" : {
 
     },
@@ -189,6 +192,9 @@
       }
     },
     "Select a composition" : {
+
+    },
+    "Select a Folder" : {
 
     },
     "Select something" : {

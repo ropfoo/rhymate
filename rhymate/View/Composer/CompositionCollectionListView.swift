@@ -39,7 +39,6 @@ struct CompositionCollectionListView: View {
                                 renameMode = .rename(collection)
                             } label: {
                                 Image(systemName: "pencil")
-                                    .foregroundStyle(.blue)
                             }
                             .buttonStyle(.plain)
                         }

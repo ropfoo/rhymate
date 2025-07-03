@@ -79,6 +79,7 @@
 		ECD720F42C5C0930007CE080 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD720F32C5C0930007CE080 /* SearchHistory.swift */; };
 		ECE8AB322E114C62007F08D4 /* CompositionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE8AB312E114C62007F08D4 /* CompositionCollection.swift */; };
 		ECE8AB342E116E08007F08D4 /* CompositionCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE8AB332E116E08007F08D4 /* CompositionCollectionListView.swift */; };
+		ECE8AB392E15C47A007F08D4 /* CompositionMoveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE8AB382E15C47A007F08D4 /* CompositionMoveView.swift */; };
 		ECF4C9342C52EC7D001E6B55 /* WiktionaryFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */; };
 		ECF4C9392C52F2AB001E6B55 /* WiktionaryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */; };
 /* End PBXBuildFile section */
@@ -177,6 +178,7 @@
 		ECD720F32C5C0930007CE080 /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		ECE8AB312E114C62007F08D4 /* CompositionCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionCollection.swift; sourceTree = "<group>"; };
 		ECE8AB332E116E08007F08D4 /* CompositionCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionCollectionListView.swift; sourceTree = "<group>"; };
+		ECE8AB382E15C47A007F08D4 /* CompositionMoveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionMoveView.swift; sourceTree = "<group>"; };
 		ECF4C9332C52EC7D001E6B55 /* WiktionaryFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryFetcherTests.swift; sourceTree = "<group>"; };
 		ECF4C9382C52F2AB001E6B55 /* WiktionaryDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiktionaryDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -410,6 +412,7 @@
 				ECA8F6F72E09CDD3009212D0 /* CompositionView.swift */,
 				ECA8F6F42E09CB9A009212D0 /* CompositionListView.swift */,
 				ECE8AB332E116E08007F08D4 /* CompositionCollectionListView.swift */,
+				ECE8AB382E15C47A007F08D4 /* CompositionMoveView.swift */,
 			);
 			path = Composer;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				ECD720F22C5C0410007CE080 /* Search.swift in Sources */,
 				EC37ABBD2C63A05900B28B58 /* FavoritesGridItem.swift in Sources */,
 				EC4313D82DFC56910023D835 /* SearchHistoryScreen.swift in Sources */,
+				ECE8AB392E15C47A007F08D4 /* CompositionMoveView.swift in Sources */,
 				ECA8F6F02E05A100009212D0 /* WordRecommendationView.swift in Sources */,
 				EC81FCEB2DF9F77E008512CF /* SearchResultManager.swift in Sources */,
 				ECA8F6DD2E042FA6009212D0 /* SearchError.swift in Sources */,

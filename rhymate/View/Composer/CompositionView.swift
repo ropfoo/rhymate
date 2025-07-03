@@ -5,6 +5,8 @@ struct CompositionView: View {
     @Bindable var composition: Composition
     @Binding var favorites: FavoriteRhymes
     
+    @State var isMoveSheetVisible: Bool = false
+    
     var body: some View {
         Group {
             ScrollView {
@@ -28,6 +30,29 @@ struct CompositionView: View {
                     )
                 }
                 .padding(.horizontal)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {
+                            isMoveSheetVisible.toggle()
+                        }) {
+                            Label("Move", systemImage: "arrow.forward.folder.fill")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 18))
+                    }
+                }
+
+            }
+            .sheet(isPresented: $isMoveSheetVisible) {
+                NavigationStack {
+                    CompositionMoveView(
+                        composition: composition,
+                        onPress: { isMoveSheetVisible.toggle() }
+                    )
+                }
             }
             .navigationTitle(
                 composition.title.isEmpty ? "New Song" : composition.title

@@ -51,7 +51,7 @@ struct CompositionListView: View {
                         }
                         .tag(composition)
                     }
-                    .onDelete(perform: delete)
+                    .onDelete(perform: deleteComposition)
                 }
                 .navigationTitle(selectedCollection?.name ?? "Projects")
                 .toolbar {
@@ -68,19 +68,17 @@ struct CompositionListView: View {
         .onDisappear() { saveModelContext() }
     }
     
-    private func delete(at offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                let composition = compositions[index]
-                
-                if selectedComposition?.id == composition.id {
-                    selectedComposition = nil
-                }
-                
-                modelContext.delete(composition)
+    private func deleteComposition(at offsets: IndexSet) {
+        for index in offsets {
+            let composition = compositions[index]
+            
+            if selectedComposition?.id == composition.id {
+                selectedComposition = nil
             }
-            saveModelContext()
+            
+            modelContext.delete(composition)
         }
+        saveModelContext()
     }
     
     private func saveModelContext() {
