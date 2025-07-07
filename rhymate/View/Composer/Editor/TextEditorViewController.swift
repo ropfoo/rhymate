@@ -3,8 +3,8 @@ import UIKit
 final class TextEditorViewController: UIViewController, UITextViewDelegate {
     let textView = UITextView()
 
-    var onTextChange: ((String) -> Void)?
-    var onSelectionChange: ((String) -> Void)?
+    var onTextChange: ((NSAttributedString) -> Void)?
+    var onSelectionChange: ((String, NSRange) -> Void)?
     var onHeightChange: ((CGFloat) -> Void)?
 
     override func viewDidLoad() {
@@ -12,7 +12,6 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
 
         textView.delegate = self
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFont(ofSize: 16)
         textView.isEditable = true
         textView.isSelectable = true
         textView.isScrollEnabled = false
@@ -31,19 +30,55 @@ final class TextEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        onTextChange?(textView.text)
+        onTextChange?(textView.attributedText)
         recalculateHeight()
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
-        guard let range = textView.selectedTextRange else { return }
-        let selected = textView.text(in: range) ?? ""
-        onSelectionChange?(selected)
+        let range = textView.selectedRange
+        let selected = (textView.attributedText.string as NSString).substring(with: range)
+        onSelectionChange?(selected, range)
     }
 
-    func setText(_ newText: String) {
-        guard textView.text != newText else { return }
-        textView.text = newText
+    func setText(_ newText: NSAttributedString, keepingSelection range: NSRange?) {
+        guard textView.attributedText != newText else { return }
+
+        let selectionToRestore = range ?? textView.selectedRange
+        textView.attributedText = newText
+
+        // Restore selection
+        if selectionToRestore.location <= textView.attributedText.length {
+            textView.selectedRange = selectionToRestore
+        }
+    }
+    
+    func toggleBoldAtCurrentSelection() -> NSAttributedString {
+        let range = textView.selectedRange
+        guard range.length > 0 else { return textView.attributedText }
+        
+        let mutable = NSMutableAttributedString(attributedString: textView.attributedText)
+
+        mutable.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+            if let font = value as? UIFont {
+                var traits = font.fontDescriptor.symbolicTraits
+                let isBold = traits.contains(.traitBold)
+                
+                if isBold {
+                    traits.remove(.traitBold)
+                } else {
+                    traits.insert(.traitBold)
+                }
+                
+                if let newDescriptor = font.fontDescriptor.withSymbolicTraits(traits) {
+                    let updatedFont = UIFont(descriptor: newDescriptor, size: font.pointSize)
+                    mutable.addAttribute(.font, value: updatedFont, range: subrange)
+                }
+            }
+        }
+
+        textView.attributedText = mutable
+        textView.selectedRange = range
+        return mutable
     }
     
     private func recalculateHeight() {

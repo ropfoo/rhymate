@@ -5,21 +5,41 @@ import Foundation
 class Composition {
     var id: UUID
     var title: String
-    var content: String
+    var contentData: Data
     var createdAt: Date
     var updatedAt: Date
     @Relationship var collection: CompositionCollection?
-
+    
+    @Transient
+    var content: NSAttributedString {
+        get {
+            (try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSAttributedString.self, from: contentData)) ?? NSAttributedString(string: "")
+        }
+        set {
+            do {
+                contentData = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
+            } catch {
+                print("Failed to archive NSAttributedString: \(error)")
+                contentData = Data()
+            }
+        }
+    }
+    
     init(
         title: String,
-        content: String,
+        content: NSAttributedString,
         createdAt: Date,
         updatedAt: Date,
         collection: CompositionCollection? = nil
     ) {
         self.id = UUID()
         self.title = title
-        self.content = content
+        do {
+            contentData = try NSKeyedArchiver.archivedData(withRootObject: content, requiringSecureCoding: false)
+        } catch {
+            print("Failed to archive NSAttributedString: \(error)")
+            contentData = Data()
+        }
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.collection = collection

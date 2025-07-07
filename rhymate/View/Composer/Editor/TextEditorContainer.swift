@@ -3,16 +3,21 @@ import SwiftUI
 struct TextEditorContainer: UIViewControllerRepresentable {
     class Coordinator {
         var controller: TextEditorViewController?
-        var onTextChange: ((String) -> Void)?
-        var onSelectionChange: ((String) -> Void)?
+        var onTextChange: ((NSAttributedString) -> Void)?
+        var onSelectionChange: ((String, NSRange) -> Void)?
         var onHeightChange: ((CGFloat) -> Void)?
+        
+        func toggleBold() -> NSAttributedString? {
+            return controller?.toggleBoldAtCurrentSelection()
+        }
     }
 
-    let initialText: String
+    let initialText: NSAttributedString
     let initialHeight: CGFloat
-    var onTextChange: ((String) -> Void)? = nil
-    var onSelectionChange: ((String) -> Void)? = nil
+    var onTextChange: ((NSAttributedString) -> Void)? = nil
+    var onSelectionChange: ((String, NSRange) -> Void)? = nil
     var onHeightChange: ((CGFloat) -> Void)? = nil
+    @Binding var coordinatorRef: TextEditorContainer.Coordinator?
 
     func makeCoordinator() -> Coordinator {
         let coordinator = Coordinator()
@@ -24,15 +29,20 @@ struct TextEditorContainer: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> TextEditorViewController {
         let vc = TextEditorViewController()
-        vc.textView.text = initialText
+        vc.textView.attributedText = initialText
         vc.onTextChange = context.coordinator.onTextChange
         vc.onSelectionChange = context.coordinator.onSelectionChange
         vc.onHeightChange = context.coordinator.onHeightChange
         context.coordinator.controller = vc
+        
+        DispatchQueue.main.async {
+            self.coordinatorRef = context.coordinator
+        }
+        
         return vc
     }
 
     func updateUIViewController(_ uiViewController: TextEditorViewController, context: Context) {
-        // do nothing to avoid triggering updates unless you need to call .setText()
+        // do nothing to prevent re-renders via SwiftUI
     }
 }

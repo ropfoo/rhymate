@@ -2,13 +2,15 @@ import SwiftUI
 
 struct ComposeEditor: View {
     var key: String;
-    @Binding var text: String
+    @Binding var text: NSAttributedString
     @Binding var favorites: FavoriteRhymes
     var onChange: (() -> Void)?
     
     @State private var isAssistentVisible = false
     @State private var selected = ""
     @State private var height: CGFloat = 400
+    
+    @State private var coordinator: TextEditorContainer.Coordinator? = nil
     
     @StateObject private var keyboard = KeyboardObserver()
     
@@ -23,14 +25,15 @@ struct ComposeEditor: View {
                         onChange?()
                     }
                 },
-                onSelectionChange: { selection in
+                onSelectionChange: { selection, range in
                     DispatchQueue.main.async {
                         self.selected = selection
                     }
                 },
                 onHeightChange: { updatedHeight in
                     self.height = max(updatedHeight, 600)
-                }
+                },
+                coordinatorRef: $coordinator
             )
             .id(key)
             .frame(height: height)
@@ -43,6 +46,19 @@ struct ComposeEditor: View {
                     isAssistentVisible.toggle()
                 } label: {
                     Image(systemName: "music.note")
+                }
+                Button {
+                    if let updatedText = coordinator?.toggleBold() {
+                        DispatchQueue.main.async {
+                            self.text = updatedText
+                            
+                            print(updatedText)
+                            print(self.text)
+                            onChange?()
+                        }
+                    }
+                } label: {
+                    Image(systemName: "bold")
                 }
             }
         }
@@ -64,7 +80,13 @@ struct ComposeEditor: View {
             }
             .presentationDetents([.medium, .large])
             
-        })
+        }).onAppear {
+            let loaded = text
+            print("OnAppear: loaded string: \(loaded.string)")
+            loaded.enumerateAttributes(in: NSRange(location: 0, length: loaded.length), options: []) { attrs, range, _ in
+                print("Attributes at \(range): \(attrs)")
+            }
+        }
     }
 }
 
