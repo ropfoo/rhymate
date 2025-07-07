@@ -44,20 +44,25 @@ struct ComposeEditor: View {
                 } label: {
                     Image(systemName: "music.note")
                 }
-                Button {
-                    if let updatedText = coordinator?.toggleTrait(.bold) {
-                        updateText(updatedText)
+                Menu {
+                    Button {
+                        if let updatedText = coordinator?.toggleTrait(.bold) {
+                            updateText(updatedText)
+                        }
+                    } label: {
+                        Label("bold", systemImage: "bold")
+                    }
+                    Button {
+                        if let updatedText = coordinator?.toggleTrait(.italic) {
+                            updateText(updatedText)
+                        }
+                    } label: {
+                        Label("italic", systemImage: "italic")
                     }
                 } label: {
-                    Image(systemName: "bold")
+                    Image(systemName: "textformat")
                 }
-                Button {
-                    if let updatedText = coordinator?.toggleTrait(.italic) {
-                        updateText(updatedText)
-                    }
-                } label: {
-                    Image(systemName: "italic")
-                }
+
             }
         }
         .sheet(isPresented: $isAssistentVisible, content: {
@@ -77,14 +82,7 @@ struct ComposeEditor: View {
                 }
             }
             .presentationDetents([.medium, .large])
-            
-        }).onAppear {
-            let loaded = text
-            print("OnAppear: loaded string: \(loaded.string)")
-            loaded.enumerateAttributes(in: NSRange(location: 0, length: loaded.length), options: []) { attrs, range, _ in
-                print("Attributes at \(range): \(attrs)")
-            }
-        }
+        })
     }
     
     private func updateText(_ updatedText: NSAttributedString) {

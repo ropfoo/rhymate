@@ -41,7 +41,6 @@ struct CompositionView: View {
                         }
                     } label: {
                         Image(systemName: "ellipsis")
-                            .font(.system(size: 18))
                     }
                 }
 
