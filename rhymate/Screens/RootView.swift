@@ -12,18 +12,18 @@ struct RootView: View {
         NavigationSplitView {
             CompositionCollectionListView(
                 selectedCollection: $selectedCollection,
-            )
-            
-            Button {
-                isRhymesSheetVisible.toggle()
-            } label: {
-                Label("Rhymes", systemImage: "music.note.list")
-            }
-            .buttonStyle(.bordered)
-            .padding()
-            .sheet(isPresented: $isRhymesSheetVisible) {
-                NavigationStack {
-                    SearchScreen(favorites: $favorites)
+            ).toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button {
+                        isRhymesSheetVisible.toggle()
+                    } label: {
+                        Label("Rhymes", systemImage: "music.note.list")
+                    }
+                    .sheet(isPresented: $isRhymesSheetVisible) {
+                        NavigationStack {
+                            SearchScreen(favorites: $favorites)
+                        }
+                    }
                 }
             }
         } content: {

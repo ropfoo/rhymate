@@ -10,7 +10,6 @@ struct CompositionMoveView: View {
     
     var body: some View {
         Group{
-//            Text(composition.title)
             List {
                 ForEach(collections) { collection in
                     Button(action: {
