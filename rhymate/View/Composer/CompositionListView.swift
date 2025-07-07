@@ -93,7 +93,7 @@ struct CompositionListView: View {
         guard let collection = selectedCollection else { return }
         let newComposition = Composition(
             title: "Untitled",
-            content: NSAttributedString(),
+            content: nil,
             createdAt: Date.now,
             updatedAt: Date.now,
             collection: collection

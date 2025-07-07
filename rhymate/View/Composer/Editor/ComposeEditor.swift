@@ -19,11 +19,8 @@ struct ComposeEditor: View {
             TextEditorContainer(
                 initialText: text,
                 initialHeight: height,
-                onTextChange: { updated in
-                    DispatchQueue.main.async {
-                        self.text = updated
-                        onChange?()
-                    }
+                onTextChange: { updatedText in
+                    updateText(updatedText)
                 },
                 onSelectionChange: { selection, range in
                     DispatchQueue.main.async {
@@ -48,17 +45,18 @@ struct ComposeEditor: View {
                     Image(systemName: "music.note")
                 }
                 Button {
-                    if let updatedText = coordinator?.toggleBold() {
-                        DispatchQueue.main.async {
-                            self.text = updatedText
-                            
-                            print(updatedText)
-                            print(self.text)
-                            onChange?()
-                        }
+                    if let updatedText = coordinator?.toggleTrait(.bold) {
+                        updateText(updatedText)
                     }
                 } label: {
                     Image(systemName: "bold")
+                }
+                Button {
+                    if let updatedText = coordinator?.toggleTrait(.italic) {
+                        updateText(updatedText)
+                    }
+                } label: {
+                    Image(systemName: "italic")
                 }
             }
         }
@@ -86,6 +84,13 @@ struct ComposeEditor: View {
             loaded.enumerateAttributes(in: NSRange(location: 0, length: loaded.length), options: []) { attrs, range, _ in
                 print("Attributes at \(range): \(attrs)")
             }
+        }
+    }
+    
+    private func updateText(_ updatedText: NSAttributedString) {
+        DispatchQueue.main.async {
+            self.text = updatedText
+            onChange?()
         }
     }
 }

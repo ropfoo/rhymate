@@ -7,8 +7,8 @@ struct TextEditorContainer: UIViewControllerRepresentable {
         var onSelectionChange: ((String, NSRange) -> Void)?
         var onHeightChange: ((CGFloat) -> Void)?
         
-        func toggleBold() -> NSAttributedString? {
-            return controller?.toggleBoldAtCurrentSelection()
+        func toggleTrait(_ type: TraitType) -> NSAttributedString? {
+            return controller?.toggleTraitAtCurrentSelection(type)
         }
     }
 
@@ -29,11 +29,12 @@ struct TextEditorContainer: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> TextEditorViewController {
         let vc = TextEditorViewController()
-        vc.textView.attributedText = initialText
         vc.onTextChange = context.coordinator.onTextChange
         vc.onSelectionChange = context.coordinator.onSelectionChange
         vc.onHeightChange = context.coordinator.onHeightChange
         context.coordinator.controller = vc
+        
+        vc.textView.attributedText = ensureFont(in: initialText)
         
         DispatchQueue.main.async {
             self.coordinatorRef = context.coordinator
@@ -41,6 +42,23 @@ struct TextEditorContainer: UIViewControllerRepresentable {
         
         return vc
     }
+    
+    private func ensureFont(
+        in attributed: NSAttributedString,
+        defaultFont: UIFont = .systemFont(ofSize: DEFAULT_FONT_SIZE)
+    ) -> NSAttributedString {
+        let mutable = NSMutableAttributedString(attributedString: attributed)
+        let fullRange = NSRange(location: 0, length: mutable.length)
+        
+        mutable.enumerateAttribute(.font, in: fullRange, options: []) { value, range, _ in
+            if value == nil {
+                mutable.addAttribute(.font, value: defaultFont, range: range)
+            }
+        }
+
+        return mutable
+    }
+    
 
     func updateUIViewController(_ uiViewController: TextEditorViewController, context: Context) {
         // do nothing to prevent re-renders via SwiftUI

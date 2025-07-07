@@ -27,7 +27,7 @@ class Composition {
     
     init(
         title: String,
-        content: NSAttributedString,
+        content: NSAttributedString?,
         createdAt: Date,
         updatedAt: Date,
         collection: CompositionCollection? = nil
@@ -35,7 +35,11 @@ class Composition {
         self.id = UUID()
         self.title = title
         do {
-            contentData = try NSKeyedArchiver.archivedData(withRootObject: content, requiringSecureCoding: false)
+            if let safeContent = content {
+                contentData = try NSKeyedArchiver.archivedData(withRootObject: safeContent, requiringSecureCoding: false)
+            } else {
+                contentData = Data()
+            }
         } catch {
             print("Failed to archive NSAttributedString: \(error)")
             contentData = Data()
